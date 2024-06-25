@@ -128,13 +128,11 @@ SNS等の口コミや知人への勧誘
 検索関連(ransack)<br>
 ボタン関連(rails-turbo)<br>
 画像関連(carrierwave, swiper)
+食品テーブル作成(roo)
 
 ### **• API**
 PurgoMalum<br>
 不適切な言葉を「*」に置き換えて返してくれるAPI<br>
-
-Oracle Database Cloudを用いて、REST APIを作成<br>
-文部科学省のデータをREST APIとして使用する
 
 ## **技術スタック**
 - **フロントエンド**<br>
