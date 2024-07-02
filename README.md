@@ -1,6 +1,9 @@
 ## **画面遷移図**
 Figma: https://www.figma.com/design/eemkhxVSOExY661XiGpBHG/Baby-gourmet?node-id=0-1&t=2iC5HBlb0g9HKihY-0
 
+## **ER図**
+https://mermaid.live/edit#pako:eNqlVE1O6zAQvopliV25QNdP3SDQE-htUKRoFE-LRWKH8RhU2kqcggPA6bjFs-OExKFCqKwsfzPf-Jsfz05WVqFcysIg_dGwIWgKI8TZmfjnkD5e3z5e3iPgw82J_f783O4EYaVbdGIpCtlax64I_J52DdE2EgffSN0P1HJtrQr8wBuZq4CNvOTxDWvmEi-l8UwaDc9DX_X4GH70PMr_pKe8d5EihDbcFaLUSvy9SJgLDLMRBhrMAGxA1xlS0bZlVGULzj1ZUpnRQc0iIQoYWTcYCAiRADwz-FZlhj4GPAIDFeYQhQ91n0jvqzgRP01olSfEmus8I4WuIt2ytibDW7IVKk84xgwhH4OpdPoZT0mqyyC1d6K_a9EPSl-FOBtL2wz0Rp9W4E7LOC4TPQP4E03x-V9VojwqIbPMOzvUa3VxXPOAr2sLLKCx3pyuMfuiX4euw-cCx4FcfSM7yXvwYMJMbk8WWPRTm065kA1S-KMqLL9ObiH5DkPXZNxqCug-LoBD8APP9mZrKrlk8riQZP3mTi7XULtwS-_0q_MTRaXZ0mXard2KXcgWzK21g8_hP67_7Qs
+
 ### READMEに記載した機能
 - [x] トップページ機能
 - [x] ログイン機能
