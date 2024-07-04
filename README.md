@@ -1,6 +1,9 @@
 ## **画面遷移図**
 Figma: https://www.figma.com/design/eemkhxVSOExY661XiGpBHG/Baby-gourmet?node-id=0-1&t=2iC5HBlb0g9HKihY-0
 
+## **ER図**
+https://mermaid.live/edit#pako:eNqlVE1O6zAQvopliV25QNdP3SDQE-htUKRoFE-LRWKH8RhU2kqcggPA6bjFs-OExKFCqKwsfzPf-Jsfz05WVqFcysIg_dGwIWgKI8TZmfjnkD5e3z5e3iPgw82J_f783O4EYaVbdGIpCtlax64I_J52DdE2EgffSN0P1HJtrQr8wBuZq4CNvOTxDWvmEi-l8UwaDc9DX_X4GH70PMr_pKe8d5EihDbcFaLUSvy9SJgLDLMRBhrMAGxA1xlS0bZlVGULzj1ZUpnRQc0iIQoYWTcYCAiRADwz-FZlhj4GPAIDFeYQhQ91n0jvqzgRP01olSfEmus8I4WuIt2ytibDW7IVKk84xgwhH4OpdPoZT0mqyyC1d6K_a9EPSl-FOBtL2wz0Rp9W4E7LOC4TPQP4E03x-V9VojwqIbPMOzvUa3VxXPOAr2sLLKCx3pyuMfuiX4euw-cCx4FcfSM7yXvwYMJMbk8WWPRTm065kA1S-KMqLL9ObiH5DkPXZNxqCug-LoBD8APP9mZrKrlk8riQZP3mTi7XULtwS-_0q_MTRaXZ0mXard2KXcgWzK21g8_hP67_7Qs
+
 ### READMEに記載した機能
 - [x] トップページ機能
 - [x] ログイン機能
@@ -11,19 +14,14 @@ Figma: https://www.figma.com/design/eemkhxVSOExY661XiGpBHG/Baby-gourmet?node-id=
 - [x] 新規レシピ投稿機能
 - [x] レシピ詳細機能(未ログインでも閲覧可能)
 - [x] レシピ一覧機能(未ログインでも閲覧可能)
-- [x] 作りたいリスト機能(未ログインでも閲覧可能(件数制限あり))
-- [x] 今日の献立を用いた、お買い物リスト機能
+- [x] レシピ検索機能
 - [x] パスワードリセット機能
-- [x] 美味しそう機能(いいね機能)(未ログインでも閲覧可能)
-- [x] コメント機能(投稿, 編集, 削除)(未ログインでも閲覧可能)
+- [x] 塩分、栄養素機能
 
 ### 未ログインでも閲覧または利用できるページ
 - [x] プロフィール機能(未ログインでも閲覧可能)
 - [x] レシピ詳細機能(未ログインでも閲覧可能)
 - [x] レシピ一覧機能(未ログインでも閲覧可能)
-- [x] 作りたいリスト機能(未ログインでも閲覧可能(件数制限あり))
-- [x] 美味しそう機能(いいね機能)(未ログインでも閲覧可能)
-- [x] コメント機能(投稿, 編集, 削除)(未ログインでも閲覧可能)
 
 ### メールアドレス、パスワード変更確認項目
 - [x] メールアドレス
@@ -88,8 +86,8 @@ SNS等の口コミや知人への勧誘
 	・Google認証<br>
 
 - ゲスト、会員の各利用可能機能<br>
-	・ゲスト: レシピ検索・美味しそうボタン・作りたいリスト（3品）<br>
-	・会員: プロフィール登録・新規レシピ投稿・レシピ検索・美味しそう＆作ってみたよボタン・今日の献立(5品)・作りたいリスト・お買い物TODOリスト<br>
+	・ゲスト: レシピ検索・レシピ一覧<br>
+	・会員: プロフィール登録・新規レシピ投稿・レシピ検索<br>
 
 - 会員登録<br>
 	・ユーザー名(ニックネーム)<br>
@@ -111,33 +109,32 @@ SNS等の口コミや知人への勧誘
 	・その他の栄養素合計値<br>
 
 - ログインしている場合の追加機能 -<br>
-	・今日の献立<br>
-	・美味しそう機能(いいね機能)<br>
-	・作ってみたよ(コメント機能)<br>
 	・レシピ編集、削除<br>
 
 - レシピ一覧(検索し、絞った後も同様のページ)<br>
 	・食材をkeyとした1文字レシピ検索<br>
 	・投稿されたレシピ<br>
 
-- 作りたいリスト(ブックマーク)<br>
-　・作りたいボタンを押したレシピ一覧<br>
-
-- 今日の献立を用いた、お買い物リスト<br>
-	・今日の献立に登録されたレシピの食材をTODOリスト化<br>
-
 ・利用規約<br>
 ・お問い合わせ<br>
 ・プライバシーポリシー<br>
 
 ### **本リリース**
+
+作りたいリスト<br>
+今日の献立<br>
+美味しそう機能(いいね機能)<br>
+作ってみたよ(コメント機能)<br>
+今日の献立を用いた、お買い物リスト<br>
+
+### **今後、アップデートしたい機能**
+
 　• タグ(レシピ)<br>
 
 　• xシェア(レシピ詳細画面をシェア)<br>
 
 　• AIによる1週間レシピ作成<br>
 
-### **今後、アップデートしたい機能**
   • 作りたい時間になったらアラーム機能 [ LINE push ]<br>
 
   • GoogleカレンダーAPIを使用した１ヶ月何食べたか記録する<br>
