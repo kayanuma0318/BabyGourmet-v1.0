@@ -1,0 +1,30 @@
+FROM ruby:3.2.3
+ENV LANG C.UTF-8
+# 言語設定: UTF-8
+ENV TZ Asia/Tokyo
+# タイムゾーンを東京に設定
+RUN apt-get update -qq \
+&& apt-get install -y ca-certificates curl gnupg \
+# ca-certificates : SSL証明書を検証するために必要なパッケージ
+# curl : コマンドラインからURLを取得するために必要なパッケージ
+# gnupg : GnuPG暗号化ツール
+&& mkdir -p /etc/apt/keyrings \
+# ディレクトリを作成
+&& curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+# curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key : Node.jsの鍵をダウンロードする
+# gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg : ダウンロードした鍵を解凍して/etc/apt/keyrings/nodesource.gpgファイルに保存する
+&& NODE_MAJOR=20 \
+# Node.jsのバージョンを設定
+&& echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
+&& wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+&& echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+# パッケージリストを最新のものへ更新、ツールをインストールし、Node.jsとYarnのリポジトリを追加
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs yarn vim
+# 開発に必要なツール（build-essential）、PostgreSQLクライアント（libpq-dev）、NodeJS、Yarn、Vimをインストール
+RUN mkdir /BabyGourmet-v1.0
+# コンテナ内に/BabyGourmet-v1.0という名前の新しいディレクトリを作成する
+WORKDIR /BabyGourmet-v1.0
+# 作業ディレクトリを/BabyGourmet-v1.0に設定。以降のコマンドはこのディレクトリで実行される。
+RUN gem install bundler
+COPY . /BabyGourmet-v1.0
+# 現在のディレクトリ（ホスト側）の内容をコンテナ内の/BabyGourmet-v1.0ディレクトリにコピーする
