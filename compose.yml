@@ -1,0 +1,54 @@
+version: '3'
+  # docker composeのバージョン
+services:
+  # アプリの部品設定(サービス)
+  db:
+    image: postgres
+    restart: always
+      # 自動で再起動するように設定
+    environment:
+      TZ: Asia/Tokyo
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: BabyGourmet-v1.0_development
+    volumes:
+      # DBのデータを保存する場所を指定している
+      - postgresql_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    healthcheck:
+      # DBが正常に動いているかを確認する設定。10秒ごとにチェックし、5回まで再試行する
+      test: ["CMD-SHELL", "pg_isready -d BabyGourmet-v1.0_development -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  web:
+    # webアプリケーションサービスの設定
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      # アプリのDockerイメージをビルドする設定。Dockerfile.devファイルを使用
+    command: bash -c "bundle install && bundle exec rails db:prepare && rm -f tmp/pids/server.pid && ./bin/dev"
+      # アプリを起動するときに実行するコマンド
+      # 必要なファイルをインストールし、データベースを準備し、サーバーを起動する
+    tty: true
+    stdin_open: true
+      # コンテナと対話的にやり取りできるようにする設定
+    volumes:
+      # アプリのファイルやデータを保存する場所を指定する
+      - .:/BabyGourmet-v1.0
+      - bundle_data:/usr/local/bundle:cached
+      - node_modules:/BabyGourmet-v1.0/node_modules
+    environment:
+      TZ: Asia/Tokyo
+      DATABASE_URL: postgres://postgres:password@db/BabyGourmet-v1.0_development
+    ports:
+      - "3000:3000"
+    depends_on:
+      # データベースが正常に動いてからアプリを起動するように指定する
+      db:
+        condition: service_healthy
+volumes:
+  # データを保存するための場所（ボリューム）を定義
+  bundle_data:
+  postgresql_data:
+  node_modules:
