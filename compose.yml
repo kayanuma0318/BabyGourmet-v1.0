@@ -9,7 +9,7 @@ services:
     environment:
       TZ: Asia/Tokyo
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: BabyGourmet-v1.0_development
+      POSTGRES_DB: BabyGourmet
     volumes:
       # DBのデータを保存する場所を指定している
       - postgresql_data:/var/lib/postgresql/data
@@ -40,7 +40,7 @@ services:
       - node_modules:/BabyGourmet-v1.0/node_modules
     environment:
       TZ: Asia/Tokyo
-      DATABASE_URL: postgres://postgres:password@db/BabyGourmet-v1.0_development
+      DATABASE_URL: postgres://postgres:password@db/BabyGourmet
     ports:
       - "3000:3000"
     depends_on:
