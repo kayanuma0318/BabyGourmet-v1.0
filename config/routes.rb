@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   root "tops#index"
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # ユーザー用のルーティング（URL/new ⇨ URL/signup）
+  get "signup", to: "users#new"
+  resources :users, expect: %i[new]
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
