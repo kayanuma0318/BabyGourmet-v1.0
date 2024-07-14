@@ -1,0 +1,33 @@
+<div class="container mx-auto min-h-screen flex items-center justify-center">
+  <!--mx-auto:左右のマージンを自動調整、中央に配置, min-h-screen: 箱の高さを最低画面の高さと同じにする-->
+  <!--items-center: 垂直方向の中央揃え, justify-center: 水平方向の中央揃え-->
+  <div class="flex flex-col items-center gap-8">
+    <!--flex-col: 縦並びにする, items-center: 水平方向の中央揃え-->
+    <!--2x2の形にする-->
+    <div class="flex justify-center gap-8">
+      <!--flex: 上段を2つを横並びにする, justify-center: 中央揃え-->
+      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 object-cover border-gray-200">
+        <!--flex flex-col: 画像と文字を縦並びにする, items-center: 中央揃え, shadow-lg: 大きめな影を作成--->
+        <!--rounded-lg: 角を丸くする, p-4: 内側に余白を設ける-->
+        <!--object-cover: 画像のアスペクト比を保ちながら、指定されたサイズに合わせてトリミングする-->
+        <%= link_to image_tag("cooking.png", class: "w-40 h-40 object-cover"), "#" %>
+        <p class="mt-2 text-center font-semibold">今日の献立</p>
+        <!--mt-2: 上に余白を設ける, text-center: 文字を中央揃え, font-semibold: 文字を少し太字にする-->
+      </div>
+      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 object-cover border-gray-200">
+        <%= link_to image_tag("resipe_book.png", class: "w-40 h-40 object-cover"), "#" %>
+        <p class="mt-2 text-center font-semibold">レシピ一覧</p>
+      </div>
+    </div>
+    <div class="flex justify-center gap-8">
+      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 object-cover border-gray-200">
+        <%= link_to image_tag("buy.png", class: "w-40 h-40 object-cover"), "#" %>
+        <p class="mt-2 text-center font-semibold">買い物リスト</p>
+      </div>
+      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 object-cover border-gray-200">
+        <%= link_to image_tag("resipe_post.png", class: "w-40 h-40 object-cover"), "#" %>
+        <p class="mt-2 text-center font-semibold">レシピ投稿</p>
+      </div>
+    </div>
+  </div>
+</div>
