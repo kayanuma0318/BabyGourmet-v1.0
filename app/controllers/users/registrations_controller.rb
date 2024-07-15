@@ -6,13 +6,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    super
-    # 親であるDevise::RegistrationsControllerのnewアクションを継承している
+    @user = User.new
   end
 
   # POST /resource
   def create
-    super
+    @user = User.new(sign_up_params)
+    if @user.save
+      sign_in(@user)
+      redirect_to root_path, success: 'ようこそ、ベビグルへ🎉'
+    else
+      flash.now[:danger] = '登録に失敗しました'
+      render :new, status: :unprocessable_entity
+      # status: :unprocessable_entity :HTTPステータスコード422を返す
+    end
   end
 
   private

@@ -1,6 +1,6 @@
 <!--新規登録フォーム-->
 <div class="container">
-  <%= form_with model:@user do |f| %>
+  <%= form_with model:@user, local:true do |f| %>
     <div class="input input-bordered flex items-center gap-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
