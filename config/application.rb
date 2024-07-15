@@ -24,6 +24,9 @@ module BabyGourmetV10
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # i18nの設定
+    config.i18n.default_locale = :ja
+
     # rails gコマンドで生成されるファイルを制御する
     config.generators.system_tests = nil
     config.generators do |g|
