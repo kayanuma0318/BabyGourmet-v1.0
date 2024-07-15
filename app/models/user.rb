@@ -1,20 +1,18 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :recoverable, :rememberable
+  devise :database_authenticatable, :registerable, :validatable
+
   #nameバリデーション
-  validates :name, presence: true, length: { maximum: 30 }
+  validates :name,  presence: true,
+                    length: { maximum: 30 }
 
   #emailバリデーション
-  validates :email, presence: true,
-                    uniqueness: true,
-                    length: { maximum: 255 },
-                    format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :email, uniqueness: true
 
-  # passwordバリデーション
-  has_secure_password
-  # ハッシュ化したパスワードをpassword_digestカラムに保存する
-  # passwordとpassword_confirmationの値が一致するかどうかのバリデーションが追加される
-  # authenticateメソッドが使えるようになる
-  validates :password,  presence: true,
-                        length: { minimum: 6 },
-                        allow_nil: true
-                        # プロフィール情報更新時にパスワードを変更しない場合にpasswordがnilでもバリデーションが通るようになる
+  # validatable: email, passwordのバリデーションが行われるため、バリデーション不要
+  # emai: formatが適切か、空欄ではないか
+  # password: 空欄ではないか、6文字以上20字以内であるか、少なくとも文字、数字、特殊文字が各1文字ずつ必要、確認用パスワードと一致しているか
+  # config/initializers/devise.rb: 設定記載あり
 end
