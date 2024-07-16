@@ -1,6 +1,7 @@
 <!--ログインフォーム-->
 <div class="container">
-  <%= form_with url: login_path, scope: sessions do |f| %>
+  <%= form_with url: login_path, scope: :session, local: true do |f| %>
+  <!--scope: :session : -->
     <div class="input input-bordered flex items-center gap-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +31,7 @@
       <%= f.password_field :password, class: "grow", placeholder: "password" %>
       <!--<input type="password" class="grow" value="password" />-->
     </div>
-    <%= f.submit  t ".sign_in", class: "btn btn-secondary" %>
+    <%= f.submit t("users.sessions.new.sign_in"), class: "btn btn-secondary" %>
       <!--<button class="btn btn-secondary">Secondary</button>-->
   <% end %>
   <div class="text-center">

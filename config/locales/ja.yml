@@ -27,8 +27,23 @@ ja:
         unlock_token: ロック解除用トークン
         updated_at: 更新日
     models:
-      name: 名前
       user: ユーザー
+  users:
+    registrations:
+      new:
+        sign_up: アカウント登録
+      create:
+        welcome: ようこそ！ベビグルへ！🎉
+        failed: アカウント登録に失敗しました。メールアドレスとパスワードを確認してください。
+    sessions:
+      new:
+        sign_in: ログイン
+      create:
+        logged_in: ログインしました!おかえりなさい！
+        failed: ログインに失敗しました。メールアドレスとパスワードを確認してください。
+      destroy:
+        logout: ログアウト
+        logged_out: ログアウトしました。またのご利用をお待ちしております。
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。

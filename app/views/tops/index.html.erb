@@ -29,5 +29,6 @@
         <p class="mt-2 text-center font-semibold">レシピ投稿</p>
       </div>
     </div>
+    <%= button_to t('users.sessions.destroy.logout'), logout_path, method: :delete if user_signed_in? %>
   </div>
 </div>
