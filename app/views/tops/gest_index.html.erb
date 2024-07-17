@@ -1,0 +1,15 @@
+<div class="container mx-auto min-h-screen flex items-center justify-center">
+  <!--mx-auto:左右のマージンを自動調整、中央に配置, min-h-screen: 箱の高さを最低画面の高さと同じにする-->
+  <!--items-center: 垂直方向の中央揃え, justify-center: 水平方向の中央揃え-->
+  <div class="flex flex-col items-center gap-8">
+    <!--flex-col: 縦並びにする, items-center: 水平方向の中央揃え-->
+    <!--2x2の形にする-->
+    <div class="flex justify-center gap-8">
+      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 object-cover border-gray-200">
+        <%= link_to image_tag("resipe_book.png", class: "w-40 h-40 object-cover"), "#" %>
+        <p class="mt-2 text-center font-semibold">レシピ一覧</p>
+      </div>
+    </div>
+    <%= link_to "ログイン", login_path %>
+  </div>
+</div>
