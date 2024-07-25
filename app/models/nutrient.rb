@@ -34,9 +34,7 @@ class Nutrient < ApplicationRecord
       # 同じ名前の栄養素が一致するレコードが存在すれば取得、なければ新規作成
     end
   end
-  def self.reset_id_sequence
-    connection.execute("TRUNCATE nutrients RESTART IDENTITY CASCADE")
-  end
+
   def self.convert_to_zero(value)
     # 引数の値がnilか空文字列の場合、0.0を返す
     if value.nil? || value.to_s.strip.empty?
