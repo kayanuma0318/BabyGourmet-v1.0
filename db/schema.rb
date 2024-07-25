@@ -10,9 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_14_210741) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_25_113523) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "food_nutrients", force: :cascade do |t|
+    t.bigint "food_id", null: false
+    t.bigint "nutrient_id", null: false
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_id", "nutrient_id"], name: "index_food_nutrients_on_food_id_and_nutrient_id", unique: true
+    t.index ["food_id"], name: "index_food_nutrients_on_food_id"
+    t.index ["nutrient_id"], name: "index_food_nutrients_on_nutrient_id"
+  end
+
+  create_table "foods", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.string "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "nutrients", force: :cascade do |t|
+    t.float "energy"
+    t.float "protein"
+    t.float "dietary_fiber"
+    t.float "calcium"
+    t.float "magnesium"
+    t.float "phosphorus"
+    t.float "iron"
+    t.float "zinc"
+    t.float "iodine"
+    t.float "vitamin_d"
+    t.float "vitamin_b6"
+    t.float "vitamin_b12"
+    t.float "folate"
+    t.float "vitamin_c"
+    t.float "salt_equivalent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
@@ -23,4 +62,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_210741) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "food_nutrients", "foods"
+  add_foreign_key "food_nutrients", "nutrients"
 end

@@ -1,3 +1,5 @@
+# Railsのデータベース設定ファイル
+
 # PostgreSQL. Versions 9.3 and up are supported.
 #
 # Install the pg driver:
@@ -21,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: baby_gourmet_v1_0_development
+  database: BabyGourmet
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
