@@ -19,7 +19,7 @@ class RecipesController < ApplicationController
   def create
     @recipe = current_user.recipes.build(recipe_params)
       # current_user: devise標準メソッドで、ログイン中のユーザー情報を取得
-      # buildメソッド: 現在ログイン中のオブジェクトを生成するメソッド
+      # build: 現在ログイン中のオブジェクトを生成するメソッド
       # userとrecipeが紐付き、自動でuser_idが設定され、ログイン中のユーザーが投稿者として登録される
     if @recipe.save
       redirect_to @recipe, success: t('messages.save_success', model: Recipe.model_name.human)
