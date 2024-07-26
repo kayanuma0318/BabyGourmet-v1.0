@@ -6,7 +6,6 @@ class RecipesController < ApplicationController
   # set_recipe: 対象のレシピを取得
   # authorize_user_recipe: レシピの編集、更新、削除する際、投稿者本人であるかを判定
 
-
   def index
     @recipes = Recipe.includes(:user).all
     # レシピ取得時にユーザー情報も取得
