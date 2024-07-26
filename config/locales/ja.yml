@@ -1,4 +1,13 @@
 ja:
+  messages:
+    save_success: "%{model}を登録しました。"
+    save_failed: "%{model}の登録に失敗しました。"
+    create_success: "%{model}を作成しました。"
+    create_failed: "%{model}の作成に失敗しました。"
+    update_success: "%{model}を更新しました。"
+    update_failed: "%{model}の更新に失敗しました。"
+    destroy_success: "%{model}を削除しました。"
+    not_authorized: 権限がありません。
   activerecord:
     attributes:
       user:
@@ -26,8 +35,18 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+      recipe:
+        title: タイトル
+        serving_size: 総分量
+        description: 説明
+        recipe_image: 画像
+        one_point: ワンポイント
+        user_id: ユーザーID
+        created_at: 作成日
+        updated_at: 更新日
     models:
       user: ユーザー
+      recipe: レシピ
   users:
     registrations:
       new:
@@ -43,7 +62,16 @@ ja:
         failed: ログインに失敗しました。メールアドレスとパスワードを確認してください。
       destroy:
         logout: ログアウト
-        logged_out: ログアウトしました。またのご利用をお待ちしております。
+        logged_out: ログアウトしました。
+  recipe:
+    index:
+      title: レシピ一覧
+    show:
+      title: レシピ詳細
+    new:
+      title: レシピ新規登録
+    edit:
+      title: レシピ編集
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
