@@ -54,6 +54,16 @@ class RecipesController < ApplicationController
     redirect_to recipes_path, success: t('messages.destroy_success', model: Recipe.model_name.human)
   end
 
+  # 食材を追加する際に、カテゴリー毎の食材リストを取得するメソッド
+  def add_ingredient_fields
+    @category = params[:category]
+    @foods = Food.where(category: @category)
+    @recipe = Recipe.new
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   private
 
   def set_recipe

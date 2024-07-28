@@ -25,5 +25,10 @@
         </div>
       </div>
     <% end %>
+    <div id="ingredients_<%= category %>"></div>
+    <%= link_to t('recipes.add_ingredient'),
+                add_ingredient_fields_recipes_path(category: category),
+                class: "btn btn-secondary",
+                data: { turbo_stream: true } %>
   </div>
 <% end %>

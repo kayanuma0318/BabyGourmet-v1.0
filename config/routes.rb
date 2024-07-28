@@ -22,7 +22,11 @@ Rails.application.routes.draw do
     delete 'logout', to: 'users/sessions#destroy', as: :logout
   end
 
-  resources :recipes
+  resources :recipes do
+    collection do
+      get 'add_ingredient_fields'
+    end
+  end
 
   get 'up' => 'rails/health#show', as: :rails_health_check
 end

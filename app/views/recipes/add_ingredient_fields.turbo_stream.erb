@@ -1,0 +1,5 @@
+<%= turbo_stream.prepend "ingredients_#{@category}" do %>
+  <%= fields_for :recipe, @recipe do |f| %>
+    <%= render partial: 'ingredient_fields', locals: { f: f, category: @category, foods: @foods } %>
+  <% end %>
+<% end %>
