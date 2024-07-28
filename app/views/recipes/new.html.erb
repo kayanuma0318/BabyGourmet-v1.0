@@ -1,0 +1,23 @@
+<div class="container">
+  <%= t('.title')%>
+  <%= form_with model:@recipe, local:true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="form-control">
+      <!--レシピ名-->
+      <%= f.label :title, t('.recipe_name') %>
+      <%= f.text_field :title, class: "input w-full max-w-xs", placeholder:"例）ロイヤルパンケーキ" %>
+
+    <!--総分量-->
+      <%= f.label :serving_size, t('.serving_size') %>
+      <%= f.text_field :serving_size, class: "input w-full max-w-xs", placeholder:"例）2人分" %>
+
+    <!--レシピ説明-->
+      <%= f.label :description, t('.description') %>
+      <%= f.text_area :description, class: "textarea textarea-bordered", placeholder:"例）これはロイヤルパンケーキです。とても美味しいです。" %>
+
+    <!--材料-->
+    <%= render 'shared/ingredient', categories: @categories, f: f, foods_by_category: @foods_by_category %>
+
+    <!---->
+  <% end %>
+</div>

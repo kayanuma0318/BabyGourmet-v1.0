@@ -1,4 +1,17 @@
 ja:
+  helpers:
+    submit:
+      create: 登録
+      submit: 送信
+      update: 更新
+  placeholder:
+    quantity_placeholder: 例）グラム数を入力してください
+  flash:
+    welcome: ようこそ！ベビグルへ！🎉
+    signin_failed: アカウント登録に失敗しました。メールアドレスとパスワードを確認してください。
+    logged_in: ログインしました!おかえりなさい！
+    login_failed: ログインに失敗しました。メールアドレスとパスワードを確認してください。
+    logout: ログアウトしました。
   messages:
     save_success: "%{model}を登録しました。"
     save_failed: "%{model}の登録に失敗しました。"
@@ -7,69 +20,42 @@ ja:
     update_success: "%{model}を更新しました。"
     update_failed: "%{model}の更新に失敗しました。"
     destroy_success: "%{model}を削除しました。"
-    not_authorized: 権限がありません。
-  activerecord:
-    attributes:
-      user:
-        name: 名前
-        confirmation_sent_at: パスワード確認送信時刻
-        confirmation_token: パスワード確認用トークン
-        confirmed_at: パスワード確認時刻
-        created_at: 作成日
-        current_password: 現在のパスワード
-        current_sign_in_at: 現在のログイン時刻
-        current_sign_in_ip: 現在のログインIPアドレス
-        email: Eメール
-        encrypted_password: 暗号化パスワード
-        failed_attempts: 失敗したログイン試行回数
-        last_sign_in_at: 最終ログイン時刻
-        last_sign_in_ip: 最終ログインIPアドレス
-        locked_at: ロック時刻
-        password: パスワード
-        password_confirmation: パスワード（確認用）
-        remember_created_at: ログイン記憶時刻
-        remember_me: ログインを記憶する
-        reset_password_sent_at: パスワードリセット送信時刻
-        reset_password_token: パスワードリセット用トークン
-        sign_in_count: ログイン回数
-        unconfirmed_email: 未確認Eメール
-        unlock_token: ロック解除用トークン
-        updated_at: 更新日
-      recipe:
-        title: タイトル
-        serving_size: 総分量
-        description: 説明
-        recipe_image: 画像
-        one_point: ワンポイント
-        user_id: ユーザーID
-        created_at: 作成日
-        updated_at: 更新日
-    models:
-      user: ユーザー
-      recipe: レシピ
+    not_authorized: "%{user}さんは、不法侵入です。"
+    not_found: "%{model}が見つかりません。"
   users:
     registrations:
       new:
         sign_up: アカウント登録
-      create:
-        welcome: ようこそ！ベビグルへ！🎉
-        failed: アカウント登録に失敗しました。メールアドレスとパスワードを確認してください。
     sessions:
       new:
         sign_in: ログイン
-      create:
-        logged_in: ログインしました!おかえりなさい！
-        failed: ログインに失敗しました。メールアドレスとパスワードを確認してください。
       destroy:
         logout: ログアウト
-        logged_out: ログアウトしました。
-  recipe:
+  recipes:
     index:
       title: レシピ一覧
     show:
       title: レシピ詳細
     new:
-      title: レシピ新規登録
+      title: レシピ作成
+      recipe_name: レシピ名
+      serving_size: 総分量
+      description: 説明
+      recipe_image: 画像
+      one_point: ワンポイント
+    ingredient:
+      title: 材料
+      select_food: 食材を選択してください
+      quantity: 分量
+    category:
+      meat: 肉類
+      fish: 魚介類
+      vegetable: 野菜
+      fruit: 果物
+      seasoning: 調味料
+      sweet: お菓子類
+      deli: 惣菜
+      other: その他
     edit:
       title: レシピ編集
   devise:

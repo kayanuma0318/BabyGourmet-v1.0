@@ -1,4 +1,5 @@
 class Food < ApplicationRecord
+  has_many :recipe_foods
   has_many :food_nutrients
   has_many :nutrients, through: :food_nutrients
 
@@ -26,5 +27,9 @@ class Food < ApplicationRecord
       # 同じ名前の食品が一致するレコードが存在すれば取得、なければ新規作成
       # find_or_create_by! = !をつけると失敗時に例外が発生する
     end
+  end
+  # シーケンス番号のリセットメソッド
+  def self.reset_id_sequence
+    connection.execute("TRUNCATE foods RESTART IDENTITY CASCADE")
   end
 end

@@ -13,9 +13,9 @@ class Users::SessionsController < Devise::SessionsController
     if @user&&@user.valid_password?(params[:session][:password])
       # @user: ユーザーの存在を確認し、devise標準メソッドvalid_password?で入力値とDBのパスワードを比較
       sign_in(@user)
-      redirect_to @user, success: t('users.sessions.create.logged_in')
+      redirect_to @user, success: t('flash.logged_in')
     else
-      flash.now[:danger] = t('users.sessions.create.failed')
+      flash.now[:danger] = t('flash.login_failed')
       render 'new', status: :unprocessable_entity
     end
   end
@@ -23,7 +23,7 @@ class Users::SessionsController < Devise::SessionsController
   # DELETE /resource/sign_out
   def destroy
     sign_out
-    redirect_to root_path, info: t('users.sessions.destroy.logged_out')
+    redirect_to root_path, info: t('flash.logout')
   end
 
   # protected

@@ -1,0 +1,29 @@
+<% @categories.each do |category| %>
+  <!--@categoriesという配列の各要素に対してループ-->
+  <!--categoryに代入する-->
+  <div class="grid grid-cols-1 gap-4 mb-4">
+    <%= f.fields_for :recipe_foods, f.object.recipe_foods.build do |recipe_food| %>
+      <!--f.fields_for :ネストされたrecipe_foodsのフォームを生成する-->
+      <!-- f.object.recipe_foods.build :新しいrecipe_foodsオブジェクトを作成-->
+      <!--各カテゴリーに対して新しいフィールドを生成する-->
+      <!--|recipe_food| :先ほど作成したrecipe_foodを参照する-->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="ingredient">
+          <%= recipe_food.label :food_id, t("recipes.category.#{category}"), class: "label" %>
+          <%= recipe_food.collection_select :food_id, @foods_by_category[category], :id, :name, { prompt: t('recipes.ingredient.select_food') }, { class: "select select-bordered w-full" } %>
+            <!--collection_select :配列やActive Recordのコレクションからセレクトボックスを生成するRailsのヘルパーメソッド-->
+            <!--:food_id :選択された値が割り当てられる属性名-->
+            <!--@foods_by_category[category] :現在のカテゴリーに属する食材のリスト-->
+            <!--:idと:name :それぞれオプションの値とテキストに使用されるメソッド名-->
+            <!--promptオプション :デフォルトの選択肢として表示されるテキストを指定-->
+        </div>
+        <div class="quantity">
+          <%= recipe_food.label :quantity, t('recipes.ingredient.quantity'), class: "label" %>
+          <%= recipe_food.number_field :quantity, class: "input input-bordered w-full", placeholder: t('placeholder.quantity_placeholder') %>
+            <!--number_field :数値入力用のフォームフィールドを生成-->
+            <!--:quantity :入力された値が割り当てられる属性名-->
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

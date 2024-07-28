@@ -14,6 +14,8 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @categories = ['meat', 'fish', 'vegetable', 'seasoning', 'sweet', 'other', 'fruit', 'deli']
+    prepare_foods_by_category
   end
 
   def create
@@ -32,7 +34,10 @@ class RecipesController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    @categories = ['meat', 'fish', 'vegetable', 'seasoning', 'sweet', 'other', 'fruit', 'deli']
+    prepare_foods_by_category
+  end
 
   def update
     if @recipe.update(recipe_params)
@@ -52,7 +57,11 @@ class RecipesController < ApplicationController
   private
 
   def set_recipe
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find_by(id: params[:id])
+    # レシピが存在しない場合、レシピ一覧にリダイレクト
+    if @recipe.nil?
+      redirect_to recipes_path, danger: t('messages.not_found', model: Recipe.model_name.human)
+    end
   end
 
   def recipe_params
@@ -61,13 +70,30 @@ class RecipesController < ApplicationController
       :recipe_image,
       :one_point,
       :description,
-      :serving_size
+      :serving_size,
+      recipe_foods_attributes: [:id, :food_id, :quantity, :_destroy]
+      # recipes_foods_attributes: レシピ投稿フォームでネストされた属性を許可する
+      # _destroy: レシピ投稿フォームでレコードを削除する際に使用
     )
   end
 
+  # 投稿者本人であるかを判定メソッド
   def authorize_user_recipe
-    # 投稿者本人でない場合、トップページにリダイレクト
+    # 投稿者本人でない場合、レシピ一覧にリダイレクト
     unless @recipe.user == current_user
-    redirect_to recipes_path, danger: t('messages.not_authorized')
+      redirect_to recipes_path, danger: t('messages.not_authorized')
+    end
+  end
+
+  # カテゴリー毎の食材リストを準備するメソッド
+  def prepare_foods_by_category
+    @foods_by_category = {}
+    # カテゴリー名をkeyとして、そのカテゴリーに属する食材リストをvalueとして格納するハッシュ
+    @categories.each do |category|
+      @foods_by_category[category] = Food.where(category: category)
+      # 各カテゴリーに対応する食材のリストを取得し、@foods_by_category ハッシュに保存
+      # Food.where(category: category) :データベースから特定のカテゴリーに属する全ての食材を取得するActiveRecordのクエリ
+      #  @foods_by_category[category] :取得した食材のリストをハッシュに保存
+    end
   end
 end
