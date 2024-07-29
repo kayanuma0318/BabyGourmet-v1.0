@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :recipes do
     collection do
       get 'add_ingredient_fields'
+      get 'add_step_fields'
     end
   end
 

@@ -7,17 +7,39 @@
       <%= f.label :title, t('.recipe_name') %>
       <%= f.text_field :title, class: "input w-full max-w-xs", placeholder:"例）ロイヤルパンケーキ" %>
 
-    <!--総分量-->
+      <!--総分量-->
       <%= f.label :serving_size, t('.serving_size') %>
       <%= f.text_field :serving_size, class: "input w-full max-w-xs", placeholder:"例）2人分" %>
 
-    <!--レシピ説明-->
+      <!--レシピ説明-->
       <%= f.label :description, t('.description') %>
       <%= f.text_area :description, class: "textarea textarea-bordered", placeholder:"例）これはロイヤルパンケーキです。とても美味しいです。" %>
 
-    <!--材料-->
-    <%= render 'shared/ingredient', categories: @categories, f: f, foods_by_category: @foods_by_category %>
+      <!--材料-->
+      <%= render 'shared/ingredient', categories: @categories, f: f, foods_by_category: @foods_by_category %>
 
-    <!---->
+      <!--手順-->
+      <%= render 'shared/step', step: @step, f: f %>
+
+      <!--ワンポイント-->
+      <%= f.label :one_point, t('.one_point'), class: "label pt-8" %>
+      <%= f.text_area :one_point, class: "textarea textarea-bordered", placeholder:"例）焼き加減に気をつけてください。" %>
+
+      <!--画像アップロード-->
+      <div class="mt-4 pt-8 pb-8">
+        <h3 class="text-lg mb-2"><%= t('.recipe_image')%></h3>
+        <div class="border-2 border-dashed border-gray-300 rounded-lg p-4">
+          <div id="image-preview" class="hidden mb-4">
+            <%= image_tag "", id: "preview-image", class: "max-w-full h-auto" %>
+          </div>
+          <div id="upload-prompt" class="text-center">
+            <%= f.file_field :image, class: "hidden", accept: "image/*", id: "recipe-image-input" %>
+            <%= f.label :image, t('.add_recipe_image'), class: "cursor-pointer inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" %>
+          </div>
+        </div>
+      </div>
+
+      <%= f.submit t('helpers.submit.submit'), class: "btn btn-secondary"%>
+    </div>
   <% end %>
 </div>

@@ -1,0 +1,6 @@
+<!--追加方法を決めるファイル-->
+<%= turbo_stream.append "steps" do %>
+  <%=fields_for :recipe, @recipe do |f| %>
+    <%= render 'step_fields', f: f, step: @recipe.steps.build %>
+  <% end %>
+<% end %>

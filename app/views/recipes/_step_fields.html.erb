@@ -1,0 +1,8 @@
+<!--追加用フィールド-->
+<%= f.fields_for :step, f.object.steps.build do |f| %>
+  <div class="grid grid-cols-2 gap-4 pt-4">
+    <div class="step">
+      <%= f.text_area :description, class: "textarea textarea-bordered", placeholder: "例）にんじんの皮を剥きます。" %>
+    </div>
+  </div>
+<% end %>

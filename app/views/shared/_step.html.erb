@@ -1,0 +1,13 @@
+<!--手順フォーム表示用ファイル-->
+<div class='text-2xl pt-8 pb-3'><%= t('recipes.step.title') %></div>
+<div id="steps">
+  <%= f.fields_for :steps, f.object.steps.build  do |step| %>
+    <div class="step">
+      <%= step.text_area :description, class: "textarea textarea-bordered", placeholder: "例）にんじんの皮を剥きます。" %>
+    </div>
+  <% end %>
+</div>
+<%= link_to t('recipes.step.add_step'),
+            add_step_fields_recipes_path(step: step),
+            class: "btn btn-secondary",
+            data: { turbo_stream: true } %>

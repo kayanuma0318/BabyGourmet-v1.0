@@ -54,11 +54,21 @@ class RecipesController < ApplicationController
     redirect_to recipes_path, success: t('messages.destroy_success', model: Recipe.model_name.human)
   end
 
-  # 食材を追加する際に、カテゴリー毎の食材リストを取得するメソッド
+  # 食材フォーム追加時に、カテゴリー毎の食材リストを取得するメソッド
   def add_ingredient_fields
     @category = params[:category]
     @foods = Food.where(category: @category)
     @recipe = Recipe.new
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  # 手順フォーム追加時に、新規手順を追加するメソッド
+  def add_step_fields
+    @recipe = Recipe.new
+    @step = Step.new
+
     respond_to do |format|
       format.turbo_stream
     end
@@ -81,7 +91,8 @@ class RecipesController < ApplicationController
       :one_point,
       :description,
       :serving_size,
-      recipe_foods_attributes: [:id, :food_id, :quantity, :_destroy]
+      recipe_foods_attributes: [:id, :food_id, :quantity, :_destroy],
+      steps_attributes: [:id, :description, :_destroy]
       # recipes_foods_attributes: レシピ投稿フォームでネストされた属性を許可する
       # _destroy: レシピ投稿フォームでレコードを削除する際に使用
     )

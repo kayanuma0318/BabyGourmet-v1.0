@@ -1,10 +1,11 @@
-<%= f.fields_for :recipe_foods, f.object.recipe_foods.build do |rf| %>
-  <div class="grid grid-cols-2 gap-4 pt-6">
+<!--追加用フィールド-->
+<%= f.fields_for :recipe_foods, f.object.recipe_foods.build do |f| %>
+  <div class="grid grid-cols-2 gap-4 pt-4">
     <div class="ingredient">
-      <%= rf.collection_select :food_id, foods, :id, :name, { prompt: t('recipes.ingredient.select_food') }, { class: "select select-bordered w-full" } %>
+      <%= f.collection_select :food_id, foods, :id, :name, { prompt: t('recipes.ingredient.select_food') }, { class: "select select-bordered w-full" } %>
     </div>
     <div class="quantity">
-      <%= rf.number_field :quantity, class: "input input-bordered w-full", placeholder: t('placeholder.quantity_placeholder') %>
+      <%= f.number_field :quantity, class: "input input-bordered w-full", placeholder: t('placeholder.quantity_placeholder') %>
     </div>
   </div>
 <% end %>

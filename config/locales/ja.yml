@@ -40,13 +40,16 @@ ja:
       title: レシピ作成
       recipe_name: レシピ名
       serving_size: 総分量
-      description: 説明
+      description: レシピ説明
       recipe_image: 画像
       one_point: ワンポイント
+      recipe_image: レシピ画像
+      add_recipe_image: + 画像を追加
     ingredient:
       title: 材料
       select_food: 食材を選択してください
       quantity: 分量
+      add_ingredient: + 材料を追加
     category:
       meat: 肉類
       fish: 魚介類
@@ -56,6 +59,10 @@ ja:
       sweet: お菓子類
       deli: 惣菜
       other: その他
+    step:
+      title: 手順
+      description: 説明
+      add_step: + 手順を追加
     edit:
       title: レシピ編集
   devise:

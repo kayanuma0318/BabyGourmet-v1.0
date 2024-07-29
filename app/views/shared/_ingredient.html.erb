@@ -1,3 +1,5 @@
+<!--材料フォーム表示用ファイル-->
+<div class='text-2xl pt-8 pb-3'><%= t('recipes.ingredient.title') %></div>
 <% @categories.each do |category| %>
   <!--@categoriesという配列の各要素に対してループ-->
   <!--categoryに代入する-->
@@ -26,7 +28,7 @@
       </div>
     <% end %>
     <div id="ingredients_<%= category %>"></div>
-    <%= link_to t('recipes.add_ingredient'),
+    <%= link_to t('recipes.ingredient.add_ingredient'),
                 add_ingredient_fields_recipes_path(category: category),
                 class: "btn btn-secondary",
                 data: { turbo_stream: true } %>
