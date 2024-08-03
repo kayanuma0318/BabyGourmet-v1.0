@@ -1,6 +1,8 @@
 <!--追加方法を決めるファイル-->
-<%= turbo_stream.prepend "ingredients_#{@category}" do %>
-  <%= fields_for :recipe, @recipe do |f| %>
-    <%= render 'ingredient_fields', f: f, category: @category, foods: @foods %>
+<%= turbo_stream.append "add_ingredients_#{@category}" do %>
+  <%= fields_for :recipe do |recipe_form| %>
+    <%= recipe_form.fields_for :recipe_foods, RecipeFood.new do |rf| %>
+      <%= render 'shared/add_ingredient', f: rf, category: @category, foods: @foods %>
+    <% end %>
   <% end %>
 <% end %>

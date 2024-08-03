@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions:      'users/sessions'
-  }, skip: [:registrations, :sessions]
+  }, skip: %i[registrations, sessions]
   # skip: [:registrations, :sessions]で自動生成するルーティングを制限する
   # 制限理由: ユーザー登録、ログイン、ログアウトのルーティングを可読性良くカスタマイズするため
 
@@ -26,8 +26,9 @@ Rails.application.routes.draw do
     collection do
       get 'add_ingredient_fields'
       get 'add_step_fields'
+      delete 'remove_ingredient_fields'
+      delete 'remove_step_fields'
     end
   end
-
   get 'up' => 'rails/health#show', as: :rails_health_check
 end

@@ -1,10 +1,12 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
-  before_action :set_recipe, only: %i[show edit update destroy]
+  before_action :set_not_exist_recipe, only: %i[show edit update destroy]
   before_action :authorize_user_recipe, only: %i[edit update destroy]
+  before_action :set_categories_and_foods, only: %i[new create edit update]
   # authenticate_user!: ログインしていない場合、ログインページにリダイレクトするdevise標準メソッド
-  # set_recipe: 対象のレシピを取得
+  # set_not_exist_recipe: 対象のレシピを取得し、レシピの存在を確認するメソッド
   # authorize_user_recipe: レシピの編集、更新、削除する際、投稿者本人であるかを判定
+  # set_categories_and_foods: カテゴリーと食材をハッシュに格納するメソッド
 
   def index
     @recipes = Recipe.includes(:user).all
@@ -14,8 +16,8 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @categories = ['meat', 'fish', 'vegetable', 'seasoning', 'sweet', 'other', 'fruit', 'deli']
-    prepare_foods_by_category
+    @recipe.steps.build
+    # 手順フォームの初期フォームを1つ作成する
   end
 
   def create
@@ -34,10 +36,7 @@ class RecipesController < ApplicationController
 
   def show; end
 
-  def edit
-    @categories = ['meat', 'fish', 'vegetable', 'seasoning', 'sweet', 'other', 'fruit', 'deli']
-    prepare_foods_by_category
-  end
+  def edid; end
 
   def update
     if @recipe.update(recipe_params)
@@ -50,33 +49,49 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe.destroy!
+    @recipe.destroy
     redirect_to recipes_path, success: t('messages.destroy_success', model: Recipe.model_name.human)
   end
 
-  # 食材フォーム追加時に、カテゴリー毎の食材リストを取得するメソッド
+  # 新規食材フォームを追加するメソッド
   def add_ingredient_fields
     @category = params[:category]
     @foods = Food.where(category: @category)
-    @recipe = Recipe.new
     respond_to do |format|
       format.turbo_stream
     end
   end
 
-  # 手順フォーム追加時に、新規手順を追加するメソッド
-  def add_step_fields
-    @recipe = Recipe.new
-    @step = Step.new
+  # 追加した食材欄を削除するメソッド
+  def remove_ingredient_fields
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream:
+          turbo_stream.remove("ingredient_#{params[:field_id]}")
+      end
+    end
+  end
 
+  # 新規手順フォームを追加するメソッド
+  def add_step_fields
     respond_to do |format|
       format.turbo_stream
+    end
+  end
+
+  # 追加した手順フォームを削除するメソッド
+  def remove_step_fields
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream:
+          turbo_stream.remove("step_#{params[:field_id]}")
+      end
     end
   end
 
   private
 
-  def set_recipe
+  def set_not_exist_recipe
     @recipe = Recipe.find_by(id: params[:id])
     # レシピが存在しない場合、レシピ一覧にリダイレクト
     if @recipe.nil?
@@ -106,15 +121,14 @@ class RecipesController < ApplicationController
     end
   end
 
-  # カテゴリー毎の食材リストを準備するメソッド
-  def prepare_foods_by_category
-    @foods_by_category = {}
-    # カテゴリー名をkeyとして、そのカテゴリーに属する食材リストをvalueとして格納するハッシュ
-    @categories.each do |category|
-      @foods_by_category[category] = Food.where(category: category)
-      # 各カテゴリーに対応する食材のリストを取得し、@foods_by_category ハッシュに保存
+  # カテゴリーと食材をハッシュに格納するメソッド
+  def set_categories_and_foods
+    @categories = ['meat', 'fish', 'vegetable', 'seasoning', 'other', 'fruit', 'sweet', 'deli']
+    @foods_by_category = @categories.each_with_object({}) do |category, hash|
+      # each_with_object({}): ハッシュを生成するメソッド
+      hash[category] = Food.where(category: category)
+      # 各カテゴリーに対応する食材のリストを取得し、ハッシュに保存
       # Food.where(category: category) :データベースから特定のカテゴリーに属する全ての食材を取得するActiveRecordのクエリ
-      #  @foods_by_category[category] :取得した食材のリストをハッシュに保存
     end
   end
 end

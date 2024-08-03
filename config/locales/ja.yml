@@ -20,7 +20,7 @@ ja:
     update_success: "%{model}を更新しました。"
     update_failed: "%{model}の更新に失敗しました。"
     destroy_success: "%{model}を削除しました。"
-    not_authorized: "%{user}さんは、不法侵入です。"
+    not_authorized: "不法侵入しています。"
     not_found: "%{model}が見つかりません。"
   users:
     registrations:
