@@ -14,9 +14,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new(sign_up_params)
     if @user.save
       sign_in(@user)
-      redirect_to root_path, success: t('users.registrations.create.welcome')
+      redirect_to root_path, success: t('flash.welcome')
     else
-      flash.now[:danger] = t('users.registrations.create.failed')
+      flash.now[:danger] = t('flash.signin_failed')
       render :new, status: :unprocessable_entity
       # status: :unprocessable_entity :HTTPステータスコード422を返す
     end

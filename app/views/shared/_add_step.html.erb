@@ -1,0 +1,13 @@
+<% field_id = SecureRandom.uuid %>
+<div class="step-field" id="step_<%= field_id %>">
+  <div class="grid grid-cols-2 gap-4 pt-4">
+    <div class="step">
+      <%= f.text_area :description, class: "textarea textarea-bordered", placeholder: "例）にんじんの皮を剥きます。" %>
+    </div>
+    <div class="remove">
+      <%= link_to image_tag('destroy_mark.png', alt:'削除', class: "w-12 h-12"),
+                  remove_step_fields_recipes_path(field_id: field_id),
+                  data: { turbo_method: :delete, turbo_stream: true } %>
+    </div>
+  </div>
+</div>

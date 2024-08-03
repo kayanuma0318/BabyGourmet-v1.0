@@ -1,0 +1,24 @@
+<!--材料フォーム表示用ファイル-->
+<div class="initial-ingredient-field" data-category="<%= category %>">
+  <div class="grid grid-cols-2 gap-4">
+    <div class="ingredient">
+      <%= rf.label :food_id, t("recipes.category.#{category}"), class: "label" %>
+      <%= rf.collection_select :food_id, @foods_by_category[category], :id, :name,
+                              { prompt: t('recipes.ingredient.select_food') },
+                              { class: "select select-bordered w-full" } %>
+        <!--collection_select :配列やActive Recordのコレクションからセレクトボックスを生成するRailsのヘルパーメソッド-->
+        <!--:food_id :選択された値が割り当てられる属性名-->
+        <!--@foods_by_category[category] :現在のカテゴリーに属する食材のリスト-->
+        <!--:idと:name :それぞれオプションの値とテキストに使用されるメソッド名-->
+        <!--promptオプション :デフォルトの選択肢として表示されるテキストを指定-->
+    </div>
+    <div class="quantity">
+      <%= rf.label :quantity, t('recipes.ingredient.quantity'), class: "label" %>
+      <%= rf.number_field  :quantity,
+                            class: "input input-bordered w-full",
+                            placeholder: t('placeholder.quantity_placeholder') %>
+        <!--number_field :数値入力用のフォームフィールドを生成-->
+        <!--:quantity :入力された値が割り当てられる属性名-->
+    </div>
+  </div>
+</div>

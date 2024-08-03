@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+
+  root 'tops#index'
+
   # 認証に必要なルーティングを自動生成する
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions:      'users/sessions'
-  }, skip: [:registrations, :sessions]
+  }, skip: %i[registrations, sessions]
   # skip: [:registrations, :sessions]で自動生成するルーティングを制限する
+  # 制限理由: ユーザー登録、ログイン、ログアウトのルーティングを可読性良くカスタマイズするため
 
   devise_scope :user do
     # devise_scope: どのルーティングを変更するかを指定する
@@ -18,7 +22,13 @@ Rails.application.routes.draw do
     delete 'logout', to: 'users/sessions#destroy', as: :logout
   end
 
-  root 'tops#index'
-
+  resources :recipes do
+    collection do
+      get 'add_ingredient_fields'
+      get 'add_step_fields'
+      delete 'remove_ingredient_fields'
+      delete 'remove_step_fields'
+    end
+  end
   get 'up' => 'rails/health#show', as: :rails_health_check
 end
