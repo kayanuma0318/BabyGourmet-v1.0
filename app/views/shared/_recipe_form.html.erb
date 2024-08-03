@@ -6,15 +6,15 @@
       <!--エラーメッセージの表示-->
     <div class="form-control">
       <!--レシピ名-->
-      <%= f.label :title, t('.recipe_name') %>
+      <%= f.label :title, t('recipes.shared.recipe_name') %>
       <%= f.text_field :title, class: "input w-full max-w-xs", placeholder:"例）ロイヤルパンケーキ" %>
 
       <!--総分量-->
-      <%= f.label :serving_size, t('.serving_size') %>
+      <%= f.label :serving_size, t('recipes.shared.serving_size') %>
       <%= f.text_field :serving_size, class: "input w-full max-w-xs", placeholder:"例）2人分" %>
 
       <!--レシピ説明-->
-      <%= f.label :description, t('.description') %>
+      <%= f.label :description, t('recipes.shared.description') %>
       <%= f.text_area :description, class: "textarea textarea-bordered", placeholder:"例）これはロイヤルパンケーキです。とても美味しいです。" %>
 
       <!--材料-->
@@ -48,20 +48,20 @@
                     data: { turbo_stream: true } %>
 
       <!--ワンポイント-->
-      <%= f.label :one_point, t('.one_point'), class: "label pt-8" %>
+      <%= f.label :one_point, t('recipes.shared.one_point'), class: "label pt-8" %>
       <%= f.text_area :one_point, class: "textarea textarea-bordered", placeholder:"例）焼き加減に気をつけてください。" %>
 
       <!--画像アップロード-->
       <!--TODO: 画像アップロード機能実装-->
       <div class="mt-4 pt-8 pb-8">
-        <h3 class="text-lg mb-2"><%= t('.recipe_image')%></h3>
+        <h3 class="text-lg mb-2"><%= t('recipes.shared.recipe_image')%></h3>
         <div class="border-2 border-dashed border-gray-300 rounded-lg p-4">
           <div id="image-preview" class="hidden mb-4">
             <%= image_tag "", id: "preview-image", class: "max-w-full h-auto" %>
           </div>
           <div id="upload-prompt" class="text-center">
             <%= f.file_field :image, class: "hidden", accept: "image/*", id: "recipe-image-input" %>
-            <%= f.label :image, t('.add_recipe_image'), class: "cursor-pointer inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" %>
+            <%= f.label :image, t('recipes.shared.add_recipe_image'), class: "cursor-pointer inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" %>
           </div>
         </div>
       </div>

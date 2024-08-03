@@ -38,6 +38,7 @@ ja:
       title: レシピ詳細
     new:
       title: レシピ作成
+    shared:
       recipe_name: レシピ名
       serving_size: 総分量
       description: レシピ説明
