@@ -11,7 +11,7 @@
 
       <!--総分量-->
       <%= f.label :serving_size, t('recipes.shared.serving_size') %>
-      <%= f.text_field :serving_size, class: "input w-full max-w-xs", placeholder:"例）2人分" %>
+      <%= f.number_field :serving_size, class: "input w-full max-w-xs", placeholder:"例）2人分なら、2 と入力してください" %>
 
       <!--レシピ説明-->
       <%= f.label :description, t('recipes.shared.description') %>

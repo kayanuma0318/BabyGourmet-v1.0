@@ -32,8 +32,12 @@ ja:
       destroy:
         logout: ログアウト
   recipes:
+    recipe_card:
+      nutrient_name: 含まれる栄養素
+      not_nutrient_found: 栄養素情報がありません。
     index:
-      title: レシピ一覧
+      title: みんなのレシピ
+      go_cook_list: 作りたいものリストへ
     show:
       title: レシピ詳細
     new:
@@ -66,6 +70,22 @@ ja:
       add_step: + 手順を追加
     edit:
       title: レシピ編集
+  nutrients:
+    energy: エネルギー
+    protein: タンパク質
+    dietary_fiber: 食物繊維
+    calcium: カルシウム
+    magnesium: マグネシウム
+    phosphorus: リン
+    iron: 鉄
+    zinc: 亜鉛
+    iodine: ヨウ素
+    vitamin_d: ビタミンD
+    vitamin_b6: ビタミンB6
+    vitamin_b12: ビタミンB12
+    folate: 葉酸
+    vitamin_c: ビタミンC
+    salt_equivalent: 食塩相当量
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。

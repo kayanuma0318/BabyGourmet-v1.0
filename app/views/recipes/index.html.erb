@@ -1,0 +1,13 @@
+<h1 class="text-2xl font-bold mb-4 text-center"><%= t('recipes.index.title') %></h1>
+
+<div class="mb-4">
+  <%= form_with url: recipes_path, method: :get, local: true do |f| %>
+    <%= f.text_field :search, placeholder: "レシピを検索してください。", class: "input input-bordered w-full" %>
+  <% end %>
+</div>
+
+  <%= render 'recipe_card', recipe: @recipes %>
+
+<div class="flex justify-center mt-4">
+  <%= link_to t('recipes.index.go_cook_list'), '#', class: "btn btn-primary" %>
+</div>
