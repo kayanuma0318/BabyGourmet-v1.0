@@ -28,8 +28,4 @@ class Food < ApplicationRecord
       # find_or_create_by! = !をつけると失敗時に例外が発生する
     end
   end
-  # シーケンス番号のリセットメソッド
-  def self.reset_id_sequence
-    connection.execute("TRUNCATE foods RESTART IDENTITY CASCADE")
-  end
 end
