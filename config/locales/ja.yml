@@ -40,6 +40,13 @@ ja:
       go_cook_list: 作りたいものリストへ
     show:
       title: レシピ詳細
+      nutrient_include: 含まれる栄養素
+      ingredient: 材料
+      serving_size: 人分
+      description: 作り方
+      one_point: ワンポイント
+      recipe_edit: レシピを編集
+      recipe_delete: レシピを削除
     new:
       title: レシピ作成
     shared:
@@ -86,6 +93,22 @@ ja:
     folate: 葉酸
     vitamin_c: ビタミンC
     salt_equivalent: 食塩相当量
+  nutrient_units:
+    energy: kcal
+    protein: g
+    dietary_fiber: g
+    calcium: mg
+    magnesium: mg
+    phosphorus: mg
+    iron: mg
+    zinc: mg
+    iodine: μg
+    vitamin_d: μg
+    vitamin_b6: mg
+    vitamin_b12: μg
+    folate: μg
+    vitamin_c: mg
+    salt_equivalent: g
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。

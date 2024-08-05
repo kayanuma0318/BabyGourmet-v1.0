@@ -34,7 +34,10 @@ class RecipesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+  @recipe = Recipe.includes(:user, recipe_foods: { food: { food_nutrients: :nutrient } }).find(params[:id])
+  @nutrient_totals = @recipe.nutrient_totals
+  end
 
   def edid; end
 
