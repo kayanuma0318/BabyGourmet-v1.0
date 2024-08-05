@@ -40,6 +40,7 @@
     </div>
   </div>
 
+  <!--材料表示-->
   <div class="mb-6">
     <h2 class="text-xl font-semibold mb-2"><%= t('.ingredient') %>(<%= @recipe.serving_size %><%= t('.serving_size') %>)</h2>
     <ul>
@@ -49,6 +50,7 @@
     </ul>
   </div>
 
+  <!--手順表示-->
   <div class="mb-6">
     <h2 class="text-xl font-semibold mb-2"><%= t('.description') %></h2>
     <ol>
@@ -58,11 +60,13 @@
     </ol>
   </div>
 
+  <!--ワンポイント表示-->
   <div class="mb-6">
     <h2 class="text-xl font-semibold mb-2"><%= t('.one_point') %></h2>
     <p><%= @recipe.one_point %></p>
   </div>
 
+  <!--投稿者のみ編集・削除ボタン表示-->
   <% if current_user == @recipe.user %>
     <div class="flex justify-center gap-8 mt-4">
     <%= link_to t('.recipe_edit'), edit_recipe_path(@recipe), class: "btn btn-secondary" %>
