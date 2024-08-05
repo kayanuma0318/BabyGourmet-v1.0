@@ -34,7 +34,12 @@ class RecipesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+  @recipe = Recipe.includes(:user, recipe_foods: { food: { food_nutrients: :nutrient } }).find(params[:id])
+    # 特定のレシピを取得し、ユーザー情報も取得
+  @nutrient_totals = @recipe.nutrient_totals
+    #@recipe.nutrient_totalsを呼び出し、レシピ全体の栄養素合計を計算し、@nutrient_totalsに代入
+  end
 
   def edid; end
 

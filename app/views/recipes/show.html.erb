@@ -1,0 +1,75 @@
+<div class="container mx-auto px-4 py-8">
+
+  <!--画像タイトル-->
+  <h1 class="text-3xl font-bold mb-4"><%= @recipe.title %></h1>
+
+  <!--タイトル下実線-->
+  <div class="border-t border-gray-600 my-4"></div>
+
+  <!--レシピ説明-->
+  <p class="text-gray-600 mb-4"><%= @recipe.description %></p>
+
+  <div class="mb-6">
+    <!-- レシピ投稿画像 -->
+    <div class="mb-4">
+      <%= image_tag 'noimage.png', class: "w-full h-60 object-contain rounded-lg" %>
+        <!--object-contain :画像全体を表示、尚且つ指定したサイズに収める-->
+      <!-- TODO: 画像アップロード機能実装後、レシピ投稿画像表示する -->
+    </div>
+
+    <!-- アバターとユーザー名 -->
+    <div class="flex items-center">
+      <%= image_tag '妊婦.jpg', class: "w-10 h-10 rounded-full mr-2" %>
+      <!-- TODO: 画像アップロード機能実装後、アバター画像表示する -->
+      <span class="text-gray-700"><%= @recipe.user.name %></span>
+    </div>
+  </div>
+
+  <!--栄養素表示-->
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold mb-2"><%= t('.nutrient_include') %></h2>
+    <div class="grid grid-cols-2 gap-4">
+      <% @recipe.nutrient_totals.each do |nutrient, total| %>
+        <div class="flex items-center">
+          <span class="badge badge-primary mr-2 text-xs px-2 py-1"><%= t("nutrients.#{nutrient}") %></span>
+          <!--文の一部分に適用させる、改行を起こさないためspanタグを使用-->
+          <!-- px-2 py-1 :xは水平方向（左右）、yは垂直方向（上下）-->
+          <span><%= number_with_precision(total, precision: 2) %> <%= t("nutrient_units.#{nutrient}") %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!--材料表示-->
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold mb-2"><%= t('.ingredient') %>(<%= @recipe.serving_size %><%= t('.serving_size') %>)</h2>
+    <ul>
+      <% @recipe.recipe_foods.each do |recipe_food| %>
+        <li><%= recipe_food.food.name %> <%= recipe_food.quantity %><%= recipe_food.food.unit %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <!--手順表示-->
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold mb-2"><%= t('.description') %></h2>
+    <ol>
+      <% @recipe.steps.each do |step| %>
+        <li class="mb-2"><%= step.description %></li>
+      <% end %>
+    </ol>
+  </div>
+
+  <!--ワンポイント表示-->
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold mb-2"><%= t('.one_point') %></h2>
+    <p><%= @recipe.one_point %></p>
+  </div>
+
+  <!--投稿者のみ編集・削除ボタン表示-->
+  <% if current_user == @recipe.user %>
+    <div class="flex justify-center gap-8 mt-4">
+    <%= link_to t('.recipe_edit'), edit_recipe_path(@recipe), class: "btn btn-secondary" %>
+    <%= button_to t('.recipe_delete'), recipe_path(@recipe), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-error" %>
+  <% end %>
+</div>
