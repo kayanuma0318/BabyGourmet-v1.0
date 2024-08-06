@@ -6,7 +6,7 @@
   <% end %>
 </div>
 
-  <%= render 'recipe_card', recipe: @recipes %>
+  <%= render 'shared/recipe_card', recipe: @recipes %>
 
 <div class="flex justify-center mt-4 mb-4">
   <%= link_to t('recipes.index.go_cook_list'), '#', class: "btn btn-primary" %>

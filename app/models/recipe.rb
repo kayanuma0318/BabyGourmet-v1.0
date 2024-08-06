@@ -57,8 +57,8 @@ class Recipe < ApplicationRecord
             # 栄養素の値が存在し、0より大きい場合、以下の処理を行う
             totals[column] ||= 0
               # 栄養素の値が存在しない場合、0を代入する（nil防止のため）
-            totals[column] += value * recipe_food.quantity / 100.0
-            # 特定のカラム = 100gあたりの栄養素の値 * 使用される食材の量 / 100gあたりの値を実際の使用量に比例した値に変換
+            totals[column] += value * recipe_food.quantity / 100.0 / serving_size
+            # 特定のカラム = 100gあたりの栄養素の値 * 使用される食材の量 / 100gあたりの値を実際の使用量に比例した値に変換 / 総分量で割ることで1人前の量を計算する
           end
         end
       end

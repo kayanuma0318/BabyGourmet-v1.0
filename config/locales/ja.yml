@@ -40,7 +40,7 @@ ja:
       go_cook_list: 作りたいものリストへ
     show:
       title: レシピ詳細
-      nutrient_include: 含まれる栄養素
+      nutrient_include: 1人分に含まれる栄養素
       ingredient: 材料
       serving_size: 人分
       description: 作り方

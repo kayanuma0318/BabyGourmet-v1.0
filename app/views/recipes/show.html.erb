@@ -29,14 +29,8 @@
   <div class="mb-6">
     <h2 class="text-xl font-semibold mb-2"><%= t('.nutrient_include') %></h2>
     <div class="grid grid-cols-2 gap-4">
-      <% @recipe.nutrient_totals.each do |nutrient, total| %>
-        <div class="flex items-center">
-          <span class="badge badge-primary mr-2 text-xs px-2 py-1"><%= t("nutrients.#{nutrient}") %></span>
-          <!--文の一部分に適用させる、改行を起こさないためspanタグを使用-->
-          <!-- px-2 py-1 :xは水平方向（左右）、yは垂直方向（上下）-->
-          <span><%= number_with_precision(total, precision: 2) %> <%= t("nutrient_units.#{nutrient}") %></span>
-        </div>
-      <% end %>
+      <%= nutrient_details(@recipe) %>
+      <!--nutrient_details :栄養素名とバッチを記載するメソッド(recipe_helper.rbに記述)-->
     </div>
   </div>
 
@@ -69,7 +63,8 @@
   <!--投稿者のみ編集・削除ボタン表示-->
   <% if current_user == @recipe.user %>
     <div class="flex justify-center gap-8 mt-4">
-    <%= link_to t('.recipe_edit'), edit_recipe_path(@recipe), class: "btn btn-secondary" %>
-    <%= button_to t('.recipe_delete'), recipe_path(@recipe), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-error" %>
+      <%= link_to t('.recipe_edit'), edit_recipe_path(@recipe), class: "btn btn-secondary" %>
+      <%= button_to t('.recipe_delete'), recipe_path(@recipe), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-error" %>
+    </div>
   <% end %>
 </div>
