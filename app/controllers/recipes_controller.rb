@@ -41,7 +41,7 @@ class RecipesController < ApplicationController
     #@recipe.nutrient_totalsを呼び出し、レシピ全体の栄養素合計を計算し、@nutrient_totalsに代入
   end
 
-  def edid; end
+  def edit; end
 
   def update
     if @recipe.update(recipe_params)

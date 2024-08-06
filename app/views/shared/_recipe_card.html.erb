@@ -42,17 +42,10 @@
         <h2 class="text-xs font-semibold mb-1"><%= t('recipes.recipe_card.nutrient_name') %></h2>
         <div class="flex flex-wrap gap-1">
           <!--flex-wrap :要素が多い場合、折り返す-->
-          <% recipe.nutrient_names.each_with_index do |nutrient, index| %>
-            <!--レシピの栄養素名とインデックス(配列の順番)に対してループ-->
-            <% badge_color = get_badge_color(index) %>
-              <!--helperにメソッドを定義、indexに対してバッチの色を取得-->
-            <span class="badge <%= badge_color %> text-xs">
-              <%= t("nutrients.#{nutrient}") %>
-              <!--栄養素名を翻訳して表示-->
-            </span>
-          <% end %>
-          <% if recipe.nutrient_names.empty? %>
-            <p class="text-xs text-gray-500"><%= t('recipes.recipe_card.not_nutrient_found') %></p>
+          <%= nutrient_badges(recipe) %>
+            <% if recipe.nutrient_names.empty? %>
+              <p class="text-xs text-gray-500"><%= t('recipes.recipe_card.not_nutrient_found') %></p>
+            <% end %>
           <% end %>
         </div>
       </div>
