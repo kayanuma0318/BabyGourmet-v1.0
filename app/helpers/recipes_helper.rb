@@ -29,10 +29,14 @@ module RecipesHelper
           #  各栄養素と栄養素の値に対して以下の処理を行う
           badge_color = get_badge_color(recipe.nutrient_names.index(nutrient.to_s))
             # レシピに含まれる栄養素名の配列から、特定の栄養素名のカラム(index)を取得し、そのカラム(index)に対応する色を取得する
-          content_tag :div, class: "flex items-center" do
-            concat content_tag(:span, t("nutrients.#{nutrient}"), class: "badge #{badge_color} mr-2 text-xs px-2 py-1")
-            concat content_tag(:span, "#{number_with_precision(total, precision: 2)} #{t("nutrient_units.#{nutrient}")}")
-            # number_with_precisionメソッド :第1引数の数値を第2引数の桁数（小数点第2位まで）表示するメソッド
+          content_tag :div, class: "flex flex-col" do
+            # flex flex-col: 要素を縦方向に並べる
+            content_tag :div, class: "flex items-center mb-1" do
+              # flex items-center: 要素を中央に配置する
+              concat content_tag(:span, t("nutrients.#{nutrient}"), class: "badge #{badge_color} mr-2 text-xs px-2 py-1")
+              concat content_tag(:span, "#{number_with_precision(total, precision: 2)} #{t("nutrient_units.#{nutrient}")}")
+                # number_with_precisionメソッド :第1引数の数値を第2引数の桁数（小数点第2位まで）表示するメソッド
+            end
           end
         end
       )
