@@ -1,0 +1,11 @@
+<!--手順初期フィールドの内容をリセットする設定-->
+<%= turbo_stream.replace "step_#{@field_id}" do %>
+  <!--動的id=step_#{@field_id}を置き換える-->
+  <%= fields_for @recipe do |f| %>
+  <!--レシピに関するフォームを作成-->
+    <%= f.fields_for :steps, @step do |step_form| %>
+      <!--レシピの手順に関してフォームを作成-->
+      <%= render 'shared/reset_step', f: step_form, field_id: @field_id %>
+    <% end %>
+  <% end %>
+<% end %>

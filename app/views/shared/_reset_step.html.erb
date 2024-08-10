@@ -1,0 +1,17 @@
+<!--手順フィールドリセット後のview-->
+<% field_id = SecureRandom.uuid %>
+<div id="step_<%= field_id %>">
+  <div class="grid grid-cols-2 gap-4 pt-4">
+    <div class="step">
+      <%= text_area_tag "recipe[steps_attributes][][description]", "",
+                        class: "textarea textarea-bordered",
+                        placeholder: "例）にんじんの皮を剥きます。" %>
+    </div>
+    <div class="reset">
+      <%= link_to reset_step_fields_recipes_path(field_id: field_id),
+                  data: { turbo_stream: true, turbo_method: :post } do %>
+        <%= image_tag('destroy_mark.png', alt: '削除', class: "w-12 h-12") %>
+      <% end %>
+    </div>
+  </div>
+</div>

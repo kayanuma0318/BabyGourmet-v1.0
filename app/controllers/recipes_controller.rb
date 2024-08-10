@@ -94,6 +94,17 @@ class RecipesController < ApplicationController
     end
   end
 
+  # 初期フィールドにて文章をリセットするメソッド
+  def reset_step_fields
+    @field_id = params[:field_id]
+    @recipe = Recipe.new
+    @recipe.steps.build
+    # 手順フォームの初期フォームを1つ作成する
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   private
 
   def set_not_exist_recipe
