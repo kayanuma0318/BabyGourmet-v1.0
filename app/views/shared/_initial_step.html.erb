@@ -1,7 +1,25 @@
-<div class="step-field">
+<!--手順フィールドの元のview-->
+<% field_id = SecureRandom.uuid %>
+<!--フィールドに対して一意の識別子を設ける-->
+<div id="step_<%= field_id %>">
+  <!--idを動的に設定し、特定のフィールドを特定できるようにする-->
   <div class="grid grid-cols-2 gap-4 pt-4">
     <div class="step">
-      <%= f.text_area :description, class: "textarea textarea-bordered", placeholder: "例）にんじんの皮を剥きます。" %>
+      <%= f.text_area :description,
+                      class: "textarea textarea-bordered",
+                      placeholder: "例）にんじんの皮を剥きます。" %>
+    </div>
+    <div class="reset">
+      <%= link_to reset_step_fields_recipes_path(field_id: field_id),
+                  data: { turbo_stream: true,
+                  turbo_method: :post } do %>
+                  <!--
+                    reset_step_fields_recipes_pathにリクエストを送信
+                    field_idをパラメータとして渡し、どの手順フィールドをリセットするか指定する
+                    data: { turbo_stream: true, turbo_method: :post } :非同期POSTリクエストを行うよう指示する。
+                  -->
+        <%= image_tag('destroy_mark.png', alt: '削除', class: "w-12 h-12") %>
+      <% end %>
     </div>
   </div>
 </div>
