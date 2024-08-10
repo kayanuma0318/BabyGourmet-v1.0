@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get 'add_step_fields'
       delete 'remove_ingredient_fields'
       delete 'remove_step_fields'
+      post 'reset_ingredient_fields'
       post 'reset_step_fields'
     end
   end

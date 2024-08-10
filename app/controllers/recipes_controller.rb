@@ -77,6 +77,23 @@ class RecipesController < ApplicationController
     end
   end
 
+  # 食材初期フィールドにて入力中の食材をリセットするメソッド
+  def reset_ingredient_fields
+    @category = params[:category]
+      # リクエストパラメーターから食材の特定のカテゴリーを取得
+    @foods = Food.where(category: @category)
+      # 特定されたカテゴリーに属する食材をDBから取得
+    @foods_by_category = { @category => @foods }
+      # 取得した食材リストをカテゴリーごとにハッシュに格納
+      # viewでカテゴリーごとに食材リストを表示するため
+    @recipe = Recipe.new
+    # 空のレシピオブジェクトを生成、リセット時に使用
+
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   # 新規手順フォームを追加するメソッド
   def add_step_fields
     respond_to do |format|

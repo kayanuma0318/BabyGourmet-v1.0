@@ -1,0 +1,49 @@
+<!--材料フォームリセット後の表示用ファイル-->
+<div class="container mx-auto max-w-4xl px-4">
+  <div class="initial-ingredient-field mb-4" data-category="<%= category %>">
+    <div class="grid grid-cols-12 gap-4 items-end">
+      <div class="ingredient col-span-5">
+
+        <!--食材フィールド-->
+        <%= rf.label :food_id, t("recipes.category.#{category}"), class: "label" %>
+        <%= rf.collection_select :food_id, @foods_by_category[category], :id, :name,
+                                { prompt: t('recipes.ingredient.select_food') },
+                                { class: "select select-bordered w-full shadow-lg" } %>
+          <!--
+            collection_select :配列やActive Recordのコレクションからセレクトボックスを生成する
+            food_id :選択された値が割り当てられる属性名
+            @foods_by_category[category] :現在のカテゴリーに属する食材のリスト
+            idと:name :それぞれオプションの値とテキストに使用されるメソッド名
+            promptオプション :デフォルトの選択肢として表示されるテキストを指定
+          -->
+      </div>
+
+      <!--分量フィールド-->
+      <div class="quantity col-span-5">
+        <%= rf.label :quantity, t('recipes.ingredient.quantity'), class: "label" %>
+        <%= rf.number_field :quantity,
+                            class: "input input-bordered w-full shadow-lg",
+                            placeholder: t('placeholder.quantity_placeholder') %>
+          <!--
+            number_field :数値入力用のフォームフィールドを生成
+            quantity :入力された値が割り当てられる属性名
+          -->
+      </div>
+
+      <!--リセットボタン-->
+      <div class="col-span-2 flex justify-center ">
+        <%= link_to reset_ingredient_fields_recipes_path(category: category),
+                    data: {
+                      turbo_method: :post,
+                      turbo_stream: true } do %>
+          <%= image_tag('destroy_mark.png', alt:'リセット', class: "w-12 h-12 mt-8") %>
+        <% end %>
+        <!--
+          reset_ingredient_fields_recipes_pathにリクエストを送信
+          categoryをパラメータとして渡し、どの材料フィールドをリセットするか指定する
+          data: { turbo_method: :post, turbo_stream: true } :非同期POSTリクエストを行うよう指示する
+        -->
+      </div>
+    </div>
+  </div>
+</div>

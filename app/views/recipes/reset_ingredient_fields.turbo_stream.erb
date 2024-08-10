@@ -1,0 +1,23 @@
+<!--リセット方法を設定するファイル-->
+<%= turbo_stream.replace "ingredients_#{@category}" do %>
+  <!--特定のカテゴリーに属する食材リスト動的に置き換える-->
+  <div id="ingredients_<%= @category %>">
+    <!--特定のカテゴリーに属する食材リストを一意に識別するためのid-->
+    <div class="grid grid-cols-1 gap-4 mb-4">
+      <%= fields_for :recipe do |f| %>
+        <%= f.fields_for :recipe_foods, RecipeFood.new do |rf| %>
+          <!--
+            新たな空のRecipeFoodsオブジェクトを作成し、フィールドを初期化
+            これにより、既存のデータがリセットされ、フォームが空になる
+          -->
+          <%= render 'shared/initial_ingredient', rf: rf, category: @category, foods: @foods %>
+            <!--
+              rf: rf => レシピの食材に関するフォーム
+              category: @category = 選択中のカテゴリー情報
+              foods: @foods = 選択中のカテゴリーに属する食材情報
+            -->
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
