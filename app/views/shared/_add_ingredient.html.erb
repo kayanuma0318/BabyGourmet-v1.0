@@ -1,23 +1,24 @@
 <!--材料追加用フィールド-->
 <% field_id = SecureRandom.uuid %>
-<div class="add-ingredient-field" data-category="<%= category %>" id="ingredient_<%= field_id %>">
-  <div class="grid grid-cols-2 gap-4 pt-4">
-    <div class="ingredient">
-      <%= f.collection_select :food_id, foods, :id, :name,
-                              { prompt: t('recipes.ingredient.select_food') },
-                              { class: "select select-bordered w-full" } %>
-    </div>
-    <div class="grid grid-cols-2 gap-4">
-      <div class="quantity">
-        <%= f.number_field  :quantity,
-                            class: "input input-bordered w-full",
-                            placeholder: t('placeholder.quantity_placeholder') %>
+<div class="container mx-auto max-w-4xl px-4">
+  <div class="add-ingredient-field mb-4" data-category="<%= category %>" id="ingredient_<%= field_id %>">
+    <div class="grid grid-cols-12 gap-4 items-end">
+      <div class="ingredient col-span-5 shadow-lg">
+        <%= f.collection_select :food_id, foods, :id, :name,
+                                { prompt: t('recipes.ingredient.select_food') },
+                                { class: "select select-bordered w-full" } %>
       </div>
-      <div class="remove">
-      <%= link_to image_tag('destroy_mark.png', alt:'削除', class: "w-12 h-12"),
-                  remove_ingredient_fields_recipes_path(field_id: field_id),
-                  data: { turbo_method: :delete, turbo_stream: true } %>
-    </div>
+        <div class="quantity col-span-5 shadow-lg">
+          <%= f.number_field  :quantity,
+                              class: "input input-bordered w-full",
+                              placeholder: t('placeholder.quantity_placeholder') %>
+        </div>
+        <div class="remove col-span-2 flex justfy-center ">
+        <%= link_to image_tag('destroy_mark.png', alt:'削除', class: "w-12 h-12"),
+                    remove_ingredient_fields_recipes_path(field_id: field_id),
+                    data: { turbo_method: :delete, turbo_stream: true } %>
+      </div>
+      </div>
     </div>
   </div>
 </div>
