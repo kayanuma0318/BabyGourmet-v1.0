@@ -3,13 +3,20 @@
 <!--フィールドに対して一意の識別子を設ける-->
 <div id="step_<%= field_id %>">
   <!--idを動的に設定し、特定のフィールドを特定できるようにする-->
-  <div class="grid grid-cols-2 gap-4 pt-4">
-    <div class="step">
+  <div class="flex items-start space-x-4">
+    <!--
+      flex :横並びにする
+      items-start :縦方向の中央揃え
+      space-x-4 :横方向の間隔を4に設定
+    -->
+    <div class="flex-grow">
+      <!--flex-grow :flexコンテナ内の余白スペースを埋める-->
       <%= f.text_area :description,
-                      class: "textarea textarea-bordered",
+                      class: "textarea textarea-bordered w-full shadow-lg",
                       placeholder: "例）にんじんの皮を剥きます。" %>
     </div>
-    <div class="reset">
+    <div class="flex-shrink-0">
+      <!--flex-shrink-0 :アイコンが潰れないようにサイズを維持する-->
       <%= link_to reset_step_fields_recipes_path(field_id: field_id),
                   data: { turbo_stream: true,
                   turbo_method: :post } do %>
@@ -18,7 +25,7 @@
                     field_idをパラメータとして渡し、どの手順フィールドをリセットするか指定する
                     data: { turbo_stream: true, turbo_method: :post } :非同期POSTリクエストを行うよう指示する。
                   -->
-        <%= image_tag('destroy_mark.png', alt: '削除', class: "w-12 h-12") %>
+        <%= image_tag('destroy_mark.png', alt: 'リセット', class: "w-12 h-12") %>
       <% end %>
     </div>
   </div>

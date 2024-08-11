@@ -30,28 +30,32 @@
     </div>
 
     <!-- 材料 -->
-    <div>
-      <h2 class="block text-sm font-medium text-gray-700 mb-1"><%= t('recipes.ingredient.title') %></h2>
+    <div class="mb-6">
+      <!--手順フィールドとの間隔を確保-->
+      <h2 class="text font-medium text-gray-700 mb-1"><%= t('recipes.ingredient.title') %></h2>
+        <!---->
       <% @categories.each do |category| %>
-        <div id="ingredients_<%= category %>" class="mb-4">
-          <div class="space-y-4">
+        <div class="mb-3">
+          <!--各フィールド間の間隔を確保-->
+          <div id="ingredients_<%= category %>" class="space-y-4">
+            <!--材料フィールド間に垂直方向の間隔を設定-->
             <%= f.fields_for :recipe_foods, f.object.recipe_foods.build do |rf| %>
               <%= render 'shared/initial_ingredient', rf: rf, category: category, foods: @foods_by_category[category] %>
             <% end %>
           </div>
+          <div id="add_ingredients_<%= category %>"></div>
+          <%= link_to t('recipes.ingredient.add_ingredient'),
+                      add_ingredient_fields_recipes_path(category: category),
+                      class: "btn btn-secondary btn-sm mb-4",
+                      data: { turbo_stream: true } %>
         </div>
-        <div id="add_ingredients_<%= category %>"></div>
-        <%= link_to t('recipes.ingredient.add_ingredient'),
-                    add_ingredient_fields_recipes_path(category: category),
-                    class: "btn btn-secondary btn-sm mb-4",
-                    data: { turbo_stream: true } %>
       <% end %>
     </div>
 
     <!-- 手順 -->
-    <div>
-      <h2 class="text-2xl font-bold mb-4"><%= t('recipes.step.title') %></h2>
-      <div id="steps" class="space-y-4 mb-4">
+    <div class="mb-6">
+      <h2 class="text-sm font-medium text-gray-700 mb-1"><%= t('recipes.step.title') %></h2>
+      <div id="steps" class="space-y-4">
         <%= f.fields_for :steps do |step| %>
           <%= render 'shared/initial_step', f: step %>
         <% end %>

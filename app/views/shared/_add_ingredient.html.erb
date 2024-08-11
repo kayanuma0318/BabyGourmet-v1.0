@@ -4,7 +4,6 @@
 <div class="add-ingredient-field mb-4" data-category="<%= category %>" id="ingredient_<%= field_id %>">
   <div class="grid grid-cols-12 gap-4 items-end">
 
-    <!--食材フィールド-->
     <div class="col-span-5">
       <%= f.collection_select :food_id, foods, :id, :name,
                               { prompt: t('recipes.ingredient.select_food') },
@@ -19,10 +18,12 @@
     </div>
 
     <!--削除ボタン-->
-    <div class="remove col-span-2 flex justfy-center ">
-      <%= link_to image_tag('destroy_mark.png', alt:'削除', class: "w-12 h-12"),
-                  remove_ingredient_fields_recipes_path(field_id: field_id),
-                  data: { turbo_method: :delete, turbo_stream: true } %>
+    <div class="remove col-span-2 flex justfy-center items-end">
+      <%= link_to remove_ingredient_fields_recipes_path(field_id: field_id),
+                  data: { turbo_method: :delete,
+                  turbo_stream: true } do %>
+        <%= image_tag('destroy_mark.png', alt:'削除', class: "w-12 h-12")%>
+      <% end %>
     </div>
   </div>
 </div>

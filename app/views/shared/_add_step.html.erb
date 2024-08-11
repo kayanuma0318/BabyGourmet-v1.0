@@ -1,12 +1,12 @@
 <% field_id = SecureRandom.uuid %>
 <div id="step_<%= field_id %>">
-  <div class="grid grid-cols-2 gap-4 pt-4">
-    <div class="step">
+  <div class="flex items-start space-x-4">
+    <div class="flex-grow">
       <%= f.text_area :description,
-                      class: "textarea textarea-bordered",
+                      class: "textarea textarea-bordered w-full shadow-lg",
                       placeholder: "例）にんじんの皮を剥きます。" %>
     </div>
-    <div class="remove">
+    <div class="flex-shrink-0">
       <%= link_to remove_step_fields_recipes_path(field_id: field_id),
                   data: {
                     turbo_method: :delete,
