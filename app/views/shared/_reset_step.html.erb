@@ -1,13 +1,14 @@
 <!--手順フィールドリセット後のview-->
 <% field_id = SecureRandom.uuid %>
 <div id="step_<%= field_id %>">
-  <div class="grid grid-cols-2 gap-4 pt-4">
-    <div class="step">
+  <div class="flex items-start space-x-4">
+    <div class="flex-grow">
       <%= text_area_tag "recipe[steps_attributes][][description]", "",
-                        class: "textarea textarea-bordered",
+                        class: "textarea textarea-bordered w-full shadow-lg",
                         placeholder: "例）にんじんの皮を剥きます。" %>
     </div>
-    <div class="reset">
+    <!--recipe[steps_attributes][][description] :空の配列を用意し、初期値は空白を指定-->
+    <div class="flex-shrink-0">
       <%= link_to reset_step_fields_recipes_path(field_id: field_id),
                   data: { turbo_stream: true, turbo_method: :post } do %>
         <%= image_tag('destroy_mark.png', alt: '削除', class: "w-12 h-12") %>

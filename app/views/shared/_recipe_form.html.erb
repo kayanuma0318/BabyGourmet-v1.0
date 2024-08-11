@@ -1,82 +1,93 @@
 <!-- レシピ投稿フォーム -->
-<%= form_with model: @recipe, local: true do |f| %>
+<%= form_with model: @recipe, local: true, class: "max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg" do |f| %>
   <%= hidden_field_tag :field_id, @field_id %>
-    <!--フォームの送信前後にfield_idを保持する-->
   <%= render 'shared/error_messages', object: f.object %>
-    <!--エラーメッセージの表示-->
-  <div class="form-control">
-    <!--レシピ名-->
-    <%= f.label :title, t('recipes.shared.recipe_name') %>
-    <%= f.text_field :title,
-                      class: "input w-full max-w-xs",
-                      placeholder:"例）ロイヤルパンケーキ" %>
 
-    <!--総分量-->
-    <%= f.label :serving_size, t('recipes.shared.serving_size') %>
-    <%= f.number_field :serving_size,
-                        class: "input w-full max-w-xs",
-                        placeholder:"例）2人分なら、2 と入力してください" %>
+  <div class="space-y-6">
+    <!-- レシピ名 -->
+    <div>
+      <%= f.label :title, t('recipes.shared.recipe_name'), class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_field :title,
+                        class: "input input-bordered w-full",
+                        placeholder:"例）ロイヤルパンケーキ" %>
+    </div>
 
-    <!--レシピ説明-->
-    <%= f.label :description, t('recipes.shared.description') %>
-    <%= f.text_area  :description,
-                      class: "textarea textarea-bordered",
+    <!-- 総分量 -->
+    <div>
+      <%= f.label :serving_size, t('recipes.shared.serving_size'), class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.number_field :serving_size,
+                          class: "input input-bordered w-full",
+                          placeholder:"例）2人分なら、2 と入力してください" %>
+    </div>
+
+    <!-- レシピ説明 -->
+    <div>
+      <%= f.label :description, t('recipes.shared.description'), class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_area :description,
+                      class: "textarea textarea-bordered w-full",
+                      rows: 4,
                       placeholder:"例）これはロイヤルパンケーキです。とても美味しいです。" %>
+    </div>
 
-    <!--材料-->
-    <div class='text-2xl pt-8 pb-3'><%= t('recipes.ingredient.title') %></div>
-    <% @categories.each do |category| %>
-        <div id="ingredients_<%= category %>">
-          <div class="grid grid-cols-1 gap-4 mb-4">
+    <!-- 材料 -->
+    <div class="mb-6">
+      <!--手順フィールドとの間隔を確保-->
+      <h2 class="text font-medium text-gray-700 mb-1"><%= t('recipes.ingredient.title') %></h2>
+        <!---->
+      <% @categories.each do |category| %>
+        <div class="mb-3">
+          <!--各フィールド間の間隔を確保-->
+          <div id="ingredients_<%= category %>" class="space-y-4">
+            <!--材料フィールド間に垂直方向の間隔を設定-->
             <%= f.fields_for :recipe_foods, f.object.recipe_foods.build do |rf| %>
               <%= render 'shared/initial_ingredient', rf: rf, category: category, foods: @foods_by_category[category] %>
             <% end %>
           </div>
+          <div id="add_ingredients_<%= category %>"></div>
+          <%= link_to t('recipes.ingredient.add_ingredient'),
+                      add_ingredient_fields_recipes_path(category: category),
+                      class: "btn btn-secondary btn-sm mb-4",
+                      data: { turbo_stream: true } %>
         </div>
-        <div id="add_ingredients_<%= category %>"></div>
-        <%= link_to t('recipes.ingredient.add_ingredient'),
-                  add_ingredient_fields_recipes_path(category: category),
-                  class: "btn btn-secondary shadow-lg",
-                  data: { turbo_stream: true } %>
-    <% end %>
+      <% end %>
+    </div>
 
-    <!--手順-->
-    <div class='text-2xl pt-8 pb-3'><%= t('recipes.step.title') %></div>
-      <div id="steps" class="grid grid-cols-1 gap-6 mb-6">
+    <!-- 手順 -->
+    <div class="mb-6">
+      <h2 class="text-sm font-medium text-gray-700 mb-1"><%= t('recipes.step.title') %></h2>
+      <div id="steps" class="space-y-4">
         <%= f.fields_for :steps do |step| %>
           <%= render 'shared/initial_step', f: step %>
         <% end %>
       </div>
-      <!--追加フィールド-->
-      <div id="add_steps" class="mb-6"></div>
-      <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12">
-          <%= link_to t('recipes.step.add_step'),
-                        add_step_fields_recipes_path,
-                        class: "btn btn-secondary shadow-lg w-full",
-                        data: { turbo_stream: true } %>
-        </div>
+      <div id="add_steps" class="mb-4"></div>
+      <%= link_to t('recipes.step.add_step'),
+                  add_step_fields_recipes_path,
+                  class: "btn btn-secondary btn-sm w-full",
+                  data: { turbo_stream: true } %>
+    </div>
+
+    <!-- ワンポイント -->
+    <div>
+      <%= f.label :one_point, t('recipes.shared.one_point'), class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_area :one_point,
+                      class: "textarea textarea-bordered w-full",
+                      rows: 3,
+                      placeholder:"例）焼き加減に気をつけてください。" %>
+    </div>
+
+    <!-- 画像アップロード -->
+    <div>
+      <%= f.label :recipe_image, t('recipes.shared.recipe_image'), class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <div class="flex items-center space-x-2">
+        <%= f.file_field :recipe_image, class: "file-input file-input-bordered w-full", accept: "image/*" %>
+        <%= f.hidden_field :recipe_image_cache %>
       </div>
     </div>
 
-    <!--ワンポイント-->
-    <%= f.label  :one_point,
-                  t('recipes.shared.one_point'),
-                  class: "label pt-8" %>
-    <%= f.text_area  :one_point,
-                      class: "textarea textarea-bordered",
-                      placeholder:"例）焼き加減に気をつけてください。" %>
-
-    <!--TODO: プレビュー実装-->
-    <!--画像アップロード-->
-    <div class="mt-4 pt-8 pb-8">
-      <%= f.label :recipe_image, t('recipes.shared.recipe_image'), class: "label" %>
-      <div class="flex items-center space-x-2">
-        <%= f.file_field :recipe_image, class: "file-input file-input-bordered w-full max-w-xs", accept: "image/*" %>
-        <%= f.hidden_field :recipe_image_cache %>
-          <!--hidden_field :キャッシュを保持して、エラー時等でも入力情報が残る-->
+    <!-- 送信ボタン -->
+    <div class="mt-6">
+      <%= f.submit t('helpers.submit.submit'), class: "btn btn-secondary w-full" %>
     </div>
-
-    <%= f.submit t('helpers.submit.submit'), class: "btn btn-secondary"%>
   </div>
 <% end %>
