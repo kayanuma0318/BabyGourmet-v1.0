@@ -15,11 +15,11 @@
               overflow-hidden: はみ出た部分を隠す -->
         <%= link_to recipe_path(recipe) do %>
           <!--画像クリック時に詳細ページへ-->
-          <%= image_tag 'noimage.png', class: "w-full h-full object-contain" %>
-          <!--object-contain :画像のアスペクト比を保ちつつ、コンテナ内に収める-->
+          <% if recipe.recipe_image? %>
+            <%= image_tag recipe.recipe_image.url, class: "w-full h-full object-contain" %>
+              <!--object-contain :画像のアスペクト比を保ちつつ、コンテナ内に収める-->
+          <% end %>
         <% end %>
-        <!--TODO: 投稿画像がない場合の画像を設定する
-            TODO: 投稿されたレシピ画像へ変更する-->
       </div>
 
       <!--アバター画像とユーザー名-->
@@ -28,9 +28,12 @@
         <div class="flex items-center mb-2">
           <!--アバターとユーザー名を横並びにする-->
           <div class="w-8 h-8 rounded-xl overflow-hidden mr-2">
-            <%= link_to image_tag('妊婦.jpg', class: "w-full h-full object-cover"), "#" %>
-            <!--TODO: ユーザーページに遷移させる
-                TODO: アバター画像へ変更する-->
+            <%= link_to "#" do %>
+              <!--TODO: avatarクリック時プロフィールページへ-->
+              <% if recipe.user&.avatar? %>
+                <%= image_tag(recipe.user.avatar.url, class: "w-full h-full object-cover") %>
+              <% end %>
+            <% end %>
           </div>
           <div class="pt-5 text-xs"><%= recipe.user.name %></div>
         </div>
@@ -43,9 +46,8 @@
         <div class="flex flex-wrap gap-1">
           <!--flex-wrap :要素が多い場合、折り返す-->
           <%= nutrient_badges(recipe) %>
-            <% if recipe.nutrient_names.empty? %>
-              <p class="text-xs text-gray-500"><%= t('recipes.recipe_card.not_nutrient_found') %></p>
-            <% end %>
+          <% if recipe.nutrient_names.empty? %>
+            <p class="text-xs text-gray-500"><%= t('recipes.recipe_card.not_nutrient_found') %></p>
           <% end %>
         </div>
       </div>

@@ -111,7 +111,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  # 初期フィールドにて文章をリセットするメソッド
+  # 手順初期フィールドにて文章をリセットするメソッド
   def reset_step_fields
     @field_id = params[:field_id]
     @recipe = Recipe.new
@@ -136,6 +136,7 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(
       :title,
       :recipe_image,
+      :recipe_image_cache,
       :one_point,
       :description,
       :serving_size,

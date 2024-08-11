@@ -23,6 +23,9 @@ ja:
     not_authorized: "不法侵入しています。"
     not_found: "%{model}が見つかりません。"
   users:
+    user_form:
+      form_avatar: アバター登録
+      add_avatar: + アバターを追加
     registrations:
       new:
         sign_up: アカウント登録
