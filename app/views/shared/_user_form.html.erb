@@ -43,6 +43,21 @@
       <%= f.password_field :password, class: "grow", placeholder: "password" %>
       <!--<input type="password" class="grow" value="password" />-->
     </div>
+
+    <div class="mt-4 pt-8 pb-8">
+      <h3 class="text-lg mb-2"><%= t('users.user_form.form_avatar')%></h3>
+
+          <%= f.label :avatar, class: 'btn btn-info text-lg' do %>
+            <%= t('users.user_form.add_avatar') %>
+            <%= f.file_field :avatar,
+                              class: 'hidden' %>
+            <%= f.hidden_field :recipe_image_cache %>
+            <!--hidden_field :キャッシュを保持して、エラー時等でも入力情報が残る-->
+          <% end %>
+        </div>
+      </div>
+    </div>
+
     <%= f.submit t("users.registrations.new.sign_up"), class: "btn btn-secondary" %>
       <!--<button class="btn btn-secondary">Secondary</button>-->
   <% end %>

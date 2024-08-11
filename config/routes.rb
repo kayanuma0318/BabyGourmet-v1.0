@@ -30,6 +30,10 @@ Rails.application.routes.draw do
       delete 'remove_step_fields'
       post 'reset_ingredient_fields'
       post 'reset_step_fields'
+      post 'preview_image', to: 'recipes#preview_image'
+    end
+    member do
+      delete 'remove_image'
     end
   end
   get 'up' => 'rails/health#show', as: :rails_health_check

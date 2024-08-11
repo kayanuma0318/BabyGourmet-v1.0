@@ -7,7 +7,9 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for  :recipe_foods,
                                   allow_destroy: true,
                                   reject_if: :all_blank
-                                  # reject_if: :all_blank = 全ての属性が空の場合、レコードを保存しない
+                                  # reject_if: :all_blank = 全ての属性が空の場合、レコードを保存しな
+
+  mount_uploader :recipe_image, RecipeImageUploader
 
   validates :title, presence: true
   validates :one_point, presence: true, length: { maximum: 500 }

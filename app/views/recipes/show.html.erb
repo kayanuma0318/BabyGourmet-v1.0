@@ -12,15 +12,18 @@
   <div class="mb-6">
     <!-- レシピ投稿画像 -->
     <div class="mb-4">
-      <%= image_tag 'noimage.png', class: "w-full h-60 object-contain rounded-lg" %>
-        <!--object-contain :画像全体を表示、尚且つ指定したサイズに収める-->
-      <!-- TODO: 画像アップロード機能実装後、レシピ投稿画像表示する -->
+    <% if @recipe.recipe_image? %>
+      <%= image_tag @recipe.recipe_image.url, class: "w-full h-60 object-contain rounded-lg" %>
+    <% end %>
+      <!--object-contain :画像全体を表示、尚且つ指定したサイズに収める-->
     </div>
 
     <!-- アバターとユーザー名 -->
     <div class="flex items-center">
-      <%= image_tag '妊婦.jpg', class: "w-10 h-10 rounded-full mr-2" %>
-      <!-- TODO: 画像アップロード機能実装後、アバター画像表示する -->
+      <% if @recipe.user.avatar? %>
+        <%= image_tag @recipe.user.avatar.url, class: "w-10 h-10 rounded-full mr-2" %>
+      <% end %>
+        <!-- TODO: アバター画像クリック後はプロフィールページへ遷移 -->
       <span class="text-gray-700"><%= @recipe.user.name %></span>
     </div>
   </div>
@@ -29,6 +32,7 @@
   <div class="mb-6">
     <h2 class="text-xl font-semibold mb-2"><%= t('.nutrient_include') %></h2>
     <div class="grid grid-cols-2 gap-4">
+    <!--BUG: 詳細ページにて栄養素名のみ縦表示になっている-->
       <%= nutrient_details(@recipe) %>
       <!--nutrient_details :栄養素名とバッチを記載するメソッド(recipe_helper.rbに記述)-->
     </div>
