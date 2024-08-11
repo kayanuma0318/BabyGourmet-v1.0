@@ -31,7 +31,11 @@ ja:
         sign_up: アカウント登録
     sessions:
       new:
-        sign_in: ログイン
+        sign_in: Login
+        email_placeholder: Email
+        password_placeholder: password
+        no_account: アカウントをお持ちでない方はこちら
+        sign_up: アカウント登録
       destroy:
         logout: ログアウト
   recipes:
