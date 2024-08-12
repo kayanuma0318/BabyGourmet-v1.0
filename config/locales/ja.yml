@@ -28,12 +28,14 @@ ja:
   users:
     user_form:
       form_avatar: アバター登録
-      login_link: ログインページはこちら
+      no_account: アカウントをお持ちでない方はこちら
+      login_link: ログインページ
     registrations:
       new:
         sign_up: アカウント登録
     sessions:
       new:
+        welcome: Welcome
         sign_in: Login
         email_placeholder: Email
         password_placeholder: password
