@@ -28,6 +28,7 @@ ja:
   users:
     user_form:
       form_avatar: アバター登録
+      login_link: ログインページはこちら
     registrations:
       new:
         sign_up: アカウント登録
