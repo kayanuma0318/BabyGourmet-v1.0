@@ -1,34 +1,36 @@
-<div class="container mx-auto min-h-screen flex items-center justify-center">
-  <!--mx-auto:左右のマージンを自動調整、中央に配置, min-h-screen: 箱の高さを最低画面の高さと同じにする-->
-  <!--items-center: 垂直方向の中央揃え, justify-center: 水平方向の中央揃え-->
-  <div class="flex flex-col items-center gap-8">
-    <!--flex-col: 縦並びにする, items-center: 水平方向の中央揃え-->
-    <!--2x2の形にする-->
-    <div class="flex justify-center gap-8">
-      <!--flex: 上段を2つを横並びにする, justify-center: 中央揃え-->
-      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 object-cover border-gray-200">
-        <!--flex flex-col: 画像と文字を縦並びにする, items-center: 中央揃え, shadow-lg: 大きめな影を作成--->
-        <!--rounded-lg: 角を丸くする, p-4: 内側に余白を設ける-->
-        <!--object-cover: 画像のアスペクト比を保ちながら、指定されたサイズに合わせてトリミングする-->
-        <%= link_to image_tag("cooking.png", class: "w-40 h-40 object-cover"), "#" %>
-        <p class="mt-2 text-center font-semibold">今日の献立</p>
-        <!--mt-2: 上に余白を設ける, text-center: 文字を中央揃え, font-semibold: 文字を少し太字にする-->
+<%= render 'shared/header' %>
+
+<!-- メインコンテンツ部分 -->
+<div class="container mx-auto mt-2 md:mt-4 px-4 flex items-center justify-center min-h-[calc(100vh-12rem)]">
+  <!-- mt-2 md:mt-4: ヘッダーとの間隔を縮小 -->
+  <!-- min-h-[calc(100vh-12rem)]: 最小の高さを画面の高さからヘッダーの高さを引いた値に設定 -->
+  <div class="flex flex-col items-center gap-4 md:gap-6">
+    <!-- gap-4 md:gap-6: アイテム間の間隔を調整 -->
+    <div class="grid grid-cols-2 gap-4">
+      <!-- grid grid-cols-2: 2列のグリッドレイアウトを作成 -->
+      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 border-gray-200">
+        <!-- shadow-lg: 大きな影をつける -->
+        <!-- rounded-lg: 角を丸くする -->
+        <%= link_to image_tag("cooking.png", class: "w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-cover"), "#" %>
+        <!-- object-cover: 画像のアスペクト比を保ちながらコンテナにフィットさせる -->
+        <p class="mt-2 text-center font-semibold text-sm md:text-base">今日の献立<br>(coming soon)</p>
+        <!-- font-semibold: フォントを太めに設定 -->
       </div>
-      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 object-cover border-gray-200">
-        <%= link_to image_tag("resipe_book.png", class: "w-40 h-40 object-cover"), recipes_path %>
-        <p class="mt-2 text-center font-semibold">レシピ一覧</p>
+      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 border-gray-200">
+        <%= link_to image_tag("resipe_book.png", class: "w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-cover"), recipes_path %>
+        <p class="mt-2 text-center font-semibold text-sm md:text-base">レシピ一覧</p>
+      </div>
+      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 border-gray-200">
+        <%= link_to image_tag("buy.png", class: "w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-cover"), "#" %>
+        <p class="mt-2 text-center font-semibold text-sm md:text-base">買い物リスト<br>(coming soon)</p>
+      </div>
+      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 border-gray-200">
+        <%= link_to image_tag("resipe_post.png", class: "w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-cover"), new_recipe_path %>
+        <p class="mt-2 text-center font-semibold text-sm md:text-base">レシピ投稿</p>
       </div>
     </div>
-    <div class="flex justify-center gap-8">
-      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 object-cover border-gray-200">
-        <%= link_to image_tag("buy.png", class: "w-40 h-40 object-cover"), "#" %>
-        <p class="mt-2 text-center font-semibold">買い物リスト</p>
-      </div>
-      <div class="flex flex-col items-center shadow-lg rounded-lg p-4 bg-white border-2 object-cover border-gray-200">
-        <%= link_to image_tag("resipe_post.png", class: "w-40 h-40 object-cover"), new_recipe_path %>
-        <p class="mt-2 text-center font-semibold">レシピ投稿</p>
-      </div>
-    </div>
-    <%= button_to t('users.sessions.destroy.logout'), logout_path, method: :delete if user_signed_in? %>
+    <% if user_signed_in? %>
+      <%= button_to t('users.sessions.destroy.logout'), logout_path, method: :delete, class: "mt-4 btn btn-outline" %>
+    <% end %>
   </div>
 </div>
