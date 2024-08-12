@@ -53,6 +53,7 @@ class RecipesController < ApplicationController
     end
   end
 
+  # BUG: レシピ削除できない、recipe_foodsが参照されているため
   def destroy
     @recipe.destroy
     redirect_to recipes_path, success: t('messages.destroy_success', model: Recipe.model_name.human)

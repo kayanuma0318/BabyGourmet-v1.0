@@ -29,6 +29,7 @@
                       placeholder:"例）これはロイヤルパンケーキです。とても美味しいです。" %>
     </div>
 
+    <!--BUG: 編集フォームにて、登録済み材料を維持できていない-->
     <!-- 材料 -->
     <div class="mb-6">
       <!--手順フィールドとの間隔を確保-->
@@ -76,6 +77,7 @@
                       placeholder:"例）焼き加減に気をつけてください。" %>
     </div>
 
+    <!--TODO: previewと現在の画像を表示したい-->
     <!-- 画像アップロード -->
     <div>
       <%= f.label :recipe_image, t('recipes.shared.recipe_image'), class: "block text-sm font-medium text-gray-700 mb-1" %>
