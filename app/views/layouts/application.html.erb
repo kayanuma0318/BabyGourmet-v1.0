@@ -9,10 +9,20 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
-
-  <body>
+  <body class="flex flex-col min-h-screen">
+    <!--
+      flex-col :main,footerの順で縦方向に配置
+      min-h-screen  :画面の最低高さを画面いっぱいに設定
+                    :コンテンツが少なくても画面いっぱいに表示される
+    -->
     <%= render "shared/flash" %>
-    <%= yield %>
+    <main class="flex-grow pb-24">
+      <!--
+        flex-grow :bodyの中で余っている部分をmain要素が全て占有
+        pb-24 :下部に24pxのpaddingを設定することでデザインの被りを防ぐ
+      -->
+      <%= yield %>
+    </main>
     <%= render 'shared/footer' %>
   </body>
 </html>
