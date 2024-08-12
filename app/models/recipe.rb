@@ -1,9 +1,10 @@
 class Recipe < ApplicationRecord
   belongs_to :user
   has_many :foods, through: :recipe_foods
+  has_many :recipe_foods, dependent: :destroy
   has_many :steps, dependent: :destroy
+
   accepts_nested_attributes_for :steps, allow_destroy: true
-  has_many :recipe_foods
   accepts_nested_attributes_for  :recipe_foods,
                                   allow_destroy: true,
                                   reject_if: :all_blank
