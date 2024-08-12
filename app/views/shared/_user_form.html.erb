@@ -1,6 +1,6 @@
 <div class="hero min-h-screen bg-base-200">
-  <div class="hero-content flex-col lg:flex-row-reverse">
-    <div class="text-center lg:text-left">
+  <div class="hero-content flex-col">
+    <div class="text-center">
       <h1 class="text-5xl font-bold"><%= t('users.registrations.new.welcome') %></h1>
     </div>
     <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -68,7 +68,8 @@
         <% end %>
 
         <div class="text-center mt-4">
-          <%= link_to t('users.user_form.login_link'), login_path, class: "link link-hover" %>
+          <p><%= t('users.user_form.no_account') %></p>
+          <%= link_to t('users.user_form.login_link'), login_path, class: "link link-primary" %>
         </div>
       </div>
     </div>
