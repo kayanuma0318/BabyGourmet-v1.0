@@ -6,6 +6,9 @@ ja:
       update: 更新
   placeholder:
     quantity_placeholder: 例）グラム数を入力してください
+    email: Email
+    username: UserName
+    password: Password
   flash:
     welcome: ようこそ！ベビグルへ！🎉
     signin_failed: アカウント登録に失敗しました。メールアドレスとパスワードを確認してください。
@@ -25,7 +28,7 @@ ja:
   users:
     user_form:
       form_avatar: アバター登録
-      add_avatar: + アバターを追加
+      login_link: ログインページはこちら
     registrations:
       new:
         sign_up: アカウント登録
