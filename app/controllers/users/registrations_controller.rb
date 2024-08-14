@@ -25,7 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:name, :email, :password, :avatar)
+    params.require(:user).permit(:name, :email, :password, :avatar, :avatar_cache)
   end
 
   # GET /resource/edit
