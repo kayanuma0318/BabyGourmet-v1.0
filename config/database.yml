@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: baby_gourmet_v1_0_production
+  database: BabyGourmet
   username: baby_gourmet_v1_0
   password: <%= ENV["BABY_GOURMET_V1_0_DATABASE_PASSWORD"] %>
