@@ -29,7 +29,6 @@
                       placeholder:"例）これはロイヤルパンケーキです。とても美味しいです。" %>
     </div>
 
-    <!--BUG: 編集フォームにて、登録済み材料を維持できていない-->
     <!-- 材料 -->
     <div class="mb-6">
       <!--手順フィールドとの間隔を確保-->
@@ -44,11 +43,10 @@
               <%= render 'shared/initial_ingredient', rf: rf, category: category, foods: @foods_by_category[category] %>
             <% end %>
           </div>
-          <div id="add_ingredients_<%= category %>"></div>
-          <%= link_to t('recipes.ingredient.add_ingredient'),
-                      add_ingredient_fields_recipes_path(category: category),
-                      class: "btn btn-secondary btn-sm mb-4",
-                      data: { turbo_stream: true } %>
+          <!--BUG: 材料追加フィールドの修正(認識させる)-->
+          <!--BUG: 編集時、フィールドに材料表示はないが、登録すると残っていて追加されてしまう-->
+          <!--TODO: 材料追加ボタンを一時削除-->
+
         </div>
       <% end %>
     </div>
@@ -61,13 +59,8 @@
           <%= render 'shared/initial_step', f: step %>
         <% end %>
       </div>
-      <div id="add_steps" class="mb-4"></div>
-      <%= link_to t('recipes.step.add_step'),
-                  add_step_fields_recipes_path,
-                  class: "btn btn-secondary btn-sm w-full",
-                  data: { turbo_stream: true } %>
-    </div>
-
+      <!-- BUG: 手順追加フィールドの修正(認識させる)-->
+      <!--TODO: 手順追加ボタンを一時削除-->
     <!-- ワンポイント -->
     <div>
       <%= f.label :one_point, t('recipes.shared.one_point'), class: "block text-sm font-medium text-gray-700 mb-1" %>
