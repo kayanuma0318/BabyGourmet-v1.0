@@ -29,8 +29,5 @@
         <p class="mt-2 text-center font-semibold text-sm md:text-base">レシピ投稿</p>
       </div>
     </div>
-    <% if user_signed_in? %>
-      <%= button_to t('users.sessions.destroy.logout'), logout_path, method: :delete, class: "mt-4 btn btn-outline" %>
-    <% end %>
   </div>
 </div>
