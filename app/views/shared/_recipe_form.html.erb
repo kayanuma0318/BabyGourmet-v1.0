@@ -46,6 +46,11 @@
           <!--BUG: 材料追加フィールドの修正(認識させる)-->
           <!--BUG: 編集時、フィールドに材料表示はないが、登録すると残っていて追加されてしまう-->
           <!--TODO: 材料追加ボタンを一時削除-->
+           <div id="add_ingredients_<%= category %>"></div>
+          <%= link_to t('recipes.ingredient.add_ingredient'),
+                      "#",
+                      class: "btn btn-secondary btn-sm mb-4",
+                      data: { turbo_stream: true } %>
 
         </div>
       <% end %>
@@ -61,6 +66,13 @@
       </div>
       <!-- BUG: 手順追加フィールドの修正(認識させる)-->
       <!--TODO: 手順追加ボタンを一時削除-->
+      <div id="add_steps" class="mb-4"></div>
+      <%= link_to t('recipes.step.add_step'),
+                  "#",
+                  class: "btn btn-secondary btn-sm w-full",
+                  data: { turbo_stream: true } %>
+    </div>
+
     <!-- ワンポイント -->
     <div>
       <%= f.label :one_point, t('recipes.shared.one_point'), class: "block text-sm font-medium text-gray-700 mb-1" %>
