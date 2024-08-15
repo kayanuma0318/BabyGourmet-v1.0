@@ -13,7 +13,7 @@ class Users::SessionsController < Devise::SessionsController
     if @user&&@user.valid_password?(params[:session][:password])
       # @user: ユーザーの存在を確認し、devise標準メソッドvalid_password?で入力値とDBのパスワードを比較
       sign_in(@user)
-      redirect_to @user, success: t('flash.logged_in')
+      redirect_to root_path, success: t('flash.logged_in')
     else
       flash.now[:danger] = t('flash.login_failed')
       render 'new', status: :unprocessable_entity
