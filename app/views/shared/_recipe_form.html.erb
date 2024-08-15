@@ -3,30 +3,34 @@
   <%= hidden_field_tag :field_id, @field_id %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <div class="space-y-6">
+  <div class="space-y-3">
     <!-- レシピ名 -->
-    <div>
-      <%= f.label :title, t('recipes.shared.recipe_name'), class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= f.text_field :title,
-                        class: "input input-bordered w-full",
-                        placeholder:"例）ロイヤルパンケーキ" %>
+    <div class="flex items-center space-x-2">
+      <%= f.label :title, t('recipes.shared.recipe_name'), class: "block text-sm font-medium text-gray-700" %>
+      <span class="badge badge-error px-3 text-white text-xs ">必須</span>
     </div>
+    <%= f.text_field :title,
+                      class: "input input-bordered w-full",
+                      placeholder:"例）ロイヤルパンケーキ" %>
 
     <!-- 総分量 -->
-    <div>
+    <div class="flex items-center space-x-2 ">
       <%= f.label :serving_size, t('recipes.shared.serving_size'), class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= f.number_field :serving_size,
-                          class: "input input-bordered w-full",
-                          placeholder:"例）2人分なら、2 と入力してください" %>
+      <span class="badge badge-error px-3 text-white text-xs ">必須</span>
     </div>
+    <%= f.number_field :serving_size,
+                        class: "input input-bordered w-full",
+                        placeholder:"例）2人分なら、2 と入力してください" %>
 
     <!-- レシピ説明 -->
-    <div>
+    <div class="flex items-center space-x-2 ">
       <%= f.label :description, t('recipes.shared.description'), class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= f.text_area :description,
-                      class: "textarea textarea-bordered w-full",
-                      rows: 4,
-                      placeholder:"例）これはロイヤルパンケーキです。とても美味しいです。" %>
+      <span class="badge badge-error px-3 text-white text-xs ">必須</span>
+    </div>
+    <%= f.text_area :description,
+                    class: "textarea textarea-bordered w-full",
+                    rows: 4,
+                    placeholder:"例）これはロイヤルパンケーキです。とても美味しいです。" %>
     </div>
 
     <!-- 材料 -->
@@ -46,7 +50,7 @@
           <!--BUG: 材料追加フィールドの修正(認識させる)-->
           <!--BUG: 編集時、フィールドに材料表示はないが、登録すると残っていて追加されてしまう-->
           <!--TODO: 材料追加ボタンを一時削除-->
-           <div id="add_ingredients_<%= category %>"></div>
+          <div id="add_ingredients_<%= category %>"></div>
           <%= link_to t('recipes.ingredient.add_ingredient'),
                       "#",
                       class: "btn btn-secondary btn-sm mb-4",
@@ -58,7 +62,10 @@
 
     <!-- 手順 -->
     <div class="mb-6">
-      <h2 class="text-sm font-medium text-gray-700 mb-1"><%= t('recipes.step.title') %></h2>
+      <div class="flex items-center space-x-2 ">
+        <h2 class="text-sm font-medium text-gray-700 mb-1"><%= t('recipes.step.title') %></h2>
+        <span class="badge badge-error px-3 text-white text-xs ">必須</span>
+      </div>
       <div id="steps" class="space-y-4">
         <%= f.fields_for :steps do |step| %>
           <%= render 'shared/initial_step', f: step %>
@@ -74,13 +81,14 @@
     </div>
 
     <!-- ワンポイント -->
-    <div>
+    <div class="flex items-center space-x-2 ">
       <%= f.label :one_point, t('recipes.shared.one_point'), class: "block text-sm font-medium text-gray-700 mb-1" %>
-      <%= f.text_area :one_point,
-                      class: "textarea textarea-bordered w-full",
-                      rows: 3,
-                      placeholder:"例）焼き加減に気をつけてください。" %>
+      <span class="badge badge-error px-3 text-white text-xs ">必須</span>
     </div>
+    <%= f.text_area :one_point,
+                    class: "textarea textarea-bordered w-full",
+                    rows: 3,
+                    placeholder:"例）焼き加減に気をつけてください。" %>
 
     <!--TODO: previewと現在の画像を表示したい-->
     <!--TODO: 画像投稿フォームを実装-->
