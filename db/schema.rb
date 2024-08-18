@@ -15,11 +15,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_18_115051) do
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.text "comment"
-    t.integer "user_id"
-    t.integer "recipe_id"
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_comments_on_recipe_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "food_nutrients", force: :cascade do |t|
@@ -101,6 +103,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_18_115051) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "comments", "recipes"
+  add_foreign_key "comments", "users"
   add_foreign_key "food_nutrients", "foods"
   add_foreign_key "food_nutrients", "nutrients"
   add_foreign_key "recipe_foods", "foods"
