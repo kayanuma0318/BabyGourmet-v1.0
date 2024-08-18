@@ -32,13 +32,39 @@
       <span class="text-gray-700"><%= @recipe.user.name %></span>
     </div>
   </div>
+
   <!--TODO: 栄養素についての説明を記載する-->
   <!--栄養素表示-->
   <div class="mb-6">
     <h2 class="text-xl font-semibold mb-2"><%= t('.nutrient_include') %></h2>
+      <!--t('.nutrient_include') :栄養素を含む-->
     <div class="grid grid-cols-2 gap-4">
-      <%= nutrient_details(@recipe) %>
-      <!--nutrient_details :栄養素名とバッチを記載するメソッド(recipe_helper.rbに記述)-->
+      <% @recipe.nutrient_totals.each do |nutrient, value| %>
+        <!--
+          ＠recipe.nutrient_totals :対象の個々のレシピに含まれる各栄養素の値を
+          nutrient:value :栄養素名と値、ハッシュの形{ nutrient : value }として取り出し、処理を行う
+        -->
+        <div class="flex items-center mb-2">
+          <!--栄養素を表示するコンテナを作成 中央寄せにする-->
+          <span class="<%= get_badge_color(nutrient) %>"style="background-color: <%= get_nutrient_color(nutrient) %>;">
+            <!--
+              "style="background-color: <%= get_nutrient_color(nutrient) %>;" :栄養素名に応じた背景色（バッチ内）を設定(recipes_helper.rbに記載)
+              <%= get_badge_color(nutrient) %>" :引数の栄養素名がenergyの場合、文字の色を黒色にする、それ以外の栄養素名は文字を白色にする(recipes_helper.rbに記載)
+            -->
+            <%= t("nutrients.#{nutrient}") %>
+              <!--栄養素名を表示-->
+          </span>
+          <span>
+            <%= number_with_precision(value, precision: 2) %>
+              <!--
+                value :各栄養素の値が入っている
+                number_with_precision( x, precision:2) :xの値を小数点以下2桁まで表示
+              -->
+            <%= t("nutrient_units.#{nutrient}") %>
+              <!--各栄養素の単位を表示-->
+          </span>
+        </div>
+      <% end %>
     </div>
   </div>
 

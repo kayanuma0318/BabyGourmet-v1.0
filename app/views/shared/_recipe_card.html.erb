@@ -8,6 +8,8 @@
           overflow-hidden: カードの内容がはみ出した場合に隠す
           style="width: 200px; height: 500px;": カードの幅を200px、高さを500pxに固定-->
       <%= link_to recipe_path(recipe), class: "block h-full" do %>
+
+        <!--レシピ画像-->
         <div class="h-1/2 w-full flex items-center justify-center overflow-hidden">
           <!--カードの上半分を占める画像コンテナを作成-->
           <!--  h-1/2: 高さをカードの半分（50%）に設定
@@ -21,7 +23,8 @@
             <%= image_tag 'recipe_no_image.png', class: "w-full h-full object-contain" %>
           <% end %>
         </div>
-        <!--アバター画像とユーザー名-->
+
+        <!--アバター画像、ユーザー名-->
         <div class="p-4 h-1/2 flex flex-col">
           <!--カードの下半分を占めるコンテナを作成、内容は縦並びにする-->
           <div class="flex items-center mb-2">
@@ -36,15 +39,22 @@
             </div>
             <div class="pt-5 text-xs"><%= recipe.user.name %></div>
           </div>
+
           <!--レシピ名-->
           <h3 class="font-bold text-sm mb-2"><%= recipe.title %></h3>
+
           <!--栄養素表示-->
           <h2 class="text-xs font-semibold mb-1"><%= t('recipes.recipe_card.nutrient_name') %></h2>
           <div class="flex flex-wrap gap-1">
             <!--flex-wrap :要素が多い場合、折り返す-->
-            <%= nutrient_badges(recipe) %>
-            <% if recipe.nutrient_names.empty? %>
-              <p class="text-xs text-gray-500"><%= t('recipes.recipe_card.not_nutrient_found') %></p>
+            <% nutrient_badges(recipe).each do |badge| %>
+              <!--
+                nutrient_badges(recipe) :各レシピに含まれる栄養素名の情報{ name, color, text_color }を持っている
+                レシピに含まれている栄養素名分繰り返し、ハッシュの中身を取り出し代入する
+              -->
+              <span class="badge <%= badge[:text_color] %> text-xs" style="background-color: <%= badge[:color] %>;">
+                <%= t("nutrients.#{badge[:name]}") %>
+              </span>
             <% end %>
           </div>
         </div>
