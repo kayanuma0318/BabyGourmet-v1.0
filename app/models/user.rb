@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  # dependent: :destroy : Userが削除されたら、そのUserに紐づくRecipe,commentも削除される
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -20,4 +22,12 @@ class User < ApplicationRecord
 
   #avatarカラムの画像アップロード
   mount_uploader :avatar, AvatarUploader
+
+  # ユーザーが行ったかを判定するメソッド
+  def own?(object)
+    id == object&.user_id
+      # idがobjectのuser_idと一致するかを判定する
+      # 使用例: current_user.own?(comment) = current_user.id == comment.user_idをしていることと同じとなる
+      # 現在のコメントがログインしているユーザーのコメントかを判定する
+  end
 end
