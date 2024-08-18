@@ -1,7 +1,7 @@
 module RecipesHelper
   include ApplicationHelper
 
-  # 栄養素名に対応する色をviewに返すメソッド(recipes/show)
+  # 栄養素名に対応する色をviewに返すメソッド(recipes/show, index)
   def get_badge_color(nutrient)
     color = get_nutrient_color(nutrient)
       # get_nutrient_color(nutrient) :各栄養素名に対応する色をviewに返すメソッド(application_helper.rbに記載)
