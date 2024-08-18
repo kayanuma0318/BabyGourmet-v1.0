@@ -90,13 +90,13 @@ ja:
     edit:
       title: レシピ編集
   nutrients:
-    energy: エネルギー
+    energy: カロリー
     protein: タンパク質
     dietary_fiber: 食物繊維
     calcium: カルシウム
     magnesium: マグネシウム
     phosphorus: リン
-    iron: 鉄
+    iron: 鉄分
     zinc: 亜鉛
     iodine: ヨウ素
     vitamin_d: ビタミンD
