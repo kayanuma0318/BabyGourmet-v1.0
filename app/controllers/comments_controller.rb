@@ -9,6 +9,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+    @comment = Comment.find(params[:id])
+      # @comment = viewで使用するため、インスタンス変数に代入
+  end
+
+  def destroy
+    comment = Comment.find(params[:id])
+    comment.destroy
+    redirect_to comment.recipe, success: t('messages.delete_success', model: Comment.model_name.human)
+  end
+
   private
 
   def comment_params
