@@ -39,6 +39,9 @@ class RecipesController < ApplicationController
     # 特定のレシピを取得し、ユーザー情報も取得
   @nutrient_totals = @recipe.nutrient_totals
     #@recipe.nutrient_totalsを呼び出し、レシピ全体の栄養素合計を計算し、@nutrient_totalsに代入
+  @comment = Comment.new
+  @comments = @recipe.comments.includes(:user).order(created_at: :desc)
+    # 個々のレシピに対して、コメントしたコメント情報とコメントしたユーザー情報を取得
   end
 
   def edit; end
