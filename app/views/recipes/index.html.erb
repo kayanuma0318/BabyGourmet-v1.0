@@ -1,4 +1,20 @@
-<h1 class="text-2xl font-bold mb-4 text-center"><%= t('recipes.index.title') %></h1>
+<div class="flex justify-center items-center my-8">
+  <h1 class="relative inline-block text-4xl font-bold px-16 py-2
+              before:content-[''] before:absolute before:top-1/2 before:left-0 before:inline-block before:w-12 before:h-[2px] before:border-t before:border-b before:border-black
+              after:content-[''] after:absolute after:top-1/2 after:right-0 after:inline-block after:w-12 after:h-[2px] after:border-t after:border-b after:border-black">
+    <%= t('recipes.index.title') %>
+  </h1>
+</div>
+  <!--
+    flex justify-center items-center :水平・垂直方向に中央寄せ
+    relative :相対配置、before,afterの絶対配置の基準となる
+    inline-block :インラインブロック要素、横並びにする
+    before:content-[''] :before要素に空のコンテンツを設定
+    before:absolute :before要素を絶対配置
+    before:top-1/2 :before要素を縦方向中央に配置
+    before:left-0 :before要素を横方向左端に配置
+    before:inline-block :before要素をインラインブロック要素にする
+  -->
 
 <div class="mb-4">
   <%= form_with url: recipes_path, method: :get, local: true do |f| %>

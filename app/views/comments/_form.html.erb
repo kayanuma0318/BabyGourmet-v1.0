@@ -1,0 +1,6 @@
+<div id="new_comment">
+  <%= form_with model: [recipe, comment] do |f| %>
+    <%= f.text_area :body, placeholder: "コメント", class: "textarea textarea-bordered w-full" %>
+    <%= f.submit "コメントする", class: "btn btn-primary" %>
+  <% end %>
+</div>

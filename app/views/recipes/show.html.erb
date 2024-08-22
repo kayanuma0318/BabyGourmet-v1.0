@@ -101,4 +101,18 @@
       <%= button_to t('.recipe_delete'), recipe_path(@recipe), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-error" %>
     </div>
   <% end %>
+
+  <!--コメント表示-->
+  <div id="new_comment" class="space-y-4">
+    <%= render 'comments/form', comment: Comment.new, recipe: @recipe %>
+  </div>
+  <div id="comments">
+    <% if @comments.present? %>
+      <div class="space-y-4">
+        <%= render @comments %>
+      </div>
+    <% else %>
+      <p class="text-gray-600">コメントはありません</p>
+    <% end %>
+  </div>
 </div>
