@@ -55,10 +55,10 @@
         <!--コメント編集・削除-->
         <% if comment.user == current_user %>
           <div class="flex items-center">
-            <%= link_to comment_path(comment.recipe, comment), class: "delete-comment-link", data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } do %>
+            <%= link_to comment_path(comment), class: "delete-comment-link", data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } do %>
               <%= image_tag 'comment_destroy.png', class: "w-6 h-6 ml-2 mr-2" %>
             <% end %>
-            <%= link_to edit_comment_path(comment.recipe, comment) do %>
+            <%= link_to edit_comment_path(comment) do %>
               <%= image_tag "edit_mark.png", class: "w-5 h-5" %>
             <% end %>
           </div>
