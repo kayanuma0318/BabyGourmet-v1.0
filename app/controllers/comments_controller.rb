@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
           # turbo_streamフォーマットのリクエストの場合
           # create.turbo_stream.erbへリダイレクト
       else
-        format.turbo_stream
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
           # turbo_streamフォーマットのリクエストの場合
           # create.turbo_stream.erbへリダイレクト
       end
