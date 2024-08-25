@@ -1,4 +1,6 @@
+<!--TODO: バリデーションエラー日本語化する-->
 <%= form_with model: [recipe, comment], local: false do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <%= f.text_area :body, placeholder: "コメント", class: "textarea textarea-bordered w-full mt-8" %>
   <%= f.submit "コメントする", class: "btn btn-primary" %>
 <% end %>
