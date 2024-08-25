@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "comment_body_#{@comment.id}" do %>
+  <%= form_with model: @comment, local: false do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="p-3 rounded-lg shadow-sm bg-green-100 text-green-800">
+      <%= f.text_area :body, class: "w-full p-2 text-sm leading-relaxed bg-green-100 rounded border border-gray-300" %>
+    </div>
+    <%= image_submit_tag('change_mark.png', class: "w-5 h-5 mt-2") %>
+  <% end %>
+<% end %>

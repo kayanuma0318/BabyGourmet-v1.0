@@ -1,21 +1,27 @@
 <% if @comment.errors.present? %>
   <!--@commentに対して、エラーがある場合は以下の処理-->
-  <%= turbo_stream.replace "new_comment" do %>
+  <%= turbo_stream.replace "new_form" do %>
     <%= render 'comments/form', comment: @comment, recipe: @recipe %>
       <!--
-        id="comment-form"の要素新しいフォームで置き換える(再入力)
+        id="new_form"の要素に新しいフォームで置き換える(再入力)
         @commentを渡すことにより、入力済みの内容を再表示
+        作成時はレシピとの紐付ける必要があるので、recipe: @recipeを追加
       -->
   <% end %>
 <% else %>
   <!--エラーがない場合は以下の処理-->
   <%= turbo_stream.prepend "comments" do %>
     <%= render @comment %>
-      <!--id="table-comment"の要素をcomments/_commentで追加-->
-      <!--.prepend = 配列の先頭から追加する-->
+      <!--id="comments"の要素をcomments/_commentで追加-->
+      <!--.prepend = 配列の先頭から追加する（上から追加していく）-->
   <% end %>
-  <%= turbo_stream.replace "new_comment" do %>
+  <%= turbo_stream.update "new_form" do %>
     <%= render 'comments/form', recipe: @recipe, comment: Comment.new %>
-      <!--id="new_comment"の要素をcomments/formで置き換える（新しい空のフォームを作成）-->
+      <!--
+        replaceではなく、updateを使用する理由
+        replace :ブラウザが新しいフォームと以前のフォームを同じものだと認識し、リロードなしで2回連続入力するとフォームに入力内容が残ってしまう
+        update :ブラウザが新しいフォームと以前のフォームを別物と認識し、リロードなしで2回連続入力してもフォームに入力内容が残らない
+      -->
+      <!--id="new_form"の要素をcomments/formで置き換える（新しい空のフォームを作成）-->
   <% end %>
 <% end %>

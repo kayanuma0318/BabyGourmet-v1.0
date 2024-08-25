@@ -102,11 +102,49 @@
     </div>
   <% end %>
 
-  <!--コメント表示-->
-  <div id="new_comment" class="space-y-4">
+  <!--コメント欄タイトル-->
+  <div class="flex justify-center items-center my-8">
+    <h1 class="relative inline-block text-4xl font-bold px-16 py-2
+              before:content-[''] before:absolute before:top-1/2 before:left-0 before:inline-block before:w-12 before:h-[2px] before:border-t before:border-b before:border-black
+              after:content-[''] after:absolute after:top-1/2 after:right-0 after:inline-block after:w-12 after:h-[2px] after:border-t after:border-b after:border-black">
+      <p>コメント欄</p>
+    </h1>
+  </div>
+  <!--
+    - コメント欄 -  ←このようなスタイルになる
+    flex justify-center items-center :水平・垂直方向に中央寄せ
+    relative :相対配置、before,afterの絶対配置の基準となる
+    inline-block :インラインブロック要素、横並びにする
+    before:content-[''] :before要素に空のコンテンツを設定
+    before:absolute :before要素を絶対配置
+    before:top-1/2 :before要素を縦方向中央に配置
+    before:left-0 :before要素を横方向左端に配置
+    before:inline-block :before要素をインラインブロック要素にする
+  -->
+
+  <!--コメント欄 説明文-->
+  <div class="flex flex-col items-center justify-center my-8 text-center">
+    <p class="inline-flex flex-col items-center">
+      <span class="mb-2">作ったよ！美味しそう！など、</span></br>
+      <span>このレシピに対する感想を</span>
+      <span>気軽に伝えよう！</span>
+    </p>
+  </div>
+  <!--
+    flex flex-col :アイテムを縦方向に並べる
+    items-center :アイテムを中央に揃える
+    justify-center :アイテムを中央に配置
+    text-center :テキストを中央寄せ
+    inline-flex :インラインフレックスボックス
+  -->
+
+  <!--コメントフォーム-->
+  <div id="new_form" class="space-y-4">
     <%= render 'comments/form', comment: Comment.new, recipe: @recipe %>
   </div>
-  <div id="comments">
+
+  <!--コメント欄表示-->
+  <div id="comments" class="mt-8">
     <% if @comments.present? %>
       <div class="space-y-4">
         <%= render @comments %>

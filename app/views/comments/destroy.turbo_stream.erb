@@ -1,2 +1,3 @@
-<%= turbo_stream.remove @comment do %>
+<%= turbo_stream.remove dom_id(@comment) do %>
+  <!--dom_id(@comment) = _comment.html.erb上部に記載-->
 <% end %>

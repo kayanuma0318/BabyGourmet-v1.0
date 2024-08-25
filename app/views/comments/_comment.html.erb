@@ -30,40 +30,43 @@
     <!--チャット欄-->
     <div class="max-w-[70%] self-start mt-2">
       <!--
-        max-w-[70%] :最大幅を70%に設定
-        self-start :アイテムを左端に揃える
+        max-w-[70%] :チャット欄の最大幅を70%まで延長させる設定(相手側までチャット欄が延長するのを防ぐ)
+        self-start :チャット欄を左端に揃える(上にflex-row-reverseでアイテムを右→左に表示しているため、自分は右側になる)
       -->
-      <div class="p-3 rounded-lg shadow-sm <%= comment.user == current_user ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800' %>">
-        <!--チャット欄の背景色を設定-->
-
-        <p class="text-sm leading-relaxed"><%= comment.body %></p>
-          <!--leading-relaxed :行間をやや広めにする-->
-      </div>
-      <div class="flex items-center justify-between mt-1">
-        <!--
-          items-center :アイテムを中央に揃える
-          justify-between :アイテムを左右に均等に配置
-        -->
+      <!--コメント内容-->
+      <%= turbo_frame_tag "comment_body_#{comment.id}" do %>
+        <div class="p-3 rounded-lg shadow-sm <%= comment.user == current_user ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800' %>">
+          <!--チャット欄の背景色を設定-->
+          <p class="text-sm leading-relaxed"><%= comment.body %></p>
+            <!--leading-relaxed :行間をやや広めにする-->
+        </div>
 
         <!--日時表示-->
-        <p class="text-xs text-gray-500 mt-1 <%= comment.user == current_user ? 'text-right' : 'text-left' %>">
-          <!--左寄り:相手のコメント、右寄り:自分のコメント-->
-          <%= l(comment.created_at, format: :short) %>
-            <!--l(comment.created_at, format: :short) :コメントの作成日時を短い形式で表示-->
-        </p>
+        <div class="flex items-center justify-between mt-1">
+          <!--
+            items-center :アイテムを中央に揃える
+            justify-between :アイテムを左右に均等に配置
+          -->
+          <p class="text-xs text-gray-500 mt-1 <%= comment.user == current_user ? 'text-right' : 'text-left' %>">
+            <!--%= comment.user == current_user ?がtrueの場合に 'text-right' になる(reverseのため、反対になる)-->
+            <!--左寄り:相手のコメント、右寄り:自分のコメント-->
+            <%= l(comment.created_at, format: :short) %>
+              <!--l(comment.created_at, format: :short) :コメントの作成日時を短い形式で表示-->
+          </p>
 
-        <!--コメント編集・削除-->
-        <% if comment.user == current_user %>
-          <div class="flex items-center">
-            <%= link_to comment_path(comment), class: "delete-comment-link", data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } do %>
-              <%= image_tag 'comment_destroy.png', class: "w-6 h-6 ml-2 mr-2" %>
-            <% end %>
-            <%= link_to edit_comment_path(comment) do %>
-              <%= image_tag "edit_mark.png", class: "w-5 h-5" %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+          <!--コメント編集・削除-->
+          <% if comment.user == current_user %>
+            <div class="flex items-center">
+              <%= link_to comment_path(comment), class: "delete-comment-link", data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } do %>
+                <%= image_tag 'comment_destroy.png', class: "w-6 h-6 ml-2 mr-2" %>
+              <% end %>
+              <%= link_to edit_comment_path(comment), class: "edit-comment-link", data: { turbo_frame: "comment_body_#{comment.id}" }  do %>
+                <%= image_tag "edit_mark.png", class: "w-5 h-5" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>
