@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     member do
       delete 'remove_image'
     end
-    resources :comments, only: %i[create edit destroy], shallow: true
+    resources :comments, only: %i[create edit update destroy], shallow: true
       # shallow: trueでネストを浅くする(削除時、comment_idのみで削除可能)
   end
   get 'up' => 'rails/health#show', as: :rails_health_check

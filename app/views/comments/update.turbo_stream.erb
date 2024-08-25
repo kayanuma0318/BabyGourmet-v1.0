@@ -1,0 +1,18 @@
+<!--TODO: エラー日本語化対応させる-->
+<% if @comment.errors.present? %>
+  <!--@commentに対して、エラーがある場合は以下の処理-->
+  <%= turbo_stream.replace "comment_body_#{@comment.id}" do %>
+    <%= render template: 'comments/edit', comment: @comment %>
+      <!--
+        id="comment-form"の要素新しいフォームで置き換える(再入力)
+        @commentを渡すことにより、入力済みの内容を再表示
+      -->
+  <% end %>
+<% else %>
+  <!--エラーがない場合は以下の処理-->
+  <%= turbo_stream.update "comment_body_#{@comment.id}" do %>
+    <%= render 'comments/comment_body', comment: @comment %>
+      <!--id="table-comment"の要素をcomments/_commentで追加-->
+      <!--.prepend = 配列の先頭から追加する-->
+  <% end %>
+<% end %>

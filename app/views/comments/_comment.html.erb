@@ -1,0 +1,72 @@
+<%= turbo_frame_tag dom_id(comment) do %>
+  <div class="flex items-start mb-6 <%= comment.user == current_user ? 'flex-row-reverse' : 'flex-row' %>">
+    <!--
+      items-start :アイテムを上端に揃える
+      flex-row-reverse :アイテムを右→左に表示
+      flex-row :アイテムを左→右に表示
+    -->
+    <div class="flex flex-col items-center <%= comment.user == current_user ? 'ml-4' : 'mr-4' %>">
+      <!--
+        flex flex-col :アイテムを縦方向に並べる
+        items-center :アイテムを中央に揃える
+        ml-4:mr-4 :アバターとチャット欄のスペースを確保
+      -->
+
+      <div class="w-14 h-14 rounded-full overflow-hidden mb-2">
+        <!--overflow-hidden :はみ出た部分を隠す-->
+
+        <!--アバター-->
+        <% if comment.user&.avatar&.present? %>
+          <%= image_tag comment.user.avatar.url, class: "w-full h-full object-cover" %>
+        <% else %>
+          <%= image_tag "default_avatar.png", class: "w-full h-full object-cover" %>
+        <% end %>
+      </div>
+
+      <!--ユーザー名-->
+      <p class="text-xs font-medium text-gray-600"><%= comment.user.name %></p>
+    </div>
+
+    <!--チャット欄-->
+    <div class="max-w-[70%] self-start mt-2">
+      <!--
+        max-w-[70%] :チャット欄の最大幅を70%まで延長させる設定(相手側までチャット欄が延長するのを防ぐ)
+        self-start :チャット欄を左端に揃える(上にflex-row-reverseでアイテムを右→左に表示しているため、自分は右側になる)
+      -->
+      <!--コメント内容-->
+      <%= turbo_frame_tag "comment_body_#{comment.id}" do %>
+        <div class="p-3 rounded-lg shadow-sm <%= comment.user == current_user ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800' %>">
+          <!--チャット欄の背景色を設定-->
+          <p class="text-sm leading-relaxed"><%= comment.body %></p>
+            <!--leading-relaxed :行間をやや広めにする-->
+        </div>
+
+        <!--日時表示-->
+        <div class="flex items-center justify-between mt-1">
+          <!--
+            items-center :アイテムを中央に揃える
+            justify-between :アイテムを左右に均等に配置
+          -->
+          <p class="text-xs text-gray-500 mt-1 <%= comment.user == current_user ? 'text-right' : 'text-left' %>">
+            <!--%= comment.user == current_user ?がtrueの場合に 'text-right' になる(reverseのため、反対になる)-->
+            <!--左寄り:相手のコメント、右寄り:自分のコメント-->
+            <%= l(comment.created_at, format: :short) %>
+              <!--l(comment.created_at, format: :short) :コメントの作成日時を短い形式で表示-->
+          </p>
+
+          <!--コメント編集・削除-->
+          <% if comment.user == current_user %>
+            <div class="flex items-center">
+              <%= link_to comment_path(comment), class: "delete-comment-link", data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } do %>
+                <%= image_tag 'comment_destroy.png', class: "w-6 h-6 ml-2 mr-2" %>
+              <% end %>
+              <%= link_to edit_comment_path(comment), class: "edit-comment-link", data: { turbo_frame: "comment_body_#{comment.id}" }  do %>
+                <%= image_tag "edit_mark.png", class: "w-5 h-5" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
