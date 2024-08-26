@@ -4,6 +4,8 @@ class Recipe < ApplicationRecord
   has_many :recipe_foods, dependent: :destroy
   has_many :steps, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :yummies, dependent: :destroy
+  # dependent: :destroy : Recipeが削除されたら、そのRecipeに紐づく関連データも削除される
 
   accepts_nested_attributes_for :steps, allow_destroy: true
   accepts_nested_attributes_for  :recipe_foods,
@@ -70,5 +72,12 @@ class Recipe < ApplicationRecord
       end
     end
     totals
+  end
+
+  # Userがいいねをしているかを判定するメソッド
+  def yummy_by?(user)
+    yummies.exists?(user_id: user.id)
+      # .exists? = 与えられた条件に合うレコードと一致するかを判定するメソッド
+      # yummiesテーブルのuser_idカラムに、user.id（渡された引数userのid）が一致するかを判定する
   end
 end

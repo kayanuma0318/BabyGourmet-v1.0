@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
   has_many :comments, dependent: :destroy
-  # dependent: :destroy : Userが削除されたら、そのUserに紐づくRecipe,commentも削除される
+  has_many :yummies, dependent: :destroy
+  # dependent: :destroy : Userが削除されたら、そのUserに紐づくRecipe,comment,yummyも削除される
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
