@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     end
     resources :comments, only: %i[create edit update destroy], shallow: true
       # shallow: trueでネストを浅くする(削除時、comment_idのみで削除可能)
+    resouce :yummies, only: %i[create destroy]
+      # userが1回しかyummyボタンを押さないのでyummy_idは不要、resouceを採用
   end
   get 'up' => 'rails/health#show', as: :rails_health_check
 end
