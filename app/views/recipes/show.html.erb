@@ -22,14 +22,21 @@
     </div>
 
     <!-- アバターとユーザー名 -->
-    <div class="flex items-center">
-      <% if @recipe.user.avatar? %>
-        <%= image_tag @recipe.user.avatar.url, class: "w-10 h-10 rounded-full mr-2" %>
-      <% else %>
-        <%= image_tag "default_avatar.png", class: "w-10 h-10 rounded-full mr-2" %>
-      <% end %>
-        <!-- TODO: アバター画像クリック後はプロフィールページへ遷移 -->
-      <span class="text-gray-700"><%= @recipe.user.name %></span>
+    <div class="flex justify-between items-end">
+      <div class="flex items-center">
+        <% if @recipe.user.avatar? %>
+          <%= image_tag @recipe.user.avatar.url, class: "w-10 h-10 rounded-full mr-2" %>
+        <% else %>
+          <%= image_tag "default_avatar.png", class: "w-10 h-10 rounded-full mr-2" %>
+        <% end %>
+          <!-- TODO: アバター画像クリック後はプロフィールページへ遷移 -->
+        <span class="text-gray-700"><%= @recipe.user.name %></span>
+      </div>
+
+      <!--yummyボタン-->
+      <div class="yummy_btn">
+        <%= render 'yummies/button', recipe: @recipe, user: current_user %>
+      </div>
     </div>
   </div>
 
