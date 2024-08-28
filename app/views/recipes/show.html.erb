@@ -38,6 +38,11 @@
         <div class="yummy_btn">
           <%= render 'yummies/button', recipe: @recipe, user: current_user %>
         </div>
+      <% else %>
+        <div class="flex items-center">
+          <%= image_tag "un_yummy.png", class: "w-7 h-7" %>
+          <span class="text-sm ml-2"><%= @recipe.yummies_count %> Yummy!</span>
+        </div>
       <% end %>
     </div>
   </div>
