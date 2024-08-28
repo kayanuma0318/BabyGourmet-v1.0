@@ -27,17 +27,25 @@
     <!--アバター画像、ユーザー名-->
     <div class="p-4 h-1/2 flex flex-col justify-between">
       <!--カードの下半分を占めるコンテナを作成、内容は縦並びにする-->
-      <div class="flex items-center mb-2">
+      <div class="flex items-center justify-between mb-2">
         <!--アバターとユーザー名を横並びにする-->
-        <div class="w-8 h-8 rounded-xl overflow-hidden mr-2">
-          <!--TODO: avatarクリック時プロフィールページへ-->
-          <% if recipe.user&.avatar? %>
-            <%= image_tag recipe.user.avatar.url, class: "w-full h-full object-cover" %>
-          <% else %>
-            <%= image_tag 'default_avatar.png', class: "w-full h-full object-cover" %>
-          <% end %>
+        <div class="flex items-end">
+          <div class="w-8 h-8 rounded-xl overflow-hidden mr-2">
+            <!--TODO: avatarクリック時プロフィールページへ-->
+            <% if recipe.user&.avatar? %>
+              <%= image_tag recipe.user.avatar.url, class: "w-full h-full object-cover" %>
+            <% else %>
+              <%= image_tag 'default_avatar.png', class: "w-full h-full object-cover" %>
+            <% end %>
+          </div>
+          <div class="pt-5 text-xs"><%= recipe.user.name %></div>
         </div>
-        <div class="pt-5 text-xs"><%= recipe.user.name %></div>
+
+        <!--yummyボタン-->
+        <div class="flex items-center mr-2">
+          <%= image_tag 'un_yummy.png', class: "w-7 h-7" %>
+          <span class="text-sm ml-2">: <%= recipe.yummies_count %></span>
+        </div>
       </div>
 
       <!--レシピ名-->
