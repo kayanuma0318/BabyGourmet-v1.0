@@ -34,9 +34,11 @@
       </div>
 
       <!--yummyボタン-->
-      <div class="yummy_btn">
-        <%= render 'yummies/button', recipe: @recipe, user: current_user %>
-      </div>
+      <% if user_signed_in? %>
+        <div class="yummy_btn">
+          <%= render 'yummies/button', recipe: @recipe, user: current_user %>
+        </div>
+      <% end %>
     </div>
   </div>
 

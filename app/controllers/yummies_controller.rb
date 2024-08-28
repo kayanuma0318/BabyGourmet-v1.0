@@ -2,13 +2,13 @@ class YummiesController < ApplicationController
   before_action :authenticate_user!, only: %i[create destroy]
 
   def create
-    @recipe = Recipe.find(params[:recipe_id])
-    @yummy = current_user.yummies.build(recipe: @recipe)
+    recipe = Recipe.find(params[:recipe_id])
+    yummy = current_user.yummies.build(recipe: recipe)
       # newではなく、buildメソッドを使用することで、user_idを自動で設定される
       # recipe_idを指定せず、関連づけられた@recipeを指定することで、recipe_idも自動で設定される
 
     respond_to do |format|
-      if @yummy.save
+      if yummy.save
         format.turbo_stream
         redirect_to request.referer
           # リクエスト元にリダイレクトする
@@ -17,11 +17,11 @@ class YummiesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:recipe_id])
-    @yummy = current_user.yummies.find_by(recipe_id: @recipe.id)
+    recipe = Recipe.find(params[:recipe_id])
+    yummy = current_user.yummies.find_by(recipe_id: recipe.id)
 
     respond_to do |format|
-      if @yummy.destroy
+      if yummy.destroy
         format.turbo_stream
         redirect_to request.referer
           # リクエスト元にリダイレクトする
