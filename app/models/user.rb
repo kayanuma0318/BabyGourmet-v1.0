@@ -34,4 +34,19 @@ class User < ApplicationRecord
       # 使用例: current_user.own?(comment) = current_user.id == comment.user_idをしていることと同じとなる
       # 現在のコメントがログインしているユーザーのコメントかを判定する
   end
+
+  # 作りたいものリストに追加するメソッド
+  def cook_later(recipe)
+    cook_later_recipes << recipe
+  end
+
+  # 作りたいものリストから削除するメソッド
+  def uncook_later(recipe)
+    cook_later_recipes.delete(recipe)
+  end
+
+  # 作りたいものリスト追加してあるかを判定するメソッド
+  def cook_later?(recipe)
+    cook_later_recipes.include?(recipe)
+  end
 end
