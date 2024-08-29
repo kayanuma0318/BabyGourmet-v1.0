@@ -5,6 +5,7 @@ class Recipe < ApplicationRecord
   has_many :steps, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :yummies, dependent: :destroy
+  has_many :cook_laters, dependent: :destroy
   # dependent: :destroy : Recipeが削除されたら、そのRecipeに紐づく関連データも削除される
 
   accepts_nested_attributes_for :steps, allow_destroy: true

@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :yummies, dependent: :destroy
+  has_many :cook_laters, through: :cook_laters, source: :recipe
+  # ユーザーはcook_latersを通じてrecipeテーブルへのアクセス権限を持つ
+  # user.cook_later_recipesで、ユーザーが「作りたいものリスト」へ追加したレシピを取得できる
   # dependent: :destroy : Userが削除されたら、そのUserに紐づくRecipe,comment,yummyも削除される
 
   # Include default devise modules. Others available are:
@@ -24,7 +27,7 @@ class User < ApplicationRecord
   #avatarカラムの画像アップロード
   mount_uploader :avatar, AvatarUploader
 
-  # ユーザーが行ったかを判定するメソッド
+  # ユーザーが行ったかを判定するメソッド(comment機能)
   def own?(object)
     id == object&.user_id
       # idがobjectのuser_idと一致するかを判定する
