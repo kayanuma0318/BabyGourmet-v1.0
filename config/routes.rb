@@ -36,12 +36,12 @@ Rails.application.routes.draw do
     member do
       delete 'remove_image'
     end
-    resources :cook_laters, only: %i[create destroy]
-      # レシピを作りたいものリストに追加する機能
     resources :comments, only: %i[create edit update destroy], shallow: true
       # shallow: trueでネストを浅くする(削除時、comment_idのみで削除可能)
     resource :yummies, only: %i[create destroy]
       # userが1回しかyummyボタンを押さないのでyummy_idは不要、resourceを採用
   end
+  resources :cook_laters, only: %i[create destroy]
+  # レシピを作りたいものリストに追加する機能
   get 'up' => 'rails/health#show', as: :rails_health_check
 end
