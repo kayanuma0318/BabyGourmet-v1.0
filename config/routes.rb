@@ -30,11 +30,14 @@ Rails.application.routes.draw do
       delete 'remove_step_fields'
       post 'reset_ingredient_fields'
       post 'reset_step_fields'
-      post 'preview_image', to: 'recipes#preview_image'
+      get 'cook_laters'
+        # ユーザーが作りたいものリストに追加したレシピ一覧を表示するルート
     end
     member do
       delete 'remove_image'
     end
+    resources :cook_laters, only: %i[create destroy]
+      # レシピを作りたいものリストに追加する機能
     resources :comments, only: %i[create edit update destroy], shallow: true
       # shallow: trueでネストを浅くする(削除時、comment_idのみで削除可能)
     resource :yummies, only: %i[create destroy]
