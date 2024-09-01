@@ -16,14 +16,22 @@
     before:inline-block :before要素をインラインブロック要素にする
   -->
 
+<!--TODO: 検索できるようにする-->
+<!--検索フォーム-->
 <div class="mb-4">
   <%= form_with url: recipes_path, method: :get, local: true do |f| %>
     <%= f.text_field :search, placeholder: "レシピを検索してください。", class: "input input-bordered w-full" %>
   <% end %>
 </div>
 
-  <%= render 'shared/recipe_card', recipe: @recipes %>
+<!--レシピ一覧表示-->
+<div class="grid grid-cols-2 gap-4">
+  <% @recipes.each do |recipe| %>
+    <%= render 'shared/recipe_card', recipe: recipe, user: current_user %>
+  <% end %>
+</div>
 
+<!--作りたいものリストへのリンクボタン-->
 <div class="flex justify-center mt-4 mb-4">
-  <%= link_to t('recipes.index.go_cook_list'), '#', class: "btn btn-primary" %>
+  <%= link_to t('recipes.index.go_cook_list'), cook_laters_recipes_path, class: "btn btn-primary" %>
 </div>

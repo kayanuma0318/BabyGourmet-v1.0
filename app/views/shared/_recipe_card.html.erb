@@ -1,36 +1,58 @@
-<div class="grid grid-cols-2 gap-4">
-  <% @recipes.each do |recipe| %>
-<div class="card bg-base-100 shadow-xl rounded-lg overflow-hidden" style="width: 200px; height: 500px;">
-  <!--  card: カードとして扱うためのクラス
+<div class="card bg-base-100 shadow-xl rounded-lg overflow-hidden" style="width: 200px; height: 470px;">
+  <%= link_to recipe_path(recipe), class: "block h-full" do %>
+    <!--
+      card: カードとして扱うためのクラス
       bg-base-100: 基本的な背景色を適用
       shadow-xl: 大きめなシャドウを追加
       rounded-lg: カードの角を大きく丸める
       overflow-hidden: カードの内容がはみ出した場合に隠す
-      style="width: 200px; height: 500px;": カードの幅を200px、高さを500pxに固定-->
-  <%= link_to recipe_path(recipe), class: "block h-full" do %>
+      style="width: 200px; height: 470px;": カードの幅を200px、高さを470pxに固定
+    -->
 
     <!--レシピ画像-->
-    <div class="h-1/2 w-full flex items-center justify-center overflow-hidden">
-      <!--カードの上半分を占める画像コンテナを作成-->
-      <!--  h-1/2: 高さをカードの半分（50%）に設定
-            w-full: 幅を親要素いっぱいに広げる
-            flex items-center justify-center: 中央に配置
-            overflow-hidden: はみ出た部分を隠す -->
+    <div class="h-[55%] w-full overflow-hidden">
       <% if recipe.recipe_image? %>
-        <%= image_tag recipe.recipe_image.url, class: "w-full h-full object-contain" %>
-          <!--object-contain :画像のアスペクト比を保ちつつ、コンテナ内に収める-->
+        <%= image_tag recipe.recipe_image.url, class: "w-full h-full object-cover" %>
       <% else %>
-        <%= image_tag 'recipe_no_image.png', class: "w-full h-full object-contain" %>
+        <%= image_tag 'recipe_no_image.png', class: "w-full h-full object-cover" %>
       <% end %>
     </div>
+    <!--
+      h-[55%]: レシピ画像部分をカードの55%に設定
+      w-full: 幅を親要素いっぱいに広げる
+      overflow-hidden: はみ出た部分を隠す
+      object-cover :画像をカード幅いっぱいに広げる
+    -->
 
-    <!--アバター画像、ユーザー名-->
-    <div class="p-4 h-1/2 flex flex-col justify-between">
-      <!--カードの下半分を占めるコンテナを作成、内容は縦並びにする-->
-      <div class="flex items-center justify-between mb-2">
-        <!--アバターとユーザー名を横並びにする-->
-        <div class="flex items-end">
-          <div class="w-8 h-8 rounded-xl overflow-hidden mr-2">
+    <div class="p-2 h-[45%] flex flex-col justify-between gap-2">
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center">
+          <!--
+            レシピ説明部分をカードの45％に設定
+            p-2: 内部の余白を2に設定
+            flex flex-col justify-between gap-2: 縦方向に並べる、間隔を2に設定
+            flex items-center: アイコン類のみを横並びにする
+          -->
+
+        <!--作りたいものリストボタン(ユーザーが追加していた場合に表示する)-->
+          <% if user_signed_in? && user.cook_later?(recipe) %>
+            <%= image_tag 'cook_later.png', class: "w-6 h-6 mr-2" %>
+          <% end %>
+
+        <!--yummyボタン-->
+        <div class="flex items-center">
+          <% if user_signed_in? && recipe.yummy_by?(user) %>
+            <%= image_tag 'yummy.png', class: "w-6 h-6" %>
+          <% else %>
+            <%= image_tag 'un_yummy.png', class: "w-6 h-6" %>
+          <% end %>
+          <span class="text-xs ml-1">: <%= recipe.yummies_count %></span>
+        </div>
+      </div>
+
+        <!--アバターとユーザー名-->
+        <div class="flex items-center">
+          <div class="w-6 h-6 rounded-xl overflow-hidden mr-2">
             <!--TODO: avatarクリック時プロフィールページへ-->
             <% if recipe.user&.avatar? %>
               <%= image_tag recipe.user.avatar.url, class: "w-full h-full object-cover" %>
@@ -40,19 +62,13 @@
           </div>
           <div class="pt-5 text-xs"><%= recipe.user.name %></div>
         </div>
-
-        <!--yummyボタン-->
-        <div class="flex items-center mr-2">
-          <%= image_tag 'un_yummy.png', class: "w-7 h-7" %>
-          <span class="text-sm ml-2">: <%= recipe.yummies_count %></span>
-        </div>
       </div>
 
       <!--レシピ名-->
-      <h3 class="font-bold text-sm mb-2"><%= recipe.title %></h3>
+      <h3 class="font-bold text-sm"><%= recipe.title %></h3>
 
       <!--栄養素表示-->
-      <h2 class="text-xs font-semibold mb-1"><%= t('recipes.recipe_card.nutrient_name') %></h2>
+      <h2 class="text-xs font-semibold"><%= t('recipes.recipe_card.nutrient_name') %></h2>
       <div class="flex flex-wrap gap-1">
         <!--flex-wrap :要素が多い場合、折り返す-->
         <% nutrient_badges(recipe).each do |badge| %>
@@ -65,8 +81,6 @@
           </span>
         <% end %>
       </div>
-        </div>
-      <% end %>
     </div>
   <% end %>
 </div>

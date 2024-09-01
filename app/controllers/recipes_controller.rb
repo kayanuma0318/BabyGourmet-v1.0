@@ -61,6 +61,11 @@ class RecipesController < ApplicationController
     redirect_to recipes_path, success: t('messages.destroy_success', model: Recipe.model_name.human)
   end
 
+  # 作りたいものリストに追加したレシピ一覧を表示するメソッド(作りたいものリスト一覧にて使用)
+  def cook_laters
+    @cook_later_recipes = current_user.cook_later_recipes.includes(:user).order(created_at: :desc)
+  end
+
   # 新規食材フォームを追加するメソッド
   def add_ingredient_fields
     @category = params[:category]
