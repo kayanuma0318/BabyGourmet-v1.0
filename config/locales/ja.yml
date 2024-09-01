@@ -25,6 +25,7 @@ ja:
     destroy_success: "%{model}を削除しました。"
     not_authorized: "不法侵入しています。"
     not_found: "%{model}が見つかりません。"
+    not_have: "%{model}がありません。"
   users:
     user_form:
       form_avatar: アバター登録
@@ -44,6 +45,8 @@ ja:
       destroy:
         logout: ログアウト
   recipes:
+    cook_laters:
+      title: 作りたいものリスト
     recipe_card:
       nutrient_name: 含まれる栄養素
       not_nutrient_found: 栄養素情報がありません。
@@ -62,6 +65,15 @@ ja:
     new:
       title: レシピ作成
     shared:
+      footer:
+        resipe_list: レシピ一覧
+        cook_later: 作りたいものリスト
+        recipe_form: レシピ投稿
+        logout: ログアウト
+        user_form: 新規ユーザー登録
+        login: ログイン
+        gest_user: ゲスト
+
       recipe_name: レシピ名
       serving_size: 総分量
       description: レシピ説明

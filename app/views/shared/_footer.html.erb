@@ -1,17 +1,20 @@
 <footer class="btm-nav fixed bottom-0 left-0 right-0 shadow-lg">
   <!--フッターを画面下部に固定する-->
+
+  <!--homeボタン-->
   <%= link_to root_path, class: "flex flex-col items-center justify-center p-2" do %>
     <%= image_tag('home.png', class: 'h-9 w-6', alt: 'Home icon') %>
     <span class="text-xs ">Home</span>
   <% end %>
 
+  <!--戻るボタン-->
   <%= link_to 'javascript:history.back()', class: "flex flex-col items-center justify-center p-2" do %>
     <!--javascript:history.back() :複数ページ連続で戻れるjavascript関数を呼び出す-->
     <%= image_tag('return.png', class: 'h-6 w-7 mb-1', alt: 'Home icon') %>
     <span class="text-xs ">Return</span>
   <% end %>
 
-
+  <!--infoトグルメニュー-->
   <div class="dropdown dropdown-top dropdown-hover">
     <div tabindex="0" role="button" class="flex flex-col items-center justify-center p-2 cursor-pointer hover:bg-base-300 rounded-lg transition-colors duration-200">
       <%= image_tag('info.png', class: 'h-8 w-8 mb-1', alt: 'Info icon') %>
@@ -19,6 +22,38 @@
     </div>
     <ul tabindex="0" class="dropdown-content menu bg-base-200 rounded-lg shadow-lg w-56 p-2 mt-1">
       <% if user_signed_in? %>
+
+      <!--レシピ一覧-->
+        <li>
+          <%= link_to recipes_path, class: "flex items-center px-4 py-2 hover:bg-base-300 rounded-md transition-colors duration-200 text-gray" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span>レシピ一覧</span>
+          <% end %>
+        </li>
+
+        <!--作りたいものリスト-->
+        <li>
+          <%= link_to cook_laters_recipes_path, class: "flex items-center px-4 py-2 hover:bg-base-300 rounded-md transition-colors duration-200 text-gray" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span>作りたいものリスト</span>
+          <% end %>
+        </li>
+
+        <!--レシピ投稿-->
+        <li>
+          <%= link_to new_recipe_path, class: "flex items-center px-4 py-2 hover:bg-base-300 rounded-md transition-colors duration-200 text-gray" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span>レシピ投稿</span>
+          <% end %>
+        </li>
+
+        <!--ログアウト-->
         <li>
           <%= button_to logout_path, method: :delete, class: "flex items-center px-4 py-2 hover:bg-base-300 rounded-md transition-colors duration-200 text-error" do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -28,6 +63,8 @@
           <% end %>
         </li>
       <% else %>
+
+        <!--新規ユーザー登録-->
         <li>
           <%= link_to new_user_registration_path, class: "flex items-center px-4 py-2 hover:bg-base-300 rounded-md transition-colors duration-200" do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -36,6 +73,8 @@
             <span>新規ユーザー登録</span>
           <% end %>
         </li>
+
+        <!--ログイン-->
         <li>
           <%= link_to login_path, class: "flex items-center px-4 py-2 hover:bg-base-300 rounded-md transition-colors duration-200" do %>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

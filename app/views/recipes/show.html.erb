@@ -22,28 +22,39 @@
     </div>
 
     <!-- アバターとユーザー名 -->
-    <div class="flex justify-between items-end">
+    <div class="flex justify-between items-start">
       <div class="flex items-center">
         <% if @recipe.user.avatar? %>
-          <%= image_tag @recipe.user.avatar.url, class: "w-10 h-10 rounded-full mr-2" %>
+          <%= image_tag @recipe.user.avatar.url, class: "w-9 h-9 rounded-full mr-2" %>
         <% else %>
-          <%= image_tag "default_avatar.png", class: "w-10 h-10 rounded-full mr-2" %>
+          <%= image_tag "default_avatar.png", class: "w-9 h-9 rounded-full mr-2" %>
         <% end %>
           <!-- TODO: アバター画像クリック後はプロフィールページへ遷移 -->
-        <span class="text-gray-700"><%= @recipe.user.name %></span>
+        <div class="flex items-end">
+          <span class="text text-xs text-gray-700"><%= @recipe.user.name %></span>
+        </div>
       </div>
 
       <!--yummyボタン-->
-      <% if user_signed_in? %>
-        <div class="yummy_btn">
-          <%= render 'yummies/button', recipe: @recipe, user: current_user %>
-        </div>
-      <% else %>
-        <div class="flex items-center">
-          <%= image_tag "un_yummy.png", class: "w-7 h-7" %>
-          <span class="text-sm ml-2"><%= @recipe.yummies_count %> Yummy!</span>
-        </div>
-      <% end %>
+      <div class="flex flex-col items-start gap-2">
+        <% if user_signed_in? %>
+          <div class="yummy_btn">
+            <%= render 'yummies/button', recipe: @recipe, user: current_user %>
+          </div>
+        <% else %>
+          <div class="flex items-center">
+            <%= image_tag "un_yummy.png", class: "w-7 h-7" %>
+            <span class="text-sm ml-2"><%= @recipe.yummies_count %> Yummy!</span>
+          </div>
+        <% end %>
+
+        <!--作りたいものリストボタン-->
+        <% if user_signed_in? %>
+          <div class="cook_later_btn">
+            <%= render 'cook_laters/button', recipe: @recipe %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 

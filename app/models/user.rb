@@ -1,9 +1,12 @@
 class User < ApplicationRecord
+
+  # 1人のユーザーは以下の情報を複数持つことができる
   has_many :recipes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :yummies, dependent: :destroy
-  has_many :cook_laters, through: :cook_laters, source: :recipe
-  # ユーザーはcook_latersを通じてrecipeテーブルへのアクセス権限を持つ
+  has_many :cook_laters, dependent: :destroy
+  has_many :cook_later_recipes, through: :cook_laters, source: :recipe
+  # ユーザーはcook_latersを通じてrecipeの情報を取得できる
   # user.cook_later_recipesで、ユーザーが「作りたいものリスト」へ追加したレシピを取得できる
   # dependent: :destroy : Userが削除されたら、そのUserに紐づくRecipe,comment,yummyも削除される
 
@@ -42,7 +45,7 @@ class User < ApplicationRecord
 
   # 作りたいものリストから削除するメソッド
   def uncook_later(recipe)
-    cook_later_recipes.delete(recipe)
+    cook_later_recipes.destroy(recipe)
   end
 
   # 作りたいものリスト追加してあるかを判定するメソッド
