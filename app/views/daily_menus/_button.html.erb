@@ -1,0 +1,25 @@
+<%= turbo_frame_tag "daily_menu_btn_#{recipe.id}" do %>
+  <div class="flex items-center">
+    <% if current_user.daily_menu?(recipe) %>
+      <%= button_to daily_menu_path(current_user.daily_menus.find_by(recipe_id: recipe.id), method: :delete do %>
+        <%= image_tag 'daily_menu.png', class: 'w-8 h-8'%>
+      <% else %>
+        <%= button_to daily_menus_path(recipe_id: recipe.id), method: :post do %>
+          <%= image_tag 'un_daily_menu.png', class: 'w-8 h-8'%>
+        <% end %>
+      <% end %>
+    <% end %>
+    <span calss="flex justify-center text-xs ml-2">今日の献立</span>
+  </div>
+<% end %>
+<!--TODO: 日本語化-->
+<!--
+  current_userはrecipeを今日の献立に追加している？(Recipe.find(params[:recipe_id])
+  -追加済みの場合(true)-
+  点灯したアイコンを表示し、URLはdestroyアクションに設定
+  (ログイン中のユーザーの今日の献立の中からfind＿byメソッド(一致する最初のレコードを取得)で、recipe_idと削除しようとしているrecipe.idが一致するidを取得)
+
+  -追加していない場合(false)-
+  消灯したアイコンを表示し、URLはcreateアクションに設定
+  (recipe_idをパラメータとして送信している(どのレシピを追加するかをrecipe.idで判定するため))
+-->
