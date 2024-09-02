@@ -6,8 +6,10 @@ class User < ApplicationRecord
   has_many :yummies, dependent: :destroy
   has_many :cook_laters, dependent: :destroy
   has_many :cook_later_recipes, through: :cook_laters, source: :recipe
-  # ユーザーはcook_latersを通じてrecipeの情報を取得できる
-  # user.cook_later_recipesで、ユーザーが「作りたいものリスト」へ追加したレシピを取得できる
+  has_many :daily_menus, dependent: :destroy
+  has_many :daily_menu_recipes, through: :daily_menus, source: :recipes
+  # ユーザーはthroughを通じてrecipeの情報を取得できる
+  # user.(モデル名)_recipesで、ユーザーが「作りたいものリスト」へ追加したレシピを取得できる
   # dependent: :destroy : Userが削除されたら、そのUserに紐づくRecipe,comment,yummyも削除される
 
   # Include default devise modules. Others available are:
@@ -51,5 +53,20 @@ class User < ApplicationRecord
   # 作りたいものリスト追加してあるかを判定するメソッド
   def cook_later?(recipe)
     cook_later_recipes.include?(recipe)
+  end
+
+  # レシピを今日の献立に追加するメソッド
+  def daily_menu(recipe)
+    daily_menu_recipes << recipe
+  end
+
+  # レシピを今日の献立から削除するメソッド
+  def undaily_menu(recipe)
+    daily_menu_recipes.destroy(recipe)
+  end
+
+  # レシピが今日の献立に追加されているかを判定するメソッド
+  def daily_menu?(recipe)
+    daily_menu_recipes.include?(recipe)
   end
 end
