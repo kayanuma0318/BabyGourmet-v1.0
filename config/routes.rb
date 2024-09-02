@@ -32,6 +32,8 @@ Rails.application.routes.draw do
       post 'reset_step_fields'
       get 'cook_laters'
         # ユーザーが作りたいものリストに追加したレシピ一覧を表示するルート
+      get 'daily_menus'
+        # ユーザーが今日の献立に追加したレシピ一覧を表示するルート
     end
     member do
       delete 'remove_image'
@@ -42,6 +44,8 @@ Rails.application.routes.draw do
       # userが1回しかyummyボタンを押さないのでyummy_idは不要、resourceを採用
   end
   resources :cook_laters, only: %i[create destroy]
-  # レシピを作りたいものリストに追加する機能
+    # レシピを作りたいものリストに追加、削除する機能
+  resources :daily_menus, only: %i[create destroy]
+    # レシピを今日の献立に追加、削除する機能
   get 'up' => 'rails/health#show', as: :rails_health_check
 end
