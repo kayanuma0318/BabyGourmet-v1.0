@@ -1,12 +1,12 @@
 <%= turbo_frame_tag "daily_menu_btn_#{recipe.id}" do %>
   <div class="flex items-center">
     <% if current_user.daily_menu?(recipe) %>
-      <%= button_to daily_menu_path(current_user.daily_menus.find_by(recipe_id: recipe.id), method: :delete do %>
+      <%= button_to daily_menu_path(current_user.daily_menus.find_by(recipe_id: recipe.id)), method: :delete do %>
         <%= image_tag 'daily_menu.png', class: 'w-8 h-8'%>
-      <% else %>
-        <%= button_to daily_menus_path(recipe_id: recipe.id), method: :post do %>
-          <%= image_tag 'un_daily_menu.png', class: 'w-8 h-8'%>
-        <% end %>
+      <% end %>
+    <% else %>
+      <%= button_to daily_menus_path(recipe_id: recipe.id), method: :post do %>
+        <%= image_tag 'un_daily_menu.png', class: 'w-8 h-8'%>
       <% end %>
     <% end %>
     <span calss="flex justify-center text-xs ml-2">今日の献立</span>

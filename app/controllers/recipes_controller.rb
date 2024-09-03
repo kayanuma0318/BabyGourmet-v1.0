@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
   # set_categories_and_foods: カテゴリーと食材をハッシュに格納するメソッド
 
   def index
-    @recipes = Recipe.includes(:user, recipe_foods: { food: { food_nutrients: :nutrient } }).all
+    @recipes = Recipe.includes(:user, recipe_foods: { food: { food_nutrients: :nutrient } }).all.order(created_at: :desc)
     # レシピ取得時にユーザー情報も取得
     # includesメソッド: N+1問題を解消するために使用
   end
