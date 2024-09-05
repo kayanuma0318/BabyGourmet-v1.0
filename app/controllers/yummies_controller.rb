@@ -5,7 +5,6 @@ class YummiesController < ApplicationController
     recipe = Recipe.find(params[:recipe_id])
     yummy = current_user.yummies.build(recipe: recipe)
       # newではなく、buildメソッドを使用することで、user_idを自動で設定される
-      # recipe_idを指定せず、関連づけられた@recipeを指定することで、recipe_idも自動で設定される
 
     respond_to do |format|
       if yummy.save
