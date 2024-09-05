@@ -55,18 +55,24 @@ class User < ApplicationRecord
     cook_later_recipes.include?(recipe)
   end
 
-  # レシピを今日の献立に追加するメソッド
+  # レシピを今日のおかずに追加するメソッド
   def daily_menu(recipe)
     daily_menu_recipes << recipe
   end
 
-  # レシピを今日の献立から削除するメソッド
+  # レシピを今日のおかずから削除するメソッド
   def undaily_menu(recipe)
     daily_menu_recipes.destroy(recipe)
   end
 
-  # レシピが今日の献立に追加されているかを判定するメソッド
+  # レシピが今日のおかずに追加されているかを判定するメソッド
   def daily_menu?(recipe)
     daily_menu_recipes.include?(recipe)
+  end
+
+  # 今日の献立に追加したレシピの栄養素を合算するメソッド(daily_menu.rbに記載)
+  # Userモデルに記載することで、current_user.add_recipes_nutrientsで、ユーザーが今日のおかずに追加したレシピ達の各栄養素の値を合算取得できる
+  def add_recipes_nutrients
+    DailyMenu.total_nutrients_user(self)
   end
 end

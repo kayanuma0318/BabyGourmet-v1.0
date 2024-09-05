@@ -182,7 +182,7 @@
         <%= render @comments %>
       </div>
     <% else %>
-      <p class="text-gray-600">コメントはありません</p>
+      <p class="text-gray-600"><%= t('messages.not_have', model: Comment.model_name.human) %></p>
     <% end %>
   </div>
 </div>

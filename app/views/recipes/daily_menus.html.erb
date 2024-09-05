@@ -1,0 +1,60 @@
+<div class="container mx-auto p-4 bg-gradient-to-br from-amber-50 to-orange-100 min-h-screen">
+  <div class="grid grid-cols-1 gap-8">
+    <div class="flex justify-center items-center my-8">
+
+      <!--タイトル-->
+      <div class="relative inline-block text-3xl font-bold px-16 py-2
+                  before:content-[''] before:absolute before:top-1/2 before:left-0 before:inline-block before:w-12 before:h-[2px] before:border-t before:border-b before:border-black
+                  after:content-[''] after:absolute after:top-1/2 after:right-0 after:inline-block after:w-12 after:h-[2px] after:border-t after:border-b after:border-black">
+        <p><%= t('daily_menus.title')%></p>
+      </div>
+    </div>
+
+  <% if @daily_menu_recipes.present? %>
+    <!--栄養素表示-->
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-2"><%= t('daily_menus.nutrient_include') %></h2>
+      <div class="grid grid-cols-2 gap-4">
+        <% @total_nutrients.each do |nutrient, value| %>
+          <div class="flex items-center mb-2">
+            <span class="<%= get_badge_color(nutrient) %>"style="background-color: <%= get_nutrient_color(nutrient) %>;">
+              <%= t("nutrients.#{nutrient}") %>
+            </span>
+              <!--
+                ＠total_nutrients :今日のおかずに入っている個々のレシピに含まれる各栄養素の値
+                |nutrient,value| :@total_nutrients内に含まれる栄養素名とその値を取り出し、nutrient(栄養素)とvalue(値)に代入
+                flex items-center :栄養素を表示するコンテナを作成 中央寄せにする
+                "style="background-color: <%= get_nutrient_color(nutrient) %>;" :栄養素名に応じたバッチ（背景色）を設定(recipes_helper.rbに記載)
+                <%= get_badge_color(nutrient) %>" :引数の栄養素名がenergyの場合、文字の色を黒色にする、それ以外の栄養素名は文字を白色にする(recipes_helper.rbに記載)
+                t("nutrients.#{nutrient}") :栄養素名を表示
+              -->
+            <span>
+              <%= number_with_precision(value, precision: 2) %>
+              <%= t("nutrient_units.#{nutrient}") %>
+            </span>
+              <!--
+                value :各栄養素の値が入っている
+                number_with_precision( x, precision:2) :xの値を小数点以下2桁まで表示
+                t("nutrient_units.#{nutrient}") :各栄養素の単位を表示
+              -->
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!--今日のおかずに追加したレシピを表示-->
+    <% @daily_menu_recipes.each_with_index do |recipe, index| %>
+      <%= render 'shared/menu_card', recipe: recipe, user: current_user,index: index %>
+    <% end %>
+  <% else %>
+    <div class="flex justify-center items-center h-96">
+      <p class="text-2xl text-gray-500"><%= t('messages.not_have', model: DailyMenu.model_name.human) %></p>
+    </div>
+  <% end %>
+</div>
+<!--
+  1. @daily_menu_recipesに配列データは入っているか判定
+  2. 存在する場合は、各＠daily_menu_recipesにインデックスを設けて、recipeとindexという変数に代入して取り出す
+  3. menu_cardパーシャルを呼び出し、データとしてrecipe, user, indexを渡す
+  4. 存在しない場合は、メッセージを表示
+-->

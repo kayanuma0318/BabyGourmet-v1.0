@@ -66,6 +66,14 @@ class RecipesController < ApplicationController
     @cook_later_recipes = current_user.cook_later_recipes.includes(:user).order(created_at: :desc)
   end
 
+  # 今日の献立に追加したレシピ一覧を表示するアクション(今日の献立一覧にて使用)
+  def daily_menus
+    @daily_menu_recipes = current_user.daily_menu_recipes.includes(:user).order(created_at: :desc)
+    @total_nutrients = current_user.add_recipes_nutrients
+    # daily_menuに追加したレシピを取得する際にユーザー情報も一緒に取得し、N+1問題を回避、作成順に並べる
+    # ログイン中のユーザーの今日のおかずに追加したレシピの栄養素を合算するメソッドを呼び出し、@total_nutrientsに代入
+  end
+
   # 新規食材フォームを追加するメソッド
   def add_ingredient_fields
     @category = params[:category]

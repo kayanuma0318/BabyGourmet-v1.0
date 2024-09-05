@@ -4,6 +4,7 @@ class DailyMenusController < ApplicationController
   def create
     recipe = Recipe.find(params[:recipe_id])
     current_user.daily_menu(recipe)
+    # daily_menu(recipe) = user.rbに記載
 
     respond_to do |format|
       format.turbo_stream
@@ -15,6 +16,7 @@ class DailyMenusController < ApplicationController
     daily_menu = current_user.daily_menus.find_by(id: params[:id])
     recipe = daily_menu.recipe
     current_user.undaily_menu(recipe)
+    # undaily_menu(recipe) = user.rbに記載
     # ログインしているユーザーの今日の献立の中から、指定されたidのレコードを取得
     # 削除対象のレシピを取得
 

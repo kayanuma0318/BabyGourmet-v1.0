@@ -26,6 +26,11 @@ ja:
     not_authorized: "不法侵入しています。"
     not_found: "%{model}が見つかりません。"
     not_have: "%{model}がありません。"
+  tops:
+    daily_menu: 今日のおかず
+    recipe_list: レシピ一覧
+    buy_list: 買い物リスト
+    recipe_post: レシピ投稿
   users:
     user_form:
       form_avatar: アバター登録
@@ -65,15 +70,14 @@ ja:
     new:
       title: レシピ作成
     shared:
-      footer:
-        resipe_list: レシピ一覧
-        cook_later: 作りたいものリスト
-        recipe_form: レシピ投稿
-        logout: ログアウト
-        user_form: 新規ユーザー登録
-        login: ログイン
-        gest_user: ゲスト
-
+      daily_menu: 今日のおかず
+      recipe_list: レシピ一覧
+      cook_later: 作りたいものリスト
+      recipe_post: レシピ投稿
+      logout: ログアウト
+      user_form: 新規ユーザー登録
+      login: ログイン
+      gest_user: ゲスト
       recipe_name: レシピ名
       serving_size: 総分量
       description: レシピ説明
@@ -81,6 +85,7 @@ ja:
       one_point: ワンポイント
       recipe_image: レシピ画像
       add_recipe_image: + 画像を追加
+      item: 品目
     ingredient:
       title: 材料
       select_food: 食材を選択してください
@@ -133,6 +138,9 @@ ja:
     folate: μg
     vitamin_c: mg
     salt_equivalent: g
+  daily_menus:
+    title: 今日のおかず
+    nutrient_include: 全てのおかずに含まれる栄養素量(1人分)
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
