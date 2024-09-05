@@ -22,7 +22,7 @@
             </span>
               <!--
                 ＠total_nutrients :今日のおかずに入っている個々のレシピに含まれる各栄養素の値
-                |nutrient,value| :@total_nutrients内に含まれる栄養素名とその値を取り出し、nutrient(栄養素)とvalue(値)に代入
+                nutrient,value| :@total_nutrients内に含まれる栄養素名とその値を取り出し、nutrient(栄養素)とvalue(値)に代入
                 flex items-center :栄養素を表示するコンテナを作成 中央寄せにする
                 "style="background-color: <%= get_nutrient_color(nutrient) %>;" :栄養素名に応じたバッチ（背景色）を設定(recipes_helper.rbに記載)
                 <%= get_badge_color(nutrient) %>" :引数の栄養素名がenergyの場合、文字の色を黒色にする、それ以外の栄養素名は文字を白色にする(recipes_helper.rbに記載)
