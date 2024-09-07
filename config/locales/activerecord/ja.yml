@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       recipe: レシピ
       cook_later: 作りたいものリスト
+      daily_menu: 今日のおかず
     attributes:
       user:
         confirmation_sent_at: パスワード確認送信時刻
