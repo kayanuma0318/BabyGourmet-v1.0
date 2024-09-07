@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :cook_laters, dependent: :destroy
   has_many :cook_later_recipes, through: :cook_laters, source: :recipe
   has_many :daily_menus, dependent: :destroy
-  has_many :daily_menu_recipes, through: :daily_menus, source: :recipes
+  has_many :daily_menu_recipes, through: :daily_menus, source: :recipe
   # ユーザーはthroughを通じてrecipeの情報を取得できる
   # user.(モデル名)_recipesで、ユーザーが「作りたいものリスト」へ追加したレシピを取得できる
   # dependent: :destroy : Userが削除されたら、そのUserに紐づくRecipe,comment,yummyも削除される

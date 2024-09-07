@@ -54,6 +54,13 @@
             <%= render 'cook_laters/button', recipe: @recipe %>
           </div>
         <% end %>
+
+        <!--今日の献立ボタン-->
+        <% if user_signed_in? %>
+          <div class="daily_menu_btn">
+            <%= render 'daily_menus/button', recipe: @recipe %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
