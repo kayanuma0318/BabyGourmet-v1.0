@@ -1,24 +1,40 @@
-<%= turbo_frame_tag "daily_menu_btn_#{recipe.id}" do %>
+<%= turbo_frame_tag "daily_menu_btn_#{@recipe.id}" do %>
   <div class="flex items-center">
-    <% if current_user.daily_menu?(recipe) %>
-      <%= button_to daily_menu_path(current_user.daily_menus.find_by(recipe_id: recipe.id)), method: :delete do %>
+    <% if current_user.daily_menu?(@recipe) %>
+
+      <!--追加している場合-->
+      <%= button_to daily_menu_path(current_user.daily_menus.find_by(recipe_id: @recipe.id)), method: :delete do %>
         <%= image_tag 'daily_menu.png', class: 'w-8 h-8'%>
       <% end %>
+
+      <!--今日のおかずが５個以上の場合-->
+    <% elsif current_user.daily_menus.count >= 5 %>
+        <%= image_tag 'un_daily_menu.png', class: 'w-8 h-8' %>
+
+      <!--追加していない場合-->
     <% else %>
-      <%= button_to daily_menus_path(recipe_id: recipe.id), method: :post do %>
-        <%= image_tag 'un_daily_menu.png', class: 'w-8 h-8'%>
+      <%= button_to daily_menus_path(recipe_id: @recipe.id), method: :post do %>
+        <%= image_tag 'un_daily_menu.png', class: 'w-8 h-8' %>
       <% end %>
     <% end %>
-    <span calss="flex justify-center text-xs ml-2"><%= t('daily_menus.title') %></span>
+    <span class="flex justify-center text-xs ml-2"><%= t('daily_menus.title') %></span>
   </div>
+
+  <!--5個以上追加した場合のエラー文-->
+  <% if current_user.daily_menus.count >= 5  %>
+    <div class="badge badge-error text-white text-xs"><%= t('daily_menus.max_count_over') %></div>
+  <% end %>
 <% end %>
 <!--
   current_userはrecipeを今日の献立に追加している？(Recipe.find(params[:recipe_id])
-  -追加済みの場合(true)-
+  -追加済みの場合(true)
   点灯したアイコンを表示し、URLはdestroyアクションに設定
   (ログイン中のユーザーの今日の献立の中からfind＿byメソッド(一致する最初のレコードを取得)で、recipe_idと削除しようとしているrecipe.idが一致するidを取得)
 
-  -追加していない場合(false)-
+  -追加していない場合(false)
   消灯したアイコンを表示し、URLはcreateアクションに設定
   (recipe_idをパラメータとして送信している(どのレシピを追加するかをrecipe.idで判定するため))
+
+  -今日のおかずが５個以上の場合(elsif)
+  表示アイコンを画像のみ表示し、下記にエラーメッセージを表示(ボタン化はさせない)
 -->

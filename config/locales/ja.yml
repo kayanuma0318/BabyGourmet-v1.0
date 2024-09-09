@@ -141,6 +141,7 @@ ja:
   daily_menus:
     title: 今日のおかず
     nutrient_include: 全てのおかずに含まれる栄養素量(1人分)
+    max_count_over: 今日のおかずは最大５個まで
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
