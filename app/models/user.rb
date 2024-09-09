@@ -57,7 +57,9 @@ class User < ApplicationRecord
 
   # レシピを今日のおかずに追加するメソッド
   def daily_menu(recipe)
-    daily_menu_recipes << recipe
+    if daily_menu_recipes.count < 5
+      daily_menu_recipes << recipe
+    end
   end
 
   # レシピを今日のおかずから削除するメソッド
