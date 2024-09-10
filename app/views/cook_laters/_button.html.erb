@@ -1,11 +1,11 @@
-<%= turbo_frame_tag "cook_later_btn_#{recipe.id}" do %>
+<%= turbo_frame_tag "cook_later_btn_#{@recipe.id}" do %>
   <div class="flex items-center">
-    <% if current_user.cook_later?(recipe) %>
-      <%= button_to cook_later_path(current_user.cook_laters.find_by(recipe_id: recipe.id)), method: :delete do %>
+    <% if current_user.cook_later?(@recipe) %>
+      <%= button_to cook_later_path(current_user.cook_laters.find_by(recipe_id: @recipe.id)), method: :delete do %>
         <%= image_tag 'cook_later.png', class: "w-8 h-8" %>
       <% end %>
     <% else %>
-      <%= button_to cook_laters_path(recipe_id: recipe.id), method: :post do %>
+      <%= button_to cook_laters_path(recipe_id: @recipe.id), method: :post do %>
         <%= image_tag 'un_cook_later.png', class: "w-8 h-8"%>
       <% end %>
     <% end %>
