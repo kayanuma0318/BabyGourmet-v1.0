@@ -1,15 +1,15 @@
-<%= turbo_frame_tag "yummy_btn_#{recipe.id}" do %>
+<%= turbo_frame_tag "yummy_btn_#{@recipe.id}" do %>
   <div class="flex items-center">
-    <% if recipe.yummy_by?(user) %>
-      <%= button_to recipe_yummies_path(recipe), method: :delete do %>
+    <% if @recipe.yummy_by?(current_user) %>
+      <%= button_to recipe_yummies_path(@recipe), method: :delete do %>
         <%= image_tag 'yummy.png', class: "w-8 h-8" %>
       <% end %>
     <% else %>
-      <%= button_to  recipe_yummies_path(recipe), method: :post do %>
+      <%= button_to  recipe_yummies_path(@recipe), method: :post do %>
         <%= image_tag 'un_yummy.png', class: "w-8 h-8" %>
       <% end %>
     <% end %>
-    <span class="text-xs ml-2">: <%= recipe.yummies_count %> Yummy !</span>
+    <span class="text-xs ml-2">: <%= @recipe.yummies_count %> Yummy !</span>
       <!--recipeテーブルのyummies_countカラムを参照して、個々のレシピの持つyummy数を取得、表示する-->
   </div>
 <% end %>

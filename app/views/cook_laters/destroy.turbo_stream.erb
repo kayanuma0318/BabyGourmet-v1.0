@@ -1,3 +1,3 @@
-<%= turbo_stream.replace "cook_later_btn_#{recipe.id}" do %>
-  <%= render 'cook_laters/button', recipe: recipe %>
+<%= turbo_stream.replace "cook_later_btn_#{@recipe.id}" do %>
+  <%= render 'cook_laters/button', recipe: @recipe, cook_later: @cook_later %>
 <% end %>
