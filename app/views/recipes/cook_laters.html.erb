@@ -16,3 +16,24 @@
     <p class="text-2xl text-gray-500"><%= t('messages.not_have', model: CookLater.model_name.human) %></p>
   </div>
 <% end %>
+<!--無限スクロール ページネーション-->
+<%= turbo_frame_tag "recipes_page_#{@cook_later_recipes.current_page}" do %>
+  <div class="grid grid-cols-2 gap-4">
+    <% @cook_later_recipes.each do |recipe| %>
+      <%= render 'shared/recipe_card', recipe: recipe, user: current_user %>
+    <% end %>
+  </div>
+  <% if @cook_later_recipes.next_page %>
+    <%= turbo_frame_tag "recipes_page_#{@cook_later_recipes.next_page}",
+      src: cook_laters_recipes_path(page: @cook_later_recipes.next_page),
+      loading: :lazy
+    %>
+  <% end %>
+<% end %>
+<!--
+  1. 現在のページのレシピを表示
+  2. 次のページがある場合は下部へセットし、表示領域に入ると読み込まれる（loading: :lazyを使用して読み込みを遅延させる)
+
+    src = 次のページのURLを指定する
+    loading: :lazy = ページが表示されるまで読み込みを遅延させる(無限スクロールの鍵の部分)
+-->

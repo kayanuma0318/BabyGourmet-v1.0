@@ -31,7 +31,24 @@
   <% end %>
 </div>
 
-<!--作りたいものリストへのリンクボタン-->
-<div class="flex justify-center mt-4 mb-4">
-  <%= link_to t('recipes.index.go_cook_list'), cook_laters_recipes_path, class: "btn btn-primary" %>
-</div>
+<!--無限スクロール ページネーション-->
+<%= turbo_frame_tag "recipes_page_#{@recipes.current_page}" do %>
+  <div class="grid grid-cols-2 gap-4">
+    <% @recipes.each do |recipe| %>
+      <%= render 'shared/recipe_card', recipe: recipe, user: current_user %>
+    <% end %>
+  </div>
+  <% if @recipes.next_page %>
+    <%= turbo_frame_tag "recipes_page_#{@recipes.next_page}",
+      src: recipes_path(page: @recipes.next_page),
+      loading: :lazy
+    %>
+  <% end %>
+<% end %>
+<!--
+  1. 現在のページのレシピを表示
+  2. 次のページがある場合は下部へセットし、表示領域に入ると読み込まれる（loading: :lazyを使用して読み込みを遅延させる)
+
+    src = 次のページのURLを指定する
+    loading: :lazy = ページが表示されるまで読み込みを遅延させる(無限スクロールの鍵の部分)
+-->

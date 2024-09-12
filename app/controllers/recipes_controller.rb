@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
   # set_categories_and_foods: カテゴリーと食材をハッシュに格納するメソッド
 
   def index
-    @recipes = Recipe.includes(:user, recipe_foods: { food: { food_nutrients: :nutrient } }).all.order(created_at: :desc)
+    @recipes = Recipe.includes(:user, recipe_foods: { food: { food_nutrients: :nutrient } }).all.order(created_at: :desc).page(params[:page])
     # レシピ取得時にユーザー情報も取得
     # includesメソッド: N+1問題を解消するために使用
   end
@@ -63,7 +63,7 @@ class RecipesController < ApplicationController
 
   # 作りたいものリストに追加したレシピ一覧を表示するメソッド(作りたいものリスト一覧にて使用)
   def cook_laters
-    @cook_later_recipes = current_user.cook_later_recipes.includes(:user).order(created_at: :desc)
+    @cook_later_recipes = current_user.cook_later_recipes.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   # 今日の献立に追加したレシピ一覧を表示するアクション(今日の献立一覧にて使用)
