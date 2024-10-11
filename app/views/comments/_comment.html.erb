@@ -1,27 +1,24 @@
 <%= turbo_frame_tag dom_id(comment) do %>
   <div class="flex items-start mb-6 <%= comment.user == current_user ? 'flex-row-reverse' : 'flex-row' %>">
-    <!--
-      items-start :アイテムを上端に揃える
-      flex-row-reverse :アイテムを右→左に表示
-      flex-row :アイテムを左→右に表示
-    -->
     <div class="flex flex-col items-center <%= comment.user == current_user ? 'ml-4' : 'mr-4' %>">
-      <!--
-        flex flex-col :アイテムを縦方向に並べる
-        items-center :アイテムを中央に揃える
-        ml-4:mr-4 :アバターとチャット欄のスペースを確保
-      -->
+        <!--
+          items-start :アイテムを上端に揃える
+          flex-row-reverse :アイテムを右→左に表示
+          flex-row :アイテムを左→右に表示
+          flex flex-col :アイテムを縦方向に並べる
+          items-center :アイテムを中央に揃える
+          ml-4:mr-4 :アバターとチャット欄のスペースを確保
+          overflow-hidden :はみ出た部分を隠す
+        -->
 
-      <div class="w-14 h-14 rounded-full overflow-hidden mb-2">
-        <!--overflow-hidden :はみ出た部分を隠す-->
-
-        <!--アバター-->
+      <!--アバター-->
+      <%= link_to profile_path(comment.user), class: "w-14 h-14 rounded-full overflow-hidden mb-2" do %>
         <% if comment.user&.avatar&.present? %>
           <%= image_tag comment.user.avatar.url, class: "w-full h-full object-cover" %>
         <% else %>
           <%= image_tag "default_avatar.png", class: "w-full h-full object-cover" %>
         <% end %>
-      </div>
+      <% end %>
 
       <!--ユーザー名-->
       <p class="text-xs font-medium text-gray-600"><%= comment.user.name %></p>
