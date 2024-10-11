@@ -1,0 +1,9 @@
+<div class="text-sm text-gray-500">
+  <%= @user_recipes.total_count %>件の投稿
+    <div id="recipes-container">
+      <div class="mx-auto px-4">
+        <%= render 'shared/recipe_tab_page', user_recipes: @user_recipes %>
+      </div>
+    </div>
+  </div>
+</div>
