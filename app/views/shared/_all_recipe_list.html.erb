@@ -1,5 +1,5 @@
-<%= turbo_frame_tag "recipe_page" do %>
-  <div class="grid grid-cols-2 gap-4">
+<%= turbo_frame_tag "all_recipe_list" do %>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
     <% @recipes.each do |recipe| %>
       <%= render 'shared/recipe_card', recipe: recipe, user: current_user %>
     <% end %>
@@ -7,7 +7,7 @@
 
   <% if @recipes.next_page %>
     <div class="mt-4">
-      <%= turbo_frame_tag "recipe_page",
+      <%= turbo_frame_tag "all_recipe_list",
         src: recipes_path(page: @recipes.next_page),
         loading: :lazy
       %>
@@ -15,9 +15,9 @@
   <% end %>
 <% end %>
 <!--
-  1. "recipe_page"という名前のturbo_frameを作成
+  1. "all_recipe_list"という名前のturbo_frameを作成
   2. 2列のグリッドを作成し、間隔を4pxに設定
   3. recipes配列からrecipeを取り出し、shared/recipe_cardでレンダリング
-  4. 次のページが存在する場合は、turbo_frame_tagの"recipe_page"を呼び出して、srcに次のページのURLを指定
+  4. 次のページが存在する場合は、turbo_frame_tagの"all_recipe_list"を呼び出して、srcに次のページのURLを指定
   5. loading: :lazyを指定し、ページが表示されるまで読み込みを遅延させる
 -->

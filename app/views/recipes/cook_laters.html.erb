@@ -1,25 +1,30 @@
-<div class="flex justify-center items-center my-8">
-  <div class="relative inline-block text-3xl font-bold px-16 py-2
-              before:content-[''] before:absolute before:top-1/2 before:left-0 before:inline-block before:w-12 before:h-[2px] before:border-t before:border-b before:border-black
-              after:content-[''] after:absolute after:top-1/2 after:right-0 after:inline-block after:w-12 after:h-[2px] after:border-t after:border-b after:border-black">
-    <%= t('recipes.cook_laters.title') %>
+<div class="container mx-auto px-4">
+  <!--タイトル-->
+  <div class="flex justify-center items-center my-8">
+    <div class="relative inline-block text-3xl font-bold px-16 py-2
+                before:content-[''] before:absolute before:top-1/2 before:left-0 before:inline-block before:w-12 before:h-[2px] before:border-t before:border-b before:border-black
+                after:content-[''] after:absolute after:top-1/2 after:right-0 after:inline-block after:w-12 after:h-[2px] after:border-t after:border-b after:border-black">
+      <%= t('recipes.cook_laters.title') %>
+    </div>
   </div>
-</div>
-<div class="flex flex-col justify-center items-center my-8 text-sm text-gray-500">
-  <div class="mb-2">
-    <span class="font-bold"><%= current_user.name %></span>さん の作りたい「 おかず 」は
+  <!--説明文-->
+  <div class="flex flex-col justify-center items-center my-8 text-sm text-gray-500">
+    <div class="mb-2">
+      <span class="font-bold"><%= current_user.name %></span>さん の作りたい「 おかず 」は
+    </div>
+    <div>
+      全部で <span class="font-bold"><%= @cook_later_recipes.total_count %></span>件 あるよ！
+    </div>
   </div>
-  <div>
-    全部で <span class="font-bold"><%= @cook_later_recipes.total_count %></span>件 あるよ！
-  </div>
-</div>
 
-<% if @cook_later_recipes.present? %>
-<div class="flex justify-center items-center my-8">
-  <%= render 'shared/cook_later_page', cook_later_recipes: @cook_later_recipes %>
-</div>
-<% else %>
-  <div class="flex justify-center items-center h-96">
-    <p class="text-2xl text-gray-500"><%= t('messages.not_have', model: CookLater.model_name.human) %></p>
+  <!--作りたいものリスト一覧-->
+  <% if @cook_later_recipes.present? %>
+  <div class="flex justify-center items-center my-8">
+    <%= render 'shared/cook_later_page', cook_later_recipes: @cook_later_recipes %>
   </div>
-<% end %>
+  <% else %>
+    <div class="flex justify-center items-center h-96">
+      <p class="text-2xl text-gray-500"><%= t('messages.not_have', model: CookLater.model_name.human) %></p>
+    </div>
+  <% end %>
+</div>

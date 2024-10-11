@@ -1,87 +1,63 @@
-<div class="card bg-base-100 shadow-xl rounded-lg overflow-hidden" style="width: 200px; height: 470px;">
-  <%= link_to recipe_path(recipe), class: "block h-full", data: {turbo_frame: "_top"} do %>
-    <!--
-      card: カードとして扱うためのクラス
-      bg-base-100: 基本的な背景色を適用
-      shadow-xl: 大きめなシャドウを追加
-      rounded-lg: カードの角を大きく丸める
-      overflow-hidden: カードの内容がはみ出した場合に隠す
-      style="width: 200px; height: 470px;": カードの幅を200px、高さを470pxに固定
-      data: {turbo_frame: "_top"}: リンクをクリックした際にページ全体を更新する(無限スクロール時に、これがないと詳細ページに遷移できない)
-    -->
-
-    <!--レシピ画像-->
-    <div class="h-[55%] w-full overflow-hidden">
+<%= link_to recipe_path(recipe), class: "block", data: { turbo_frame: "_top" } do %>
+  <div class="card bg-gray-100 shadow-xl rounded-lg overflow-hidden w-[170px] h-[390px] sm:w-[180px] h-[440px] md:w-[200px] h-[420px]">
+    <div class="h-[40%] w-full overflow-hidden">
       <% if recipe.recipe_image? %>
         <%= image_tag recipe.recipe_image.url, class: "w-full h-full object-cover" %>
       <% else %>
         <%= image_tag 'recipe_no_image.png', class: "w-full h-full object-cover" %>
       <% end %>
     </div>
-    <!--
-      h-[55%]: レシピ画像部分をカードの55%に設定
-      w-full: 幅を親要素いっぱいに広げる
-      overflow-hidden: はみ出た部分を隠す
-      object-cover :画像をカード幅いっぱいに広げる
-    -->
 
-    <div class="p-2 h-[45%] flex flex-col justify-between gap-2">
-      <div class="flex flex-col gap-2">
+    <div class="p-2 h-[60%] flex flex-col justify-between">
+      <div class="space-y-2">
+        <!--レシピタイトル-->
+        <h3 class="font-bold text-xs sm:text-sm line-clamp-2"><%= recipe.title %></h3>
+
+        <!--ユーザー画像と名前-->
         <div class="flex items-center">
-          <!--
-            レシピ説明部分をカードの45％に設定
-            p-2: 内部の余白を2に設定
-            flex flex-col justify-between gap-2: 縦方向に並べる、間隔を2に設定
-            flex items-center: アイコン類のみを横並びにする
-          -->
-
-        <!--作りたいものリストボタン(ユーザーが追加していた場合に表示する)-->
-          <% if user_signed_in? && user.cook_later?(recipe) %>
-            <%= image_tag 'cook_later.png', class: "w-6 h-6 mr-2" %>
-          <% end %>
-
-        <!--yummyボタン-->
-        <div class="flex items-center">
-          <% if user_signed_in? && recipe.yummy_by?(user) %>
-            <%= image_tag 'yummy.png', class: "w-6 h-6" %>
-          <% else %>
-            <%= image_tag 'un_yummy.png', class: "w-6 h-6" %>
-          <% end %>
-          <span class="text-xs ml-1">: <%= recipe.yummies_count %></span>
-        </div>
-      </div>
-
-        <!--アバターとユーザー名-->
-        <div class="flex items-center">
-          <div class="w-6 h-6 rounded-xl overflow-hidden mr-2">
-            <!--TODO: avatarクリック時プロフィールページへ-->
+          <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-xl overflow-hidden mr-2">
             <% if recipe.user&.avatar? %>
               <%= image_tag recipe.user.avatar.url, class: "w-full h-full object-cover" %>
             <% else %>
               <%= image_tag 'default_avatar.png', class: "w-full h-full object-cover" %>
             <% end %>
           </div>
-          <div class="pt-5 text-xs"><%= recipe.user.name %></div>
+          <span class="text-xs"><%= recipe.user.name %></span>
+        </div>
+
+        <div class="flex items-center space-x-1 sm:space-x-2 mb-4">
+          <!--今日のおかずマーク-->
+          <% if user_signed_in? && current_user.daily_menu?(recipe) %>
+            <%= image_tag 'daily_menu.png', class: "w-5 h-5 sm:w-6 sm:h-6" %>
+          <% end %>
+          <!--作りたいものリストマーク-->
+          <% if user_signed_in? && current_user.cook_later?(recipe) %>
+            <%= image_tag 'cook_later.png', class: "w-5 h-5 sm:w-6 sm:h-6" %>
+          <% end %>
+          <!--Yummyマーク-->
+          <div class="flex items-center">
+            <% if user_signed_in? && recipe.yummy_by?(current_user) %>
+              <%= image_tag 'yummy.png', class: "w-5 h-5 sm:w-6 sm:h-6" %>
+              <span class="text-xs ml-1"><%= recipe.yummies_count %></span>
+            <% elsif recipe.yummies_count > 0 %>
+              <%= image_tag 'un_yummy.png', class: "w-5 h-5 sm:w-6 sm:h-6" %>
+              <span class="text-xs ml-1"><%= recipe.yummies_count %></span>
+            <% end %>
+          </div>
+        </div>
+
+        <!--栄養素表示-->
+        <div class="space-y-1 mt-5">
+          <h2 class="text-xs font-semibold"><%= t('recipes.recipe_card.nutrient_name') %></h2>
+          <div class="flex flex-wrap gap-1">
+            <% nutrient_badges(recipe).each do |badge| %>
+              <span class="badge <%= badge[:text_color] %> text-[10px] sm:text-xs" style="background-color: <%= badge[:color] %>;">
+                <%= t("nutrients.#{badge[:name]}") %>
+              </span>
+            <% end %>
+          </div>
         </div>
       </div>
-
-      <!--レシピ名-->
-      <h3 class="font-bold text-sm"><%= recipe.title %></h3>
-
-      <!--栄養素表示-->
-      <h2 class="text-xs font-semibold"><%= t('recipes.recipe_card.nutrient_name') %></h2>
-      <div class="flex flex-wrap gap-1">
-        <!--flex-wrap :要素が多い場合、折り返す-->
-        <% nutrient_badges(recipe).each do |badge| %>
-          <!--
-            nutrient_badges(recipe) :各レシピに含まれる栄養素名の情報{ name, color, text_color }を持っている
-            レシピに含まれている栄養素名分繰り返し、ハッシュの中身を取り出し代入する
-          -->
-          <span class="badge <%= badge[:text_color] %> text-xs" style="background-color: <%= badge[:color] %>;">
-            <%= t("nutrients.#{badge[:name]}") %>
-          </span>
-        <% end %>
-      </div>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
