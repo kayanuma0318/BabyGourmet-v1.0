@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_01_215152) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_01_212552) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_01_215152) do
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "notified_user_id", null: false
+    t.string "notifiable_type", null: false
+    t.bigint "notifiable_id", null: false
+    t.string "action_type"
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["notified_user_id"], name: "index_notifications_on_notified_user_id"
   end
 
   create_table "nutrients", force: :cascade do |t|
@@ -140,6 +152,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_01_215152) do
   add_foreign_key "daily_menus", "users"
   add_foreign_key "food_nutrients", "foods"
   add_foreign_key "food_nutrients", "nutrients"
+  add_foreign_key "notifications", "users", column: "notified_user_id"
   add_foreign_key "recipe_foods", "foods"
   add_foreign_key "recipe_foods", "recipes"
   add_foreign_key "recipes", "users"
