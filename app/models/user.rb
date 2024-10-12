@@ -20,7 +20,7 @@ class User < ApplicationRecord
   validates :name,  presence: true, length: { maximum: 30 }
   validates :email, uniqueness: true
   validates :password_confirmation, presence: true, if: :password_required?
-    # if: :password_required?で、更新時パスワード必要な場合のみバリデーションを行う(password_required?メソッドはuser.rb下部に記述)
+    # if: :password_required?で、更新時パスワードの変更が必要な場合のみバリデーションを行う(password_required?メソッドはuser.rb下部に記述)
   # パスワード、メールアドレスのバリデーションはconfig/initializers/devise.rbで行われるため、重複に注意する
 
   # avatarカラムの画像アップロード
