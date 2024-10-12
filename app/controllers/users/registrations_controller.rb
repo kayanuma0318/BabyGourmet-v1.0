@@ -33,13 +33,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if params[:user][:password].present?
       if @user.update_with_password(account_update_params)
         bypass_sign_in(@user)
-        redirect_to profile_path, success: 'ユーザー情報とパスワードを更新しました'
+        redirect_to my_page_path, success: 'ユーザー情報とパスワードを更新しました'
       else
         render :edit, status: :unprocessable_entity
       end
     else
       if @user.update(account_update_params.except(:current_password, :password, :password_confirmation))
-        redirect_to profile_path, success: 'ユーザー情報を更新しました'
+        redirect_to my_page_path, success: 'ユーザー情報を更新しました'
       else
         render :edit, status: :unprocessable_entity
       end
