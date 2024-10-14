@@ -1,0 +1,48 @@
+<div class="bg-white shadow rounded-lg p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold text-gray-800"><%= t('notifications.yummy_notifications') %></h2>
+    <% if yummy_notifications.exists? %>
+      <% if yummy_notifications.unread.exists? %>
+        <%= button_to t('notifications.all_read'), mark_yummy_as_read_notifications_path(tab: 'yummy', yummy_page: params[:yummy_page]), method: :post, class: "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-300" %>
+      <% else %>
+        <%= button_to t('notifications.all_delete'), delete_all_yummy_notifications_path(tab: 'yummy', yummy_page: params[:yummy_page]), method: :delete, class: "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300", data: { turbo_confirm: t('notifications.confirm_all_delete_yummy') } %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if yummy_notifications.exists? %>
+    <div class="space-y-4">
+      <% yummy_notifications.each do |notification| %>
+      <div class="notification <%= notification.read_at.nil? ? 'bg-green-100' : 'bg-gray-100' %> p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+        <%= link_to recipe_path(notification.notifiable.recipe), class: "block" do %>
+          <div class="flex items-center space-x-3">
+            <div class="flex-shrink-0">
+              <%= image_tag notification.notifiable.user.avatar_url, class: "h-10 w-10 rounded-full" %>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900">
+                <%= link_to notification.notifiable.user.name, profile_path(notification.notifiable.user), class: "text-blue-500" %>さんがあなたのレシピ " <%= link_to notification.notifiable.recipe.title, recipe_path(notification.notifiable.recipe), class: "text-sm text-blue-500"  %> "を Yummy!しました
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <span class="text-sm text-gray-500">
+                <%= time_ago_in_words(notification.created_at) %>前
+              </span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500 text-center"><%= t('notifications.no_yummy_notifications') %></p>
+  <% end %>
+
+  <!--ページネーション-->
+  <div class="mt-6 flex justify-center">
+    <div class="join grid grid-cols-2">
+      <%= link_to_prev_page yummy_notifications, t('notifications.previous_page'), params: { tab: 'yummy' }, param_name: :yummy_page, class: 'join-item btn btn-outline btn-sm' %>
+      <%= link_to_next_page yummy_notifications, t('notifications.next'), params: { tab: 'yummy' }, param_name: :yummy_page, class: 'join-item btn btn-outline btn-sm' %>
+    </div>
+  </div>
+</div>

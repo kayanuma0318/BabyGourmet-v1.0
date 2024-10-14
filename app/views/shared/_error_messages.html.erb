@@ -1,9 +1,21 @@
-<% if object.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <ul class="mb-0">
-      <% object.errors.each do |error| %>
-        <li><%= error.full_message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+    <% if object.errors.any? %>
+      <div id="error_explanation" class="alert alert-error">
+        <ul class="mb-0">
+          <% object.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!--
+    このコードの説明：
+    1. まず、渡されたオブジェクト（例：ユーザーやレシピなど）にエラーがあるかチェックします。
+    2. エラーがある場合、赤い警告ボックスを作成します。これは、ユーザーの注意を引くためです。
+    3. その中に、エラーメッセージを箇条書きで表示するリストを作ります。
+    4. オブジェクトの全てのエラーを順番に取り出し、それぞれを1つのリスト項目として表示します。
+    5. 各エラーメッセージは、わかりやすい形で表示されます（例：「パスワードは6文字以上にしてください」）。
+
+    このパーシャル（部分テンプレート）は、フォームでエラーが発生した時に使用され、
+    ユーザーに何が間違っているかを明確に伝えるために重要な役割を果たします。
+    -->

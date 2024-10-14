@@ -9,6 +9,9 @@ ja:
     email: Email
     username: UserName
     password: Password
+    new_password: 新しいパスワード
+    password_confirmation: パスワード確認
+    current_password: 現在のパスワード
   flash:
     welcome: ようこそ！ベビグルへ！🎉
     signin_failed: アカウント登録に失敗しました。メールアドレスとパスワードを確認してください。
@@ -29,13 +32,28 @@ ja:
   tops:
     daily_menu: 今日のおかず
     recipe_list: レシピ一覧
-    buy_list: 買い物リスト
+    buy_list: 買い物sリスト
     recipe_post: レシピ投稿
   users:
+    show:
+      edit: 編集
+      tab_post: 投稿
+      tab_yummy: Yummy
+      tab_comment: コメント
+    profile:
+      recipe_count: レシピ
     user_form:
       form_avatar: アバター登録
       no_account: アカウントをお持ちでない方はこちら
       login_link: ログインページ
+    edit_user_form:
+      title: プロフィール編集
+      email: Email
+      username: UserName
+      update_profile: プロフィールを更新
+      delete_profile: アカウントを削除
+      delete_profile_description: アカウントの削除はこちら
+      delete_profile_confirm: 本当に削除しますか？
     registrations:
       new:
         sign_up: アカウント登録
@@ -60,6 +78,7 @@ ja:
       go_cook_list: 作りたいものリストへ
     show:
       title: レシピ詳細
+      comment_title: コメント欄
       nutrient_include: 1人分に含まれる栄養素
       ingredient: 材料
       serving_size: 人分
@@ -69,23 +88,6 @@ ja:
       recipe_delete: レシピを削除
     new:
       title: レシピ作成
-    shared:
-      daily_menu: 今日のおかず
-      recipe_list: レシピ一覧
-      cook_later: 作りたいものリスト
-      recipe_post: レシピ投稿
-      logout: ログアウト
-      user_form: 新規ユーザー登録
-      login: ログイン
-      gest_user: ゲスト
-      recipe_name: レシピ名
-      serving_size: 総分量
-      description: レシピ説明
-      recipe_image: 画像
-      one_point: ワンポイント
-      recipe_image: レシピ画像
-      add_recipe_image: + 画像を追加
-      item: 品目
     ingredient:
       title: 材料
       select_food: 食材を選択してください
@@ -142,6 +144,37 @@ ja:
     title: 今日のおかず
     nutrient_include: 全てのおかずに含まれる栄養素量(1人分)
     max_count_over: 今日のおかずは最大５個まで
+  shared:
+    footer:
+      recipe_list: レシピ一覧
+      daily_menu: 今日のおかず
+      cook_later: 作りたいものリスト
+      recipe_post: レシピ投稿
+      logout: ログアウト
+      user_form: 新規ユーザー登録
+      login: ログイン
+      gest_user: ゲスト
+    recipe_form:
+      recipe_name: レシピ名
+      serving_size: 総分量
+      description: レシピ説明
+      recipe_image: 画像
+      one_point: ワンポイント
+      recipe_image: レシピ画像
+      add_recipe_image: + 画像を追加
+    menu_card:
+      item: 品目
+  notifications:
+    next: 次へ
+    previous_page: 前へ
+    all_read: 全て既読にする
+    all_delete: 全て削除する
+    comment_notifications: コメント通知
+    no_comment_notifications: コメント通知はありません
+    confirm_all_delete: 全てのコメント通知を削除してもよろしいですか？
+    yummy_notifications: Yummy通知
+    no_yummy_notifications: Yummy通知はありません
+    confirm_all_delete_yummy: 全てのYummy通知を削除してもよろしいですか？
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。

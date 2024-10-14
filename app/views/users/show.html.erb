@@ -1,0 +1,59 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="bg-white shadow-lg rounded-lg]">
+    <div class="p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center">
+          <%= image_tag @user.avatar.url.present? ? @user.avatar.url : 'default_avatar.png', class: 'h-20 w-20 rounded-full border-4 border-white shadow-md' %>
+          <h2 class="text-2xl font-bold"><%= @user.name %></h2>
+        </div>
+        <%= link_to t('users.show.edit'), edit_user_path(@user), class: 'bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded' %>
+      </div>
+
+      <!-- Tab (投稿、Yummy、コメント)-->
+      <div data-controller="tabs">
+        <div class="mb-4 border-b border-gray-200">
+          <ul class="flex flex-wrap -mb-px" role="tablist">
+            <li class="mr-1 sm:mr-2" role="presentation">
+              <button data-tabs-target="tab" data-action="click->tabs#switch" class="inline-block p-2 sm:p-4 text-sm sm:text-base border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="tab1" data-tab="post" role="tab" aria-controls="post" aria-selected="false">
+                <%= t('users.show.tab_post') %>
+              </button>
+            </li>
+            <li class="mr-1 sm:mr-2" role="presentation">
+              <button data-tabs-target="tab" data-action="click->tabs#switch" class="inline-block p-2 sm:p-4 text-sm sm:text-base border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="tab2" data-tab="yummy" role="tab" aria-controls="yummy" aria-selected="false">
+                <%= t('users.show.tab_yummy') %>
+                <% if @yummy_notifications.unread.exists? %>
+                  <span class="inline-flex items-center justify-center px-1 sm:px-2 py-0.5 sm:py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">New</span>
+                <% end %>
+              </button>
+            </li>
+            <li class="mr-1 sm:mr-2" role="presentation">
+              <button data-tabs-target="tab" data-action="click->tabs#switch" class="inline-block p-2 sm:p-4 text-sm sm:text-base border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="tab3" data-tab="comment" role="tab" aria-controls="comment" aria-selected="false">
+                <%= t('users.show.tab_comment') %>
+                <% if @comment_notifications.unread.exists? %>
+                  <span class="inline-flex items-center justify-center px-1 sm:px-2 py-0.5 sm:py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">New</span>
+                <% end %>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div>
+
+          <!--投稿タブ-->
+          <div data-tabs-target="content" class="hidden p-4 rounded-lg bg-gray-50" id="post" role="tabpanel" aria-labelledby="tab1">
+            <%= render 'shared/post_recipe_tab', user_recipes: @user_recipes %>
+          </div>
+
+          <!--Yummyタブ-->
+          <div data-tabs-target="content" class="hidden p-4 rounded-lg bg-gray-50" id="yummy" role="tabpanel" aria-labelledby="tab2">
+            <%= render 'shared/yummy_tab', yummy_notifications: @yummy_notifications %>
+          </div>
+
+          <!--コメントタブ-->
+          <div data-tabs-target="content" class="hidden p-4 rounded-lg bg-gray-50" id="comment" role="tabpanel" aria-labelledby="tab3">
+            <%= render 'shared/comment_tab', comment_notifications: @comment_notifications %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

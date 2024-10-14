@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   root 'tops#index'
 
+  resources :users, only: [:show], as: :my_page
+  get 'users/:id/profile', to: 'users#profile', as: :profile
+
   # 認証に必要なルーティングを自動生成する
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
     post 'users', to: 'users/registrations#create', as: :users
     get 'users/:id/edit', to: 'users/registrations#edit', as: :edit_user
     patch 'users/:id', to: 'users/registrations#update', as: :user
+    delete 'users/:id', to: 'users/registrations#destroy', as: :delete_user
 
     get 'login', to: 'users/sessions#new', as: :login
     post 'login', to: 'users/sessions#create'
@@ -38,14 +42,27 @@ Rails.application.routes.draw do
     member do
       delete 'remove_image'
     end
+
     resources :comments, only: %i[create edit update destroy], shallow: true
       # shallow: trueでネストを浅くする(削除時、comment_idのみで削除可能)
     resource :yummies, only: %i[create destroy]
-      # userが1回しかyummyボタンを押さないのでyummy_idは不要、resourceを採用
+    # userが1回しかyummyボタンを押さないのでyummy_idは不要、resourceを採用
   end
+
+  resources :notifications, only: [] do
+    collection do
+      post :mark_yummy_as_read
+      post :mark_comment_as_read
+      delete :delete_all_yummy
+      delete :delete_all_comment
+    end
+  end
+
   resources :cook_laters, only: %i[create destroy]
     # レシピを作りたいものリストに追加、削除する機能
+
   resources :daily_menus, only: %i[create destroy]
     # レシピを今日の献立に追加、削除する機能
-  get 'up' => 'rails/health#show', as: :rails_health_check
+
+    get 'up' => 'rails/health#show', as: :rails_health_check
 end

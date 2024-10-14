@@ -1,0 +1,23 @@
+<%= turbo_frame_tag "cook_later_page" do %>
+  <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+    <% @cook_later_recipes.each do |recipe| %>
+      <%= render 'shared/recipe_card', recipe: recipe, user: current_user %>
+    <% end %>
+  </div>
+
+  <% if @cook_later_recipes.next_page %>
+    <div class="mt-4">
+      <%= turbo_frame_tag "cook_later_page",
+        src: cook_laters_recipes_path(page: @cook_later_recipes.next_page),
+        loading: :lazy
+      %>
+    </div>
+  <% end %>
+<% end %>
+<!--
+  1. "cook_later_page"という名前のturbo_frameを作成
+  2. 2列のグリッドを作成し、間隔を4pxに設定
+  3. cook_later_recipes配列からrecipeを取り出し、shared/recipe_cardでレンダリング
+  4. 次のページが存在する場合は、turbo_frame_tagの"cook_later_page"を呼び出して、srcに次のページのURLを指定
+  5. loading: :lazyを指定し、ページが表示されるまで読み込みを遅延させる
+-->

@@ -6,7 +6,7 @@
   <div class="space-y-3">
     <!-- レシピ名 -->
     <div class="flex items-center space-x-2">
-      <%= f.label :title, t('recipes.shared.recipe_name'), class: "block text-sm font-medium text-gray-700" %>
+      <%= f.label :title, t('shared.recipe_form.recipe_name'), class: "block text-sm font-medium text-gray-700" %>
       <span class="badge badge-error px-3 text-white text-xs ">必須</span>
     </div>
     <%= f.text_field :title,
@@ -15,7 +15,7 @@
 
     <!-- 総分量 -->
     <div class="flex items-center space-x-2 ">
-      <%= f.label :serving_size, t('recipes.shared.serving_size'), class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.label :serving_size, t('shared.recipe_form.serving_size'), class: "block text-sm font-medium text-gray-700 mb-1" %>
       <span class="badge badge-error px-3 text-white text-xs ">必須</span>
     </div>
     <%= f.number_field :serving_size,
@@ -24,7 +24,7 @@
 
     <!-- レシピ説明 -->
     <div class="flex items-center space-x-2 ">
-      <%= f.label :description, t('recipes.shared.description'), class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.label :description, t('shared.recipe_form.description'), class: "block text-sm font-medium text-gray-700 mb-1" %>
       <span class="badge badge-error px-3 text-white text-xs ">必須</span>
     </div>
     <%= f.text_area :description,
@@ -36,7 +36,7 @@
     <!-- 材料 -->
     <div class="mb-6">
       <!--手順フィールドとの間隔を確保-->
-      <h2 class="text font-medium text-gray-700 mb-1"><%= t('recipes.ingredient.title') %></h2>
+      <h2 class="text font-medium text-gray-700 mb-1"><%= t('shared.recipe_form.ingredient.title') %></h2>
         <!---->
       <% @categories.each do |category| %>
         <div class="mb-3">
@@ -51,7 +51,7 @@
           <!--BUG: 編集時、フィールドに材料表示はないが、登録すると残っていて追加されてしまう-->
           <!--TODO: 材料追加ボタンを一時削除-->
           <div id="add_ingredients_<%= category %>"></div>
-          <%= link_to t('recipes.ingredient.add_ingredient'),
+          <%= link_to t('shared.recipe_form.ingredient.add_ingredient'),
                       "#",
                       class: "btn btn-secondary btn-sm mb-4",
                       data: { turbo_stream: true } %>
@@ -82,7 +82,7 @@
 
     <!-- ワンポイント -->
     <div class="flex items-center space-x-2 ">
-      <%= f.label :one_point, t('recipes.shared.one_point'), class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.label :one_point, t('shared.recipe_form.one_point'), class: "block text-sm font-medium text-gray-700 mb-1" %>
       <span class="badge badge-error px-3 text-white text-xs ">必須</span>
     </div>
     <%= f.text_area :one_point,
