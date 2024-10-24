@@ -32,7 +32,7 @@ ja:
   tops:
     daily_menu: 今日のおかず
     recipe_list: レシピ一覧
-    buy_list: 買い物sリスト
+    buy_list: 買い物リスト
     recipe_post: レシピ投稿
   users:
     show:
@@ -60,11 +60,13 @@ ja:
     sessions:
       new:
         welcome: Welcome
-        sign_in: Login
+        sign_in: login
         email_placeholder: Email
         password_placeholder: password
         no_account: アカウントをお持ちでない方はこちら
         sign_up: アカウント登録
+        divider: または
+        password_forgot: パスワードをお忘れですか？
       destroy:
         logout: ログアウト
   recipes:
@@ -225,15 +227,17 @@ ja:
       success: "%{kind} アカウントによる認証に成功しました。"
     passwords:
       edit:
+        title: パスワード変更
         change_my_password: パスワードを変更する
         change_your_password: パスワードを変更
-        confirm_new_password: 確認用新しいパスワード
+        confirm_new_password: 新しいパスワード(確認用)
         new_password: 新しいパスワード
       new:
+        email: メールアドレス
         forgot_your_password: パスワードを忘れましたか？
         send_me_reset_password_instructions: パスワードの再設定方法を送信する
       no_token: このページにはアクセスできません。パスワード再設定メールのリンクからアクセスされた場合には、URL をご確認ください。
-      send_instructions: パスワードの再設定について数分以内にメールでご連絡いたします。
+      send_instructions: パスワードの再設定については、メールでご連絡いたします。
       send_paranoid_instructions: メールアドレスが登録済みの場合、パスワード再設定用のメールが数分以内に送信されます。
       updated: パスワードが正しく変更されました。
       updated_not_active: パスワードが正しく変更されました。

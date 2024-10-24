@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   # 認証に必要なルーティングを自動生成する
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    sessions:      'users/sessions'
-  }, skip: %i[registrations, sessions]
+    sessions:      'users/sessions',
+    passwords:     'users/passwords',
+  }, skip: %i[registrations sessions]
   # skip: [:registrations, :sessions]で自動生成するルーティングを制限する
   # 制限理由: ユーザー登録、ログイン、ログアウトのルーティングを可読性良くカスタマイズするため
 
