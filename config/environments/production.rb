@@ -71,7 +71,26 @@ Rails.application.configure do
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "baby_gourmet_v1_0_production"
 
+  # mailer関係
+  # キャッシュを無効にする（メール送信の都度、最新の設定を使用する）
   config.action_mailer.perform_caching = false
+
+  # メールのデフォルトURL設定（メール内のリンクなどに使用される）
+  config.action_mailer.default_url_options = { host: 'https://baby-gourmet-v1-0.onrender.com/' }
+
+  # メール送信方法をSMTP（Simple Mail Transfer Protocol）に設定
+  config.action_mailer.delivery_method = :smtp
+
+  # SMTPサーバーの詳細設定
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'baby-gourmet-v1-0.onrender.com',
+    user_name:            ENV['MAILER_SENDER'],
+    password:             ENV['MAILER_PASSWORD'],
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

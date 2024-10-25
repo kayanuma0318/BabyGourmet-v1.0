@@ -36,10 +36,37 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
+  # メール送信のエラーを表示しない
   config.action_mailer.raise_delivery_errors = false
 
+  # メール送信のキャッシュを無効にする
   config.action_mailer.perform_caching = false
+
+  # メール送信の設定
+  # デフォルトのURL設定：開発環境ではlocalhostのポート3000を使用
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # メール送信方法をSMTP（Simple Mail Transfer Protocol）に設定
+  config.action_mailer.delivery_method = :smtp
+
+  # SMTP設定の詳細
+  config.action_mailer.smtp_settings = {
+    # Gmailのサーバーアドレスを指定
+    address: 'smtp.gmail.com',
+    # SMTPサーバーのポート番号（Gmail標準のポート）
+    port: 587,
+    # メールを送信するドメイン（開発環境ではlocalhostを使用）
+    domain: 'localhost',
+    # メール送信に使用するGmailアカウントのアドレス（環境変数から取得）
+    user_name: ENV['MAILER_SENDER'],
+    # Gmailアカウントのパスワードまたはアプリパスワード（環境変数から取得）
+    password: ENV['MAILER_PASSWORD'],
+    # 認証方式を指定（plain：平文認証）
+    authentication: 'plain',
+    # STARTTLS（Transport Layer Security）を有効化
+    # これにより、平文での通信を暗号化された通信にアップグレード
+    enable_starttls_auto: true
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -16,7 +16,7 @@ class User < ApplicationRecord
   # バリデーション関連(コメントアウト内容はdevise.rbで行われる)
   # emai: formatが適切か、空欄ではないか
   # password: 空欄ではないか、6文字以上20字以内であるか
-  devise :database_authenticatable, :registerable, :validatable
+  devise :database_authenticatable, :registerable, :validatable, :recoverable
   validates :name,  presence: true, length: { maximum: 30 }
   validates :email, uniqueness: true
   validates :password_confirmation, presence: true, if: :password_required?
