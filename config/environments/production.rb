@@ -76,7 +76,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # メールのデフォルトURL設定（メール内のリンクなどに使用される）
-  config.action_mailer.default_url_options = { host: 'baby-gourmet-v1-0.onrender.com', protocol: 'https' }
+  config.action_mailer.default_url_options = { host: 'babygourmet-v1-0.onrender.com', protocol: 'https' }
 
   # メール送信方法をSMTP（Simple Mail Transfer Protocol）に設定
   config.action_mailer.delivery_method = :smtp
@@ -85,7 +85,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
-    domain:               'baby-gourmet-v1-0.onrender.com',
+    domain:               'babygourmet-v1-0.onrender.com',
     user_name:            ENV['MAILER_SENDER'],
     password:             ENV['MAILER_PASSWORD'],
     authentication:       'plain',
