@@ -2,9 +2,6 @@ Rails.application.routes.draw do
 
   root 'tops#index'
 
-  resources :users, only: [:show], as: :my_page
-  get 'users/:id/profile', to: 'users#profile', as: :profile
-
   # 認証に必要なルーティングを自動生成する
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -26,6 +23,9 @@ Rails.application.routes.draw do
     post 'login', to: 'users/sessions#create'
     delete 'logout', to: 'users/sessions#destroy', as: :logout
   end
+
+  resources :users, only: [:show], as: :my_page
+  get 'users/:id/profile', to: 'users#profile', as: :profile
 
   resources :recipes do
     collection do
